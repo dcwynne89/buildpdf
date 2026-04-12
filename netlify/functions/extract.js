@@ -4,7 +4,7 @@
    ============================================================ */
 
 const { authenticate, jsonResponse, errorResponse } = require("./utils/auth");
-const { incrementUsage } = require("./utils/storage");
+const { incrementUsage, MAX_BODY_BYTES } = require("./utils/storage");
 
 exports.handler = async (event) => {
   // ── Auth check (requires extract feature) ──
@@ -16,6 +16,11 @@ exports.handler = async (event) => {
 
   if (event.httpMethod !== "POST") {
     return errorResponse(405, "Method not allowed. Use POST.");
+  }
+
+  // ── Body size check ──
+  if (event.body && Buffer.byteLength(event.body, "utf-8") > MAX_BODY_BYTES) {
+    return errorResponse(413, "Request body too large. Maximum 10MB.");
   }
 
   let body;
@@ -98,6 +103,6 @@ exports.handler = async (event) => {
     }
   } catch (err) {
     console.error("Extraction error:", err);
-    return errorResponse(500, "PDF extraction failed.", { message: err.message });
+    return errorResponse(500, "PDF extraction failed. Please try again.");
   }
 };

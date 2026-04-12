@@ -82,7 +82,73 @@ const TIERS = {
   },
 };
 
+// ── Security constants ──
+const MAX_BODY_BYTES = 10 * 1024 * 1024; // 10MB max request body
+const MAX_REGISTRATIONS_PER_IP_PER_HOUR = 3;
+
 // ── API Key Operations ──
+
+/**
+ * Check if an email already has an active API key
+ * @param {string} email
+ * @returns {boolean}
+ */
+async function emailHasKey(email) {
+  const store = getConfiguredStore(KEYS_STORE);
+  try {
+    const record = await store.get(`email:${email}`, { type: "json" });
+    return record && record.active;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Track registration attempts by IP address
+ * @param {string} ip
+ * @returns {{ allowed: boolean, remaining: number }}
+ */
+async function checkRegistrationLimit(ip) {
+  const store = getConfiguredStore(USAGE_STORE);
+  const key = `reg:${ip}`;
+
+  try {
+    const record = await store.get(key, { type: "json" });
+    if (!record) return { allowed: true, remaining: MAX_REGISTRATIONS_PER_IP_PER_HOUR };
+
+    const hourAgo = Date.now() - 3600_000;
+    // Filter to only attempts within the last hour
+    const recentAttempts = (record.attempts || []).filter((t) => t > hourAgo);
+
+    if (recentAttempts.length >= MAX_REGISTRATIONS_PER_IP_PER_HOUR) {
+      return { allowed: false, remaining: 0 };
+    }
+    return { allowed: true, remaining: MAX_REGISTRATIONS_PER_IP_PER_HOUR - recentAttempts.length };
+  } catch {
+    return { allowed: true, remaining: MAX_REGISTRATIONS_PER_IP_PER_HOUR };
+  }
+}
+
+/**
+ * Record a registration attempt for IP tracking
+ * @param {string} ip
+ */
+async function recordRegistrationAttempt(ip) {
+  const store = getConfiguredStore(USAGE_STORE);
+  const key = `reg:${ip}`;
+
+  let attempts = [];
+  try {
+    const record = await store.get(key, { type: "json" });
+    const hourAgo = Date.now() - 3600_000;
+    attempts = (record?.attempts || []).filter((t) => t > hourAgo);
+  } catch {
+    // first attempt
+  }
+
+  attempts.push(Date.now());
+  await store.setJSON(key, { attempts });
+}
 
 /**
  * Register a new API key
@@ -101,9 +167,16 @@ async function registerKey(email) {
     active: true,
   };
 
-  console.log("Registering key for:", email, "hash:", keyHash.substring(0, 8) + "...");
+  // Store the key metadata
   await store.setJSON(keyHash, metadata);
-  console.log("Key stored successfully");
+
+  // Store email→key index for dedup
+  await store.setJSON(`email:${email}`, {
+    keyHash,
+    active: true,
+    createdAt: metadata.createdAt,
+  });
+
   return { apiKey, keyHash };
 }
 
@@ -189,10 +262,14 @@ async function checkQuota(keyHash, tier) {
 module.exports = {
   registerKey,
   validateKey,
+  emailHasKey,
+  checkRegistrationLimit,
+  recordRegistrationAttempt,
   getUsage,
   incrementUsage,
   checkQuota,
   hashKey,
   currentMonth,
   TIERS,
+  MAX_BODY_BYTES,
 };

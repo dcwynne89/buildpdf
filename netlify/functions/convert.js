@@ -4,7 +4,7 @@
    ============================================================ */
 
 const { authenticate, jsonResponse, errorResponse } = require("./utils/auth");
-const { incrementUsage } = require("./utils/storage");
+const { incrementUsage, MAX_BODY_BYTES } = require("./utils/storage");
 
 exports.handler = async (event) => {
   // ── Auth check ──
@@ -13,6 +13,11 @@ exports.handler = async (event) => {
 
   if (event.httpMethod !== "POST") {
     return errorResponse(405, "Method not allowed. Use POST.");
+  }
+
+  // ── Body size check ──
+  if (event.body && Buffer.byteLength(event.body, "utf-8") > MAX_BODY_BYTES) {
+    return errorResponse(413, "Request body too large. Maximum 10MB.");
   }
 
   let body;
@@ -138,7 +143,7 @@ exports.handler = async (event) => {
 
   } catch (err) {
     console.error("Conversion error:", err);
-    return errorResponse(500, "PDF conversion failed.", { message: err.message });
+    return errorResponse(500, "PDF conversion failed. Please try again.");
   }
 };
 
