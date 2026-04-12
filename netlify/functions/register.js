@@ -53,6 +53,6 @@ exports.handler = async (event) => {
     });
   } catch (err) {
     console.error("Registration error:", err);
-    return errorResponse(500, "Failed to create API key. Please try again.");
+    return errorResponse(500, "Failed to create API key: " + err.message);
   }
 };

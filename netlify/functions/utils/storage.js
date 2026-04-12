@@ -8,6 +8,7 @@ const { getStore } = require("@netlify/blobs");
 const KEYS_STORE = "api-keys";
 const USAGE_STORE = "api-usage";
 
+
 // ── Helpers ──
 function currentMonth() {
   const d = new Date();
@@ -86,7 +87,9 @@ async function registerKey(email) {
     active: true,
   };
 
+  console.log("Registering key for:", email, "hash:", keyHash.substring(0, 8) + "...");
   await store.setJSON(keyHash, metadata);
+  console.log("Key stored successfully");
   return { apiKey, keyHash };
 }
 
