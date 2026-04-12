@@ -1,0 +1,97 @@
+# ── BuildPDF · netlify.toml ──────────────────────────────────────────────────
+# Canonical: https://buildpdf.co  (non-www, HTTPS only)
+
+# ── Functions Configuration ───────────────────────────────────────────────────
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# ── API Route Redirects ──────────────────────────────────────────────────────
+# Route /api/v1/* to the corresponding Netlify Functions
+[[redirects]]
+  from   = "/api/v1/convert"
+  to     = "/.netlify/functions/convert"
+  status = 200
+
+[[redirects]]
+  from   = "/api/v1/extract"
+  to     = "/.netlify/functions/extract"
+  status = 200
+
+[[redirects]]
+  from   = "/api/v1/usage"
+  to     = "/.netlify/functions/usage"
+  status = 200
+
+[[redirects]]
+  from   = "/api/v1/register"
+  to     = "/.netlify/functions/register"
+  status = 200
+
+# API Docs clean URL
+[[redirects]]
+  from   = "/api/docs"
+  to     = "/api-docs.html"
+  status = 200
+
+# ── Redirects ────────────────────────────────────────────────────────────────
+[[redirects]]
+  from   = "https://www.buildpdf.co/*"
+  to     = "https://buildpdf.co/:splat"
+  status = 301
+  force  = true
+
+# Redirect bare /blog to trailing-slash canonical
+[[redirects]]
+  from   = "/blog"
+  to     = "/blog/"
+  status = 301
+
+# ── ads.txt — explicit content-type + no-cache so Google always finds it ─────
+[[headers]]
+  for = "/ads.txt"
+  [headers.values]
+    Content-Type  = "text/plain; charset=utf-8"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# ── Security & SEO Headers ───────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    Permissions-Policy     = "camera=(), microphone=(), geolocation=()"
+
+# Cache: HTML — short TTL so Google picks up changes fast
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Cache: sitemap / robots — short TTL
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Cache: static assets — long TTL
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,11 @@
+{
+  "name": "buildpdf-api",
+  "version": "1.0.0",
+  "description": "BuildPDF API — serverless PDF conversion",
+  "private": true,
+  "dependencies": {
+    "@netlify/blobs": "^7.0.0",
+    "jspdf": "^2.5.1",
+    "pdf-parse": "^1.1.1"
+  }
+}

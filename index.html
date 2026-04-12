@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── PRIMARY SEO ── -->
+  <title>BuildPDF – Free Online File to PDF Converter | No Sign-Up</title>
+  <meta name="description"
+    content="Convert JPG, PNG, DOCX, TXT and HTML files to PDF instantly — free, no sign-up, no watermark. Files are processed locally in your browser and never uploaded to any server." />
+  <meta name="keywords"
+    content="file to pdf, convert to pdf, jpg to pdf, png to pdf, docx to pdf, word to pdf, txt to pdf, free pdf converter, online pdf converter, no upload pdf converter, browser pdf converter" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="BuildPDF" />
+  <meta name="theme-color" content="#0D0E1A" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="canonical" href="https://buildpdf.co/" />
+
+  <!-- ── OPEN GRAPH (Facebook, Reddit, LinkedIn previews) ── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://buildpdf.co/" />
+  <meta property="og:title" content="BuildPDF – Free File to PDF Converter (No Upload, No Sign-Up)" />
+  <meta property="og:description"
+    content="Convert images, Word docs, and text files to PDF in seconds. 100% free — your files never leave your browser." />
+  <meta property="og:site_name" content="BuildPDF" />
+
+  <!-- ── TWITTER / X CARD ── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BuildPDF – Free File to PDF Converter" />
+  <meta name="twitter:description"
+    content="Convert JPG, PNG, DOCX, TXT → PDF instantly. No account. No watermark. Files stay in your browser." />
+  <meta name="twitter:site" content="@buildpdf" />
+
+  <!-- ── GOOGLE ADSENSE OWNERSHIP ── -->
+  <meta name="google-adsense-account" content="ca-pub-6010936774105671" />
+
+  <!-- ── GOOGLE SEARCH CONSOLE VERIFICATION ── -->
+  <meta name="google-site-verification" content="90g1DFHf5Ze6Ur_RSnOvLXcg7VO1fVT5AqMxAxtNcV0" />
+
+  <!-- ── STRUCTURED DATA (JSON-LD WebApplication) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BuildPDF",
+    "url": "https://buildpdf.co/",
+    "description": "Free online file to PDF converter. Convert JPG, PNG, WEBP, DOCX, TXT, and HTML files to PDF instantly in your browser — no sign-up, no watermark, no file uploads.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Convert JPG to PDF",
+      "Convert PNG to PDF",
+      "Convert DOCX to PDF",
+      "Convert TXT to PDF",
+      "Convert HTML to PDF",
+      "No file upload — 100% browser-based",
+      "No sign-up required",
+      "No watermarks",
+      "Supports batch conversion"
+    ],
+    "screenshot": "https://buildpdf.co/",
+    "browserRequirements": "Requires JavaScript. Works in Chrome, Firefox, Edge, Safari, Brave.",
+    "creator": {
+      "@type": "Organization",
+      "name": "BuildPDF"
+    }
+  }
+  </script>
+
+  <!-- ── FONTS & STYLES ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ── LIBRARIES ── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+
+  <!-- ── GOOGLE ADSENSE ── -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- ── TOP BANNER AD ── -->
+  <div class="ad-banner ad-banner--top" id="ad-top">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6010936774105671" data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="url(#logoGrad)" />
+          <path d="M10 8h11l7 7v13a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity=".9" />
+          <path d="M21 8l7 7h-5a2 2 0 01-2-2V8z" fill="white" fill-opacity=".5" />
+          <path d="M13 19h10M13 23h7" stroke="url(#strokeGrad)" stroke-width="2" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF" />
+              <stop offset="1" stop-color="#3B82F6" />
+            </linearGradient>
+            <linearGradient id="strokeGrad" x1="13" y1="21" x2="23" y2="21" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF" />
+              <stop offset="1" stop-color="#3B82F6" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </div>
+      <nav class="site-nav">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#formats">Formats</a>
+        <a href="#faq">FAQ</a>
+        <a href="/api/docs">API</a>
+        <a href="/blog/">Guides</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ 100% Free &amp; No Sign-Up</div>
+      <h1 class="hero-title">Convert Any File<br /><span class="gradient-text">to PDF Instantly</span></h1>
+      <p class="hero-subtitle">Drop your images, Word docs, or text files below and get a clean PDF in seconds. Or drop a PDF to extract its contents. No watermarks. No limits.</p>
+    </div>
+  </section>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <div class="layout-wrapper">
+
+    <!-- ── CONVERTER MAIN ── -->
+    <main class="converter-main">
+
+      <!-- DROP ZONE -->
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.txt,.docx,.html,.htm,.pdf"
+          style="display:none;" />
+        <div class="drop-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="32" fill="url(#dropCircle)" fill-opacity=".12" />
+            <path d="M32 44V24M32 24l-8 8M32 24l8 8" stroke="url(#dropArrow)" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M18 44h28" stroke="url(#dropLine)" stroke-width="2.5" stroke-linecap="round" />
+            <defs>
+              <linearGradient id="dropCircle" x1="0" y1="0" x2="64" y2="64">
+                <stop stop-color="#6C63FF" />
+                <stop offset="1" stop-color="#3B82F6" />
+              </linearGradient>
+              <linearGradient id="dropArrow" x1="24" y1="24" x2="40" y2="44">
+                <stop stop-color="#6C63FF" />
+                <stop offset="1" stop-color="#3B82F6" />
+              </linearGradient>
+              <linearGradient id="dropLine" x1="18" y1="44" x2="46" y2="44">
+                <stop stop-color="#6C63FF" />
+                <stop offset="1" stop-color="#3B82F6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h2 class="drop-title">Drag &amp; Drop Files Here</h2>
+        <p class="drop-sub">or click to browse your device</p>
+        <button class="btn-browse" id="browseBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Choose Files
+        </button>
+        <div class="drop-formats">
+          <span class="format-chip">PDF</span>
+          <span class="format-chip">JPG</span>
+          <span class="format-chip">PNG</span>
+          <span class="format-chip">WEBP</span>
+          <span class="format-chip">DOCX</span>
+          <span class="format-chip">TXT</span>
+          <span class="format-chip">HTML</span>
+        </div>
+      </div>
+
+      <!-- FILE LIST -->
+      <div class="file-list" id="fileList" style="display:none;">
+        <div class="file-list-header">
+          <h3 class="file-list-title">Files Queued</h3>
+          <button class="btn-clear" id="clearBtn">✕ Clear All</button>
+        </div>
+        <ul id="fileItems"></ul>
+      </div>
+
+      <!-- OPTIONS -->
+      <div class="options-panel" id="optionsPanel" style="display:none;">
+        <h3 class="options-title" id="optionsTitle">PDF Options</h3>
+        <div class="options-grid" id="pdfGenOptions">
+          <div class="option-group">
+            <label for="pageSize">Page Size</label>
+            <select id="pageSize">
+              <option value="a4">A4</option>
+              <option value="letter">Letter (US)</option>
+              <option value="a3">A3</option>
+              <option value="legal">Legal</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="orientation">Orientation</label>
+            <select id="orientation">
+              <option value="portrait">Portrait</option>
+              <option value="landscape">Landscape</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="margin">Margin</label>
+            <select id="margin">
+              <option value="10">Normal (10mm)</option>
+              <option value="0">None (0mm)</option>
+              <option value="20">Wide (20mm)</option>
+              <option value="5">Narrow (5mm)</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="imgQuality">Image Quality</label>
+            <select id="imgQuality">
+              <option value="0.95">High (95%)</option>
+              <option value="0.80">Medium (80%)</option>
+              <option value="0.60">Low (60%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="options-grid" id="pdfExtractOptions" style="display:none;">
+          <div class="option-group">
+            <label for="outputFormat">Output Format</label>
+            <select id="outputFormat">
+              <option value="images">ZIP of Images (JPG)</option>
+              <option value="text">Plain Text (.txt)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONVERT BUTTON -->
+      <div class="convert-row" id="convertRow" style="display:none;">
+        <button class="btn-convert" id="convertBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M7 18H5a2 2 0 01-2-2V6a2 2 0 012-2h7l5 5v3" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 9H9V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M16 19l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <span id="convertBtnText">Convert to PDF</span>
+        </button>
+        <p class="convert-note">Your files are processed locally — never uploaded to any server.</p>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="progress-area" id="progressArea" style="display:none;">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p class="progress-label" id="progressLabel">Processing…</p>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result-area" id="resultArea" style="display:none;">
+        <div class="result-card">
+          <div class="result-icon">✓</div>
+          <h3>Your PDF is Ready!</h3>
+          <p id="resultDesc">1 file converted successfully.</p>
+          <div class="result-actions">
+            <button class="btn-download" id="downloadBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v10M12 15l-4-4M12 15l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <span id="downloadBtnText">Download PDF</span>
+            </button>
+            <button class="btn-another" id="anotherBtn">Convert Another</button>
+          </div>
+        </div>
+
+        <!-- MID-PAGE AD (after download) -->
+        <div class="ad-inline" id="ad-mid">
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6010936774105671" data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+      </div>
+
+      <!-- ── HOW IT WORKS ── -->
+      <section class="how-section" id="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3>Upload Your File</h3>
+            <p>Drag and drop or click to select any supported file from your device.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3>Choose Options</h3>
+            <p>Pick your page size, orientation, and margin settings.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3>Download PDF</h3>
+            <p>Click convert and instantly download your finished PDF file.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── FORMATS TABLE ── -->
+      <section class="formats-section" id="formats">
+        <h2 class="section-title">Supported Formats</h2>
+        <div class="formats-grid">
+          <div class="format-card">
+            <div class="format-icon format-icon--pdf" style="background:#dc2626;color:white;">📄</div>
+            <div>
+              <strong>PDF Documents</strong>
+              <p>Extract to Text or Images</p>
+            </div>
+          </div>
+          <div class="format-card">
+            <div class="format-icon format-icon--img">🖼</div>
+            <div>
+              <strong>Images</strong>
+              <p>JPG, JPEG, PNG, WEBP, GIF, BMP</p>
+            </div>
+          </div>
+          <div class="format-card">
+            <div class="format-icon format-icon--doc">📄</div>
+            <div>
+              <strong>Word Documents</strong>
+              <p>DOCX (Microsoft Word)</p>
+            </div>
+          </div>
+          <div class="format-card">
+            <div class="format-icon format-icon--txt">📝</div>
+            <div>
+              <strong>Text Files</strong>
+              <p>Plain text (.txt)</p>
+            </div>
+          </div>
+          <div class="format-card">
+            <div class="format-icon format-icon--html">🌐</div>
+            <div>
+              <strong>Web Pages</strong>
+              <p>HTML files (.html, .htm)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── FAQ ── -->
+      <section class="faq-section" id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is it really free?</summary>
+            <p>Yes, completely free. We keep the lights on through the ads displayed on the page — no premium tier, no
+              paywall.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Are my files uploaded to a server?</summary>
+            <p>No. All conversion happens entirely in your browser using JavaScript. Your files never leave your device.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>Is there a file size limit?</summary>
+            <p>There's no hard limit, but very large files (above 100 MB) may be slow depending on your device.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I convert multiple files at once?</summary>
+            <p>Yes! Select multiple files and they'll all be merged into a single PDF in the order shown.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What browsers are supported?</summary>
+            <p>All modern browsers: Chrome, Firefox, Edge, Safari, and Brave.</p>
+          </details>
+        </div>
+      </section>
+
+
+      <!-- ── GUIDES SECTION ── -->
+      <section class="guides-section" id="guides">
+        <h2 class="section-title">PDF Guides & Tutorials</h2>
+        <p class="guides-intro">Learn everything about working with PDFs — converting, extracting, and merging files — with our free step-by-step guides.</p>
+        <div class="guides-grid">
+          <a href="/blog/jpg-to-pdf.html" class="guide-card">
+            <div class="guide-card-icon">🖼️</div>
+            <div class="guide-card-body">
+              <p class="guide-card-tag">Images</p>
+              <h3>How to Convert JPG to PDF</h3>
+              <p class="guide-card-desc">Convert any JPEG photo to a print-ready PDF in seconds — no software needed.</p>
+            </div>
+          </a>
+          <a href="/blog/word-to-pdf.html" class="guide-card">
+            <div class="guide-card-icon">📄</div>
+            <div class="guide-card-body">
+              <p class="guide-card-tag">Documents</p>
+              <h3>Word DOCX to PDF Without Office</h3>
+              <p class="guide-card-desc">Convert Word documents to PDF without installing Microsoft Office.</p>
+            </div>
+          </a>
+          <a href="/blog/extract-pdf.html" class="guide-card">
+            <div class="guide-card-icon">🔍</div>
+            <div class="guide-card-body">
+              <p class="guide-card-tag">PDF Extraction</p>
+              <h3>Extract Text or Images from PDF</h3>
+              <p class="guide-card-desc">Pull text or page images out of any PDF file, free and private.</p>
+            </div>
+          </a>
+          <a href="/blog/merge-images-pdf.html" class="guide-card">
+            <div class="guide-card-icon">🗂️</div>
+            <div class="guide-card-body">
+              <p class="guide-card-tag">Advanced</p>
+              <h3>Merge Multiple Images Into One PDF</h3>
+              <p class="guide-card-desc">Combine dozens of photos or scans into a single organized PDF document.</p>
+            </div>
+          </a>
+        </div>
+        <div class="guides-cta">
+          <a href="/blog/" class="btn-browse" style="display:inline-flex;text-decoration:none;">View All 6 Guides →</a>
+        </div>
+      </section>
+
+    </main>
+
+  </div><!-- /.layout-wrapper -->
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="logo">
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </div>
+      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+      <nav class="footer-nav">
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="converter.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Merge Multiple Images Into One PDF – BuildPDF</title>
+  <meta name="description" content="Combine multiple JPG, PNG, or WEBP images into a single PDF file for free. No watermarks, no upload, works in your browser. Step-by-step guide." />
+  <meta name="keywords" content="merge images to pdf, multiple images to one pdf, combine photos into pdf, jpg to pdf multiple pages, batch image to pdf" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="canonical" href="https://buildpdf.co/blog/merge-images-pdf.html" />
+  <meta name="google-adsense-account" content="ca-pub-6010936774105671" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
+  <style>
+    .article-wrap { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+    .article-back { display: inline-flex; align-items: center; gap: 0.5rem; color: #6C63FF; font-weight: 600; text-decoration: none; margin-top: 1.5rem; margin-bottom: 1.75rem; transition: gap 0.2s; }
+    .article-back:hover { gap: 0.75rem; }
+    .article-tag { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #6C63FF; margin-bottom: 0.75rem; }
+    .article-wrap h1 { font-size: 2.1rem; font-weight: 800; color: var(--text-primary,#f1f5f9); line-height: 1.25; margin-bottom: 1rem; }
+    .article-meta { display: flex; gap: 1.5rem; color: var(--text-muted,#64748b); font-size: 0.85rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-wrap h2 { font-size: 1.35rem; font-weight: 700; color: var(--text-primary,#f1f5f9); margin: 2.5rem 0 0.75rem; }
+    .article-wrap h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-primary,#f1f5f9); margin: 1.75rem 0 0.6rem; }
+    .article-wrap p { color: var(--text-secondary,#94a3b8); line-height: 1.85; margin-bottom: 1.25rem; }
+    .article-wrap ul, .article-wrap ol { color: var(--text-secondary,#94a3b8); padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .article-wrap li { line-height: 1.8; margin-bottom: 0.4rem; }
+    .article-wrap a { color: #6C63FF; text-decoration: none; }
+    .article-wrap a:hover { text-decoration: underline; }
+    .cta-box { background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(59,130,246,0.15)); border: 1px solid rgba(108,99,255,0.3); border-radius: 16px; padding: 2rem; text-align: center; margin: 2.5rem 0; }
+    .cta-box h3 { color: var(--text-primary,#f1f5f9); margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .cta-box p { color: var(--text-secondary,#94a3b8); margin-bottom: 1.25rem; font-size: 0.95rem; }
+    .cta-btn { display: inline-block; padding: 0.85rem 2.25rem; background: linear-gradient(135deg,#6C63FF,#3B82F6); color: white; border-radius: 10px; font-weight: 700; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-2px); text-decoration: none; }
+    .step-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .step-num-sm { background: linear-gradient(135deg,#6C63FF,#3B82F6); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
+    .step-content h4 { color: var(--text-primary,#f1f5f9); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .step-content p { color: var(--text-secondary,#94a3b8); font-size: 0.875rem; margin: 0; }
+    .tip-box { background: rgba(59,130,246,0.08); border-left: 3px solid #3B82F6; border-radius: 0 10px 10px 0; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .tip-box strong { color: #60a5fa; }
+    .ad-mid-article { margin: 2.5rem 0; }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    @media (max-width: 560px) { .related-grid { grid-template-columns: 1fr; } .article-wrap h1 { font-size: 1.6rem; } }
+    .related-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.25rem; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .related-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-2px); }
+    .related-card .rtag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #6C63FF; margin-bottom: 0.35rem; }
+    .related-card .rtitle { color: var(--text-primary,#f1f5f9); font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
+    .example-list { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    .example-list li { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.85rem 1.1rem; color: var(--text-secondary,#94a3b8); display: flex; gap: 0.75rem; align-items: flex-start; }
+    .example-list span.emoji { font-size: 1.1rem; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo" style="text-decoration:none;">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="url(#g1m)"/><path d="M10 8h11l7 7v13a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity=".9"/><path d="M21 8l7 7h-5a2 2 0 01-2-2V8z" fill="white" fill-opacity=".5"/><path d="M13 19h10M13 23h7" stroke="url(#g2m)" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="g1m" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#6C63FF"/><stop offset="1" stop-color="#3B82F6"/></linearGradient><linearGradient id="g2m" x1="13" y1="21" x2="23" y2="21" gradientUnits="userSpaceOnUse"><stop stop-color="#6C63FF"/><stop offset="1" stop-color="#3B82F6"/></linearGradient></defs></svg>
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </a>
+      <nav class="site-nav"><a href="/">Converter</a><a href="/blog/" style="color:#6C63FF">Guides</a><a href="/contact.html">Contact</a></nav>
+    </div>
+  </header>
+
+  <div class="article-wrap">
+    <a href="/blog/" class="article-back">← All Guides</a>
+    <div class="article-tag">Advanced Tips</div>
+    <h1>How to Merge Multiple Images Into a Single PDF</h1>
+    <div class="article-meta">
+      <span>📅 April 4, 2026</span>
+      <span>⏱ 4 min read</span>
+      <span>✍️ BuildPDF Team</span>
+    </div>
+
+    <p>Need to combine a stack of photos, scanned pages, or screenshots into a single organized PDF document? BuildPDF makes this effortless — just select all your images at once, order them, and convert. Each image becomes one page in the final PDF.</p>
+    <p>This works with JPG, PNG, WEBP, GIF, and BMP files — and it's completely free, with no watermarks and no file uploads.</p>
+
+    <h2>Step-by-Step: Merge Images into One PDF</h2>
+    <div class="step-card">
+      <div class="step-num-sm">01</div>
+      <div class="step-content"><h4>Go to BuildPDF</h4><p>Open <a href="/">buildpdf.co</a> — works on any device with a modern browser.</p></div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-sm">02</div>
+      <div class="step-content"><h4>Select all your image files</h4><p>Click "Choose Files" and select multiple images at once (hold Ctrl or Cmd to multi-select), or drag and drop a batch of images onto the drop zone together. You can mix JPG, PNG, WEBP, and other formats freely.</p></div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-sm">03</div>
+      <div class="step-content"><h4>Check the file order</h4><p>The files will appear in a list. They will be converted in the order shown — which is typically the order you selected them. Make sure the order matches the page order you want in the final PDF.</p></div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-sm">04</div>
+      <div class="step-content"><h4>Set your PDF options</h4><p>Choose page size and orientation. For portrait photos, use Portrait. For landscape/widescreen images, use Landscape. Set Image Quality to High for best results.</p></div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-sm">05</div>
+      <div class="step-content"><h4>Click "Convert to PDF" and download</h4><p>All images are merged into a single multi-page PDF and generated in your browser. Download it instantly.</p></div>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 Ordering Tip:</strong> To ensure your images appear in the right order, rename them with a sequential number prefix before selecting: <code>001_page.jpg, 002_page.jpg, 003_page.jpg</code>. When you select them all, they'll be ordered numerically.
+    </div>
+
+    <h2>Real-World Use Cases</h2>
+    <ul class="example-list">
+      <li><span class="emoji">📸</span><span><strong>Photo albums</strong> — Collect a series of event or vacation photos and bundle them into a single shareable or printable PDF album.</span></li>
+      <li><span class="emoji">📄</span><span><strong>Scanned documents</strong> — Scan each page of a form, contract, or book as a separate image and merge them into one PDF document.</span></li>
+      <li><span class="emoji">🖥</span><span><strong>UI/UX walkthroughs</strong> — Combine a sequence of app screenshots into a PDF presentation for clients or stakeholders.</span></li>
+      <li><span class="emoji">🏠</span><span><strong>Real estate portfolios</strong> — Package property photos into a single PDF listing document.</span></li>
+      <li><span class="emoji">📋</span><span><strong>Insurance claims</strong> — Compile damage photos or receipts into a single organized PDF for submission.</span></li>
+      <li><span class="emoji">🎓</span><span><strong>Student submissions</strong> — Merge handwritten assignment pages (photographed) into a single PDF to submit online.</span></li>
+    </ul>
+
+    <!-- MID AD -->
+    <div class="ad-mid-article">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6010936774105671" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <h2>Choosing the Right Settings for Image Merges</h2>
+
+    <h3>Page size</h3>
+    <p>If all your images are the same orientation and aspect ratio, choose the page size that matches best. For photos taken on a smartphone (portrait), <strong>A4 Portrait</strong> works well. For landscape photos, <strong>A4 Landscape</strong> or <strong>Letter Landscape</strong> fills more of the page.</p>
+
+    <h3>Margins</h3>
+    <p>For photo PDFs or portfolios, <strong>None (0mm)</strong> margin gives a full-bleed edge-to-edge look. For document scans that should look like real pages, use <strong>Normal (10mm)</strong> margins for a more professional appearance.</p>
+
+    <h3>Image quality</h3>
+    <ul>
+      <li><strong>High (95%)</strong> — Use for photos or images meant for printing or archiving.</li>
+      <li><strong>Medium (80%)</strong> — Use for digital sharing where you want smaller file sizes (e.g., email attachments).</li>
+      <li><strong>Low (60%)</strong> — Use for preview PDFs or quick sharing where quality doesn't matter much.</li>
+    </ul>
+
+    <h3>Mixed orientations</h3>
+    <p>Currently, BuildPDF applies a single orientation setting to all pages. If you're merging a mix of portrait and landscape images, choose the orientation that fits the majority of your images. For professional mixed-orientation work, a desktop tool like Adobe Acrobat gives more per-page control.</p>
+
+    <h2>How Many Images Can I Merge?</h2>
+    <p>There's no hard limit set by BuildPDF — you can merge as many images as your browser can handle in memory. In practice, merging 50–200 images works well in most modern browsers on a standard laptop. Very large batches (500+ high-resolution images) may be slow or may exhaust browser memory; for those, consider splitting into two conversions.</p>
+
+    <div class="cta-box">
+      <h3>Merge your images into a PDF now</h3>
+      <p>Free, unlimited, no watermarks. Files stay on your device.</p>
+      <a href="/" class="cta-btn">Start Merging Images →</a>
+    </div>
+
+    <h2>Related Guides</h2>
+    <div class="related-grid">
+      <a href="/blog/jpg-to-pdf.html" class="related-card"><div class="rtag">Images</div><div class="rtitle">How to Convert JPG to PDF</div></a>
+      <a href="/blog/png-to-pdf.html" class="related-card"><div class="rtag">Images</div><div class="rtitle">How to Convert PNG to PDF</div></a>
+      <a href="/blog/extract-pdf.html" class="related-card"><div class="rtag">PDF Extraction</div><div class="rtitle">Extract Images from a PDF</div></a>
+      <a href="/blog/word-to-pdf.html" class="related-card"><div class="rtag">Documents</div><div class="rtitle">Convert Word DOCX to PDF</div></a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
+      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+      <nav class="footer-nav"><a href="/about.html">About</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Use</a><a href="/contact.html">Contact</a></nav>
+    </div>
+  </footer>
+</body>
+</html>

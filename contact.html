@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us – BuildPDF</title>
+  <meta name="description" content="Get in touch with the BuildPDF team. Report a bug, ask a question, or send general feedback about our free online PDF converter." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="canonical" href="https://buildpdf.co/contact.html" />
+  <meta name="google-adsense-account" content="ca-pub-6010936774105671" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
+  <style>
+    .contact-page { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+    .contact-page h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg,#6C63FF,#3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .contact-page .contact-sub { color: var(--text-secondary,#94a3b8); font-size: 1.05rem; margin-bottom: 3rem; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    /* Contact Form */
+    .contact-form-card { background: var(--card-bg, rgba(255,255,255,0.04)); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; }
+    .contact-form-card h2 { font-size: 1.2rem; font-weight: 700; color: var(--text-primary,#f1f5f9); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-secondary,#94a3b8); margin-bottom: 0.5rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.75rem 1rem; border-radius: 10px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-primary,#f1f5f9); font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box;
+    }
+    .form-group input:focus, .form-group select, .form-group textarea:focus {
+      border-color: #6C63FF; box-shadow: 0 0 0 3px rgba(108,99,255,0.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+    .form-group select option { background: #1e2030; color: #f1f5f9; }
+    .btn-send {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem; border-radius: 10px; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+      background: linear-gradient(135deg,#6C63FF,#3B82F6); color: white;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-send:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* Info Cards */
+    .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+    .info-card { background: var(--card-bg, rgba(255,255,255,0.04)); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.5rem; }
+    .info-card h3 { font-size: 1rem; font-weight: 700; color: var(--text-primary,#f1f5f9); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .info-card p { color: var(--text-secondary,#94a3b8); font-size: 0.9rem; line-height: 1.7; margin: 0; }
+    .info-card a { color: #6C63FF; text-decoration: none; }
+    .info-card a:hover { text-decoration: underline; }
+    .info-icon { font-size: 1.2rem; }
+
+    .policy-back { display: inline-flex; align-items: center; gap: 0.5rem; color: #6C63FF; font-weight: 600; text-decoration: none; margin-top: 1.5rem; margin-bottom: 2rem; transition: gap 0.2s; }
+    .policy-back:hover { gap: 0.75rem; }
+    .success-msg { display: none; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); border-radius: 10px; padding: 1rem 1.25rem; color: #4ade80; font-weight: 600; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo" style="text-decoration:none;">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="url(#logoGradC)" />
+          <path d="M10 8h11l7 7v13a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity=".9" />
+          <path d="M21 8l7 7h-5a2 2 0 01-2-2V8z" fill="white" fill-opacity=".5" />
+          <path d="M13 19h10M13 23h7" stroke="url(#strokeGradC)" stroke-width="2" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="logoGradC" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF" /><stop offset="1" stop-color="#3B82F6" />
+            </linearGradient>
+            <linearGradient id="strokeGradC" x1="13" y1="21" x2="23" y2="21" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF" /><stop offset="1" stop-color="#3B82F6" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Converter</a>
+        <a href="/blog/">Guides</a>
+        <a href="/contact.html" style="color:#6C63FF">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contact-page">
+    <a href="/" class="policy-back">← Back to BuildPDF</a>
+    <h1>Contact Us</h1>
+    <p class="contact-sub">Have a question, found a bug, or want to give feedback? We'd love to hear from you.</p>
+
+    <div class="contact-grid">
+      <!-- Contact Form -->
+      <div class="contact-form-card">
+        <h2>Send a Message</h2>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input type="text" id="contactName" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" name="email" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="contactSubject">Subject</label>
+            <select id="contactSubject" name="subject">
+              <option value="general">General Question</option>
+              <option value="bug">Bug Report</option>
+              <option value="feature">Feature Request</option>
+              <option value="dmca">Copyright / DMCA</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" placeholder="Describe your question or issue..." required></textarea>
+          </div>
+          <button type="submit" class="btn-send" id="sendBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Send Message
+          </button>
+          <div class="success-msg" id="successMsg">✓ Message sent! We'll get back to you shortly.</div>
+        </form>
+      </div>
+
+      <!-- Info Cards -->
+      <div class="contact-info">
+        <div class="info-card">
+          <h3><span class="info-icon">⚡</span> Quick Answers</h3>
+          <p>Many common questions are already answered in our <a href="/#faq">FAQ section</a>. Check there first for the fastest response.</p>
+        </div>
+        <div class="info-card">
+          <h3><span class="info-icon">🔒</span> Privacy Matters</h3>
+          <p>Your files are never sent to us — all conversions happen locally in your browser. Read our <a href="/privacy.html">Privacy Policy</a> for full details.</p>
+        </div>
+        <div class="info-card">
+          <h3><span class="info-icon">🐛</span> Reporting a Bug</h3>
+          <p>When reporting a bug, please include your browser name and version, the file type you were converting, and a description of what went wrong. This helps us fix issues faster.</p>
+        </div>
+        <div class="info-card">
+          <h3><span class="info-icon">⏱</span> Response Time</h3>
+          <p>We typically respond within 1–3 business days. For urgent copyright or legal matters, please include "URGENT" in your subject line.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
+      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+      <nav class="footer-nav">
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const btn = document.getElementById('sendBtn');
+      const msg = document.getElementById('successMsg');
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value;
+      // Open mailto link as fallback
+      const mailto = `mailto:support@buildpdf.co?subject=[${subject}] Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\nFrom: ' + email)}`;
+      window.location.href = mailto;
+      btn.disabled = true;
+      btn.textContent = 'Sent!';
+      msg.style.display = 'block';
+      form.reset();
+      setTimeout(() => { btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Send Message'; }, 3000);
+    }
+  </script>
+</body>
+</html>

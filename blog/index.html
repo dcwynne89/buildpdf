@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Guides & Tutorials – BuildPDF</title>
+  <meta name="description" content="Learn how to convert files to PDF, extract content from PDFs, merge images, and more. Free step-by-step guides from BuildPDF." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="canonical" href="https://buildpdf.co/blog/" />
+  <meta name="google-adsense-account" content="ca-pub-6010936774105671" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
+  <style>
+    .blog-hero { padding: 3.5rem 1.5rem 2rem; text-align: center; }
+    .blog-hero h1 { font-size: 2.6rem; font-weight: 800; background: linear-gradient(135deg,#6C63FF,#3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; }
+    .blog-hero p { color: var(--text-secondary, #94a3b8); font-size: 1.1rem; max-width: 560px; margin: 0 auto 2rem; }
+    .blog-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+    .blog-card {
+      background: var(--card-bg, rgba(255,255,255,0.04)); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; overflow: hidden; text-decoration: none;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover { transform: translateY(-4px); border-color: rgba(108,99,255,0.4); box-shadow: 0 12px 40px rgba(108,99,255,0.15); }
+    .blog-card-thumb {
+      height: 160px; display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; position: relative; overflow: hidden;
+    }
+    .blog-card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #6C63FF; margin-bottom: 0.5rem; }
+    .blog-card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary, #f1f5f9); margin-bottom: 0.6rem; line-height: 1.4; }
+    .blog-card-desc { font-size: 0.875rem; color: var(--text-secondary, #94a3b8); line-height: 1.65; flex: 1; }
+    .blog-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .blog-card-read { font-size: 0.8rem; color: #6C63FF; font-weight: 600; }
+    .blog-card-time { font-size: 0.78rem; color: var(--text-muted,#64748b); }
+
+    /* Gradient thumbs */
+    .thumb-1 { background: linear-gradient(135deg, #1e1b4b, #312e81); }
+    .thumb-2 { background: linear-gradient(135deg, #0c4a6e, #075985); }
+    .thumb-3 { background: linear-gradient(135deg, #14532d, #166534); }
+    .thumb-4 { background: linear-gradient(135deg, #4a1d96, #6d28d9); }
+    .thumb-5 { background: linear-gradient(135deg, #7c2d12, #c2410c); }
+    .thumb-6 { background: linear-gradient(135deg, #0f172a, #1e3a5f); }
+
+    .ad-blog-top { max-width: 1100px; margin: 0 auto 1.5rem; padding: 0 1.5rem; }
+    .section-label { text-align: center; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted,#64748b); margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo" style="text-decoration:none;">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="url(#logoGradBlog)" />
+          <path d="M10 8h11l7 7v13a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity=".9" />
+          <path d="M21 8l7 7h-5a2 2 0 01-2-2V8z" fill="white" fill-opacity=".5" />
+          <path d="M13 19h10M13 23h7" stroke="url(#strokeGradBlog)" stroke-width="2" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="logoGradBlog" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF" /><stop offset="1" stop-color="#3B82F6" />
+            </linearGradient>
+            <linearGradient id="strokeGradBlog" x1="13" y1="21" x2="23" y2="21" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF" /><stop offset="1" stop-color="#3B82F6" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Converter</a>
+        <a href="/blog/" style="color:#6C63FF">Guides</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="blog-hero">
+    <h1>PDF Guides & Tutorials</h1>
+    <p>Step-by-step articles on converting, extracting, and working with PDF files — completely free.</p>
+  </section>
+
+  <!-- TOP AD -->
+  <div class="ad-blog-top">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6010936774105671" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="blog-container">
+    <p class="section-label">All Guides</p>
+    <div class="blog-grid">
+
+      <a href="/blog/jpg-to-pdf.html" class="blog-card">
+        <div class="blog-card-thumb thumb-1">🖼️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Images to PDF</div>
+          <div class="blog-card-title">How to Convert JPG Images to PDF (Free, No Software Needed)</div>
+          <div class="blog-card-desc">Learn how to turn any JPEG photo or image into a PDF document in seconds, directly from your browser — no downloads required.</div>
+          <div class="blog-card-footer">
+            <span class="blog-card-read">Read guide →</span>
+            <span class="blog-card-time">4 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/png-to-pdf.html" class="blog-card">
+        <div class="blog-card-thumb thumb-2">🎨</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Images to PDF</div>
+          <div class="blog-card-title">How to Convert PNG to PDF Online for Free</div>
+          <div class="blog-card-desc">PNG files are great for sharp graphics and screenshots. Here's the easiest way to convert them to PDF without losing quality.</div>
+          <div class="blog-card-footer">
+            <span class="blog-card-read">Read guide →</span>
+            <span class="blog-card-time">4 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/word-to-pdf.html" class="blog-card">
+        <div class="blog-card-thumb thumb-3">📄</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Documents to PDF</div>
+          <div class="blog-card-title">How to Convert Word DOCX to PDF Without Microsoft Office</div>
+          <div class="blog-card-desc">No Word installation needed. Convert your .docx files to professional, print-ready PDFs directly in your browser.</div>
+          <div class="blog-card-footer">
+            <span class="blog-card-read">Read guide →</span>
+            <span class="blog-card-time">5 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/txt-to-pdf.html" class="blog-card">
+        <div class="blog-card-thumb thumb-4">📝</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Documents to PDF</div>
+          <div class="blog-card-title">How to Convert a Text File (.TXT) to PDF</div>
+          <div class="blog-card-desc">Turn plain text files into properly formatted PDF documents with custom margins, font styles, and page sizes — all for free.</div>
+          <div class="blog-card-footer">
+            <span class="blog-card-read">Read guide →</span>
+            <span class="blog-card-time">3 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/extract-pdf.html" class="blog-card">
+        <div class="blog-card-thumb thumb-5">🔍</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">PDF Extraction</div>
+          <div class="blog-card-title">How to Extract Text or Images from a PDF File</div>
+          <div class="blog-card-desc">Need to pull content out of a PDF? Learn how to extract text as a .txt file or render each page as a JPG image using BuildPDF.</div>
+          <div class="blog-card-footer">
+            <span class="blog-card-read">Read guide →</span>
+            <span class="blog-card-time">5 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/merge-images-pdf.html" class="blog-card">
+        <div class="blog-card-thumb thumb-6">🗂️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Advanced Tips</div>
+          <div class="blog-card-title">How to Merge Multiple Images Into a Single PDF</div>
+          <div class="blog-card-desc">Combine a whole folder of photos, screenshots, or scanned pages into one organized PDF document — completely free, no watermarks.</div>
+          <div class="blog-card-footer">
+            <span class="blog-card-read">Read guide →</span>
+            <span class="blog-card-time">4 min read</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
+      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+      <nav class="footer-nav">
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

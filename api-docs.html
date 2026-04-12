@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── PRIMARY SEO ── -->
+  <title>BuildPDF API — Free PDF Conversion API for Developers | No Server Required</title>
+  <meta name="description"
+    content="Free REST API to convert HTML, images, and documents to PDF. 100 free conversions/month. No credit card. Simple integration with cURL, JavaScript, Python, and PHP." />
+  <meta name="keywords"
+    content="pdf api, html to pdf api, free pdf api, convert to pdf api, image to pdf api, document conversion api, rest api pdf, pdf generation api" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="BuildPDF" />
+  <meta name="theme-color" content="#0D0E1A" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://buildpdf.co/api/docs" />
+
+  <!-- ── OPEN GRAPH ── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://buildpdf.co/api/docs" />
+  <meta property="og:title" content="BuildPDF API — Free PDF Conversion API for Developers" />
+  <meta property="og:description"
+    content="Convert HTML, images, and docs to PDF with a simple REST API. 100 free conversions/month. No sign-up friction." />
+
+  <!-- ── TWITTER ── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BuildPDF API — Free PDF Conversion for Developers" />
+  <meta name="twitter:description"
+    content="REST API for PDF generation. HTML, images, text → PDF. Free tier included." />
+
+  <!-- ── STRUCTURED DATA ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebAPI",
+    "name": "BuildPDF API",
+    "url": "https://buildpdf.co/api/docs",
+    "description": "Free REST API to convert HTML, images, and documents to PDF. 100 free conversions per month.",
+    "provider": {
+      "@type": "Organization",
+      "name": "BuildPDF",
+      "url": "https://buildpdf.co"
+    },
+    "documentation": "https://buildpdf.co/api/docs"
+  }
+  </script>
+
+  <!-- ── FONTS & STYLES ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+
+  <style>
+    /* ── API Docs Page Styles ── */
+
+    .api-hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      position: relative;
+    }
+    .api-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(108,99,255,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .api-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(108,99,255,.12);
+      border: 1px solid rgba(108,99,255,.25);
+      color: #a5b4fc;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.25rem;
+      letter-spacing: .02em;
+    }
+    .api-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .api-hero p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    .api-hero .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.75rem;
+      background: linear-gradient(135deg, #6C63FF, #3B82F6);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(108,99,255,.35);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.75rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #e2e8f0;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: .95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s, border-color .15s;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.2);
+    }
+
+    /* ── Quick Start ── */
+    .docs-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .docs-section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+    .docs-section h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: .75rem;
+      color: #e2e8f0;
+    }
+    .docs-section p {
+      color: #94a3b8;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Code Blocks ── */
+    .code-block {
+      background: #0f1117;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 1rem 0 1.5rem;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,.03);
+      padding: .6rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .code-lang {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      font-weight: 500;
+      color: #6C63FF;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .code-copy {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #94a3b8;
+      padding: .3rem .75rem;
+      border-radius: 8px;
+      font-size: .75rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .code-copy:hover {
+      background: rgba(108,99,255,.15);
+      color: #a5b4fc;
+      border-color: rgba(108,99,255,.3);
+    }
+    .code-copy.copied {
+      background: rgba(34,197,94,.15);
+      color: #4ade80;
+      border-color: rgba(34,197,94,.3);
+    }
+    .code-body {
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+    }
+    .code-body pre {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem;
+      line-height: 1.65;
+      color: #e2e8f0;
+      white-space: pre;
+    }
+    .code-body .comment { color: #4a5568; }
+    .code-body .string { color: #a5f3fc; }
+    .code-body .keyword { color: #c084fc; }
+    .code-body .method { color: #60a5fa; }
+    .code-body .property { color: #fbbf24; }
+
+    /* ── Tab Switcher ── */
+    .tab-bar {
+      display: flex;
+      gap: .25rem;
+      background: rgba(255,255,255,.03);
+      border-radius: 12px;
+      padding: .25rem;
+      margin-bottom: 0;
+      border: 1px solid rgba(255,255,255,.06);
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: .5rem 1.25rem;
+      background: transparent;
+      border: none;
+      color: #64748b;
+      font-size: .85rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(108,99,255,.2), rgba(59,130,246,.15));
+      color: #e2e8f0;
+    }
+    .tab-btn:hover:not(.active) {
+      color: #94a3b8;
+      background: rgba(255,255,255,.03);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Endpoint Card ── */
+    .endpoint-card {
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .endpoint-method {
+      display: inline-flex;
+      padding: .25rem .75rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      font-weight: 700;
+      margin-right: .75rem;
+    }
+    .endpoint-method.post {
+      background: rgba(34,197,94,.12);
+      color: #4ade80;
+      border: 1px solid rgba(34,197,94,.2);
+    }
+    .endpoint-method.get {
+      background: rgba(59,130,246,.12);
+      color: #60a5fa;
+      border: 1px solid rgba(59,130,246,.2);
+    }
+    .endpoint-path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .9rem;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+    .endpoint-desc {
+      color: #94a3b8;
+      margin-top: .75rem;
+      line-height: 1.6;
+    }
+
+    /* ── Param Table ── */
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: .88rem;
+    }
+    .param-table th {
+      text-align: left;
+      color: #64748b;
+      font-weight: 600;
+      padding: .6rem .75rem;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .param-table td {
+      padding: .6rem .75rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: #cbd5e1;
+      vertical-align: top;
+    }
+    .param-table code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      color: #a5b4fc;
+      background: rgba(108,99,255,.08);
+      padding: .15rem .4rem;
+      border-radius: 5px;
+    }
+    .param-required {
+      color: #f87171;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .param-optional {
+      color: #64748b;
+      font-size: .72rem;
+      font-weight: 600;
+    }
+
+    /* ── Pricing Grid ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .pricing-card {
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .pricing-card:hover {
+      border-color: rgba(108,99,255,.3);
+      transform: translateY(-3px);
+    }
+    .pricing-card.featured {
+      border-color: rgba(108,99,255,.4);
+      background: rgba(108,99,255,.05);
+      position: relative;
+    }
+    .pricing-card.featured::before {
+      content: 'Popular';
+      position: absolute;
+      top: -.65rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #6C63FF, #3B82F6);
+      color: white;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .75rem;
+      border-radius: 20px;
+      letter-spacing: .03em;
+    }
+    .pricing-name {
+      font-weight: 700;
+      font-size: .95rem;
+      margin-bottom: .5rem;
+      color: #e2e8f0;
+    }
+    .pricing-price {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: .25rem;
+    }
+    .pricing-price span {
+      font-size: .85rem;
+      font-weight: 400;
+      color: #64748b;
+    }
+    .pricing-feature {
+      color: #94a3b8;
+      font-size: .82rem;
+      padding: .3rem 0;
+      border-top: 1px solid rgba(255,255,255,.04);
+    }
+    .pricing-feature:first-of-type {
+      margin-top: .75rem;
+    }
+
+    /* ── Playground ── */
+    .playground {
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .playground h3 {
+      margin-top: 0 !important;
+    }
+    .playground-input {
+      width: 100%;
+      min-height: 120px;
+      background: #0f1117;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem;
+      padding: 1rem;
+      resize: vertical;
+      margin-bottom: 1rem;
+    }
+    .playground-input:focus {
+      outline: none;
+      border-color: rgba(108,99,255,.4);
+      box-shadow: 0 0 0 3px rgba(108,99,255,.1);
+    }
+    .playground-key {
+      width: 100%;
+      background: #0f1117;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem;
+      padding: .75rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .playground-key:focus {
+      outline: none;
+      border-color: rgba(108,99,255,.4);
+      box-shadow: 0 0 0 3px rgba(108,99,255,.1);
+    }
+    .playground-output {
+      background: #0f1117;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      color: #94a3b8;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ── Divider ── */
+    .docs-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,.06);
+      margin: 3rem 0;
+    }
+
+    /* ── Key Generator ── */
+    .keygen-form {
+      display: flex;
+      gap: .75rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .keygen-input {
+      flex: 1;
+      min-width: 200px;
+      background: #0f1117;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      padding: .75rem 1rem;
+    }
+    .keygen-input:focus {
+      outline: none;
+      border-color: rgba(108,99,255,.4);
+    }
+    .keygen-result {
+      background: rgba(34,197,94,.06);
+      border: 1px solid rgba(34,197,94,.2);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      display: none;
+    }
+    .keygen-result.visible { display: block; }
+    .keygen-result .key-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .9rem;
+      color: #4ade80;
+      word-break: break-all;
+      background: rgba(0,0,0,.3);
+      padding: .5rem .75rem;
+      border-radius: 8px;
+      margin-top: .5rem;
+    }
+    .keygen-result .key-warning {
+      color: #fbbf24;
+      font-size: .82rem;
+      margin-top: .5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" style="text-decoration:none;">
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" rx="10" fill="url(#logoGrad2)" />
+            <path d="M10 8h11l7 7v13a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity=".9" />
+            <path d="M21 8l7 7h-5a2 2 0 01-2-2V8z" fill="white" fill-opacity=".5" />
+            <path d="M13 19h10M13 23h7" stroke="url(#strokeGrad2)" stroke-width="2" stroke-linecap="round" />
+            <defs>
+              <linearGradient id="logoGrad2" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6C63FF" />
+                <stop offset="1" stop-color="#3B82F6" />
+              </linearGradient>
+              <linearGradient id="strokeGrad2" x1="13" y1="21" x2="23" y2="21" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6C63FF" />
+                <stop offset="1" stop-color="#3B82F6" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+        </div>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Converter</a>
+        <a href="/api/docs" style="color:#a5b4fc;">API</a>
+        <a href="/blog/">Guides</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── API HERO ── -->
+  <section class="api-hero">
+    <div class="api-badge">⚡ REST API</div>
+    <h1>PDF Conversion API<br><span class="gradient-text">for Developers</span></h1>
+    <p>Convert HTML, images, and documents to PDF with a single API call. Free tier included — no credit card required. Files are processed and immediately discarded.</p>
+    <div class="cta-row">
+      <a href="#get-started" class="btn-primary">Get Free API Key</a>
+      <a href="#endpoints" class="btn-ghost">View Endpoints →</a>
+    </div>
+  </section>
+
+  <!-- ── QUICK START ── -->
+  <div class="docs-section" id="get-started">
+    <h2>Quick Start</h2>
+    <p>Get up and running in under 2 minutes. No SDK needed — just HTTP requests.</p>
+
+    <h3>1. Get your API key</h3>
+    <div class="playground" id="keygenSection">
+      <p style="color:#94a3b8;margin-top:0;">Enter your email to generate a free API key instantly:</p>
+      <div class="keygen-form">
+        <input type="email" class="keygen-input" id="keygenEmail" placeholder="you@example.com" />
+        <button class="btn-primary" id="keygenBtn" onclick="generateKey()">Generate Key</button>
+      </div>
+      <div class="keygen-result" id="keygenResult">
+        <strong style="color:#e2e8f0;">🎉 Your API key:</strong>
+        <div class="key-value" id="keygenValue"></div>
+        <p class="key-warning">⚠ Save this key now — it cannot be retrieved later. Store it as an environment variable.</p>
+      </div>
+    </div>
+
+    <h3>2. Make your first conversion</h3>
+
+    <div class="tab-bar" id="quickstartTabs">
+      <button class="tab-btn active" onclick="switchTab('quickstartTabs','quickstartPanels','curl')">cURL</button>
+      <button class="tab-btn" onclick="switchTab('quickstartTabs','quickstartPanels','javascript')">JavaScript</button>
+      <button class="tab-btn" onclick="switchTab('quickstartTabs','quickstartPanels','python')">Python</button>
+      <button class="tab-btn" onclick="switchTab('quickstartTabs','quickstartPanels','php')">PHP</button>
+    </div>
+    <div id="quickstartPanels">
+      <div class="tab-panel active" data-tab="curl">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><pre><span class="method">curl</span> -X POST https://buildpdf.co/api/v1/convert \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -H <span class="string">"X-API-Key: YOUR_API_KEY"</span> \
+  -d <span class="string">'{
+    "html": "&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;My first PDF via API!&lt;/p&gt;",
+    "options": {
+      "pageSize": "a4",
+      "orientation": "portrait"
+    }
+  }'</span></pre></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="javascript">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">javascript</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><pre><span class="keyword">const</span> response = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'https://buildpdf.co/api/v1/convert'</span>, {
+  <span class="property">method</span>: <span class="string">'POST'</span>,
+  <span class="property">headers</span>: {
+    <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,
+    <span class="string">'X-API-Key'</span>: process.env.<span class="property">BUILDPDF_API_KEY</span>,
+  },
+  <span class="property">body</span>: JSON.<span class="method">stringify</span>({
+    <span class="property">html</span>: <span class="string">'&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;My first PDF!&lt;/p&gt;'</span>,
+    <span class="property">options</span>: { <span class="property">pageSize</span>: <span class="string">'a4'</span> }
+  })
+});
+
+<span class="keyword">const</span> { pdf } = <span class="keyword">await</span> response.<span class="method">json</span>();
+<span class="comment">// pdf is a base64-encoded PDF — save it:</span>
+fs.<span class="method">writeFileSync</span>(<span class="string">'output.pdf'</span>, Buffer.<span class="method">from</span>(pdf, <span class="string">'base64'</span>));</pre></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="python">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">python</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><pre><span class="keyword">import</span> requests, base64, os
+
+response = requests.<span class="method">post</span>(
+    <span class="string">"https://buildpdf.co/api/v1/convert"</span>,
+    <span class="property">headers</span>={<span class="string">"X-API-Key"</span>: os.environ[<span class="string">"BUILDPDF_API_KEY"</span>]},
+    <span class="property">json</span>={
+        <span class="string">"html"</span>: <span class="string">"&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;My first PDF!&lt;/p&gt;"</span>,
+        <span class="string">"options"</span>: {<span class="string">"pageSize"</span>: <span class="string">"a4"</span>}
+    }
+)
+
+pdf_bytes = base64.<span class="method">b64decode</span>(response.<span class="method">json</span>()[<span class="string">"pdf"</span>])
+<span class="keyword">with</span> <span class="method">open</span>(<span class="string">"output.pdf"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:
+    f.<span class="method">write</span>(pdf_bytes)</pre></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="php">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">php</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><pre><span class="keyword">&lt;?php</span>
+<span class="property">$ch</span> = <span class="method">curl_init</span>(<span class="string">'https://buildpdf.co/api/v1/convert'</span>);
+<span class="method">curl_setopt_array</span>(<span class="property">$ch</span>, [
+    CURLOPT_POST           => <span class="keyword">true</span>,
+    CURLOPT_RETURNTRANSFER => <span class="keyword">true</span>,
+    CURLOPT_HTTPHEADER     => [
+        <span class="string">'Content-Type: application/json'</span>,
+        <span class="string">'X-API-Key: '</span> . <span class="method">getenv</span>(<span class="string">'BUILDPDF_API_KEY'</span>),
+    ],
+    CURLOPT_POSTFIELDS => <span class="method">json_encode</span>([
+        <span class="string">'html'</span>    => <span class="string">'&lt;h1&gt;Hello World&lt;/h1&gt;'</span>,
+        <span class="string">'options'</span> => [<span class="string">'pageSize'</span> => <span class="string">'a4'</span>],
+    ]),
+]);
+<span class="property">$result</span> = <span class="method">json_decode</span>(<span class="method">curl_exec</span>(<span class="property">$ch</span>), <span class="keyword">true</span>);
+<span class="method">file_put_contents</span>(<span class="string">'output.pdf'</span>, <span class="method">base64_decode</span>(<span class="property">$result</span>[<span class="string">'pdf'</span>]));</pre></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="docs-divider" />
+
+    <!-- ── ENDPOINTS ── -->
+    <h2 id="endpoints">Endpoints</h2>
+
+    <!-- CONVERT -->
+    <div class="endpoint-card">
+      <span class="endpoint-method post">POST</span>
+      <span class="endpoint-path">/api/v1/convert</span>
+      <p class="endpoint-desc">Convert HTML, text, or image files to PDF. Send content directly or as base64-encoded files.</p>
+
+      <h3>Request Body</h3>
+      <table class="param-table">
+        <thead>
+          <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>html</code></td>
+            <td>string</td>
+            <td>Raw HTML content to convert. <span class="param-optional">optional</span></td>
+          </tr>
+          <tr>
+            <td><code>text</code></td>
+            <td>string</td>
+            <td>Plain text content. <span class="param-optional">optional</span></td>
+          </tr>
+          <tr>
+            <td><code>file</code></td>
+            <td>string</td>
+            <td>Base64-encoded file (image or document). <span class="param-optional">optional</span></td>
+          </tr>
+          <tr>
+            <td><code>format</code></td>
+            <td>string</td>
+            <td>File format hint when using <code>file</code>: <code>image</code>, <code>text</code>, <code>html</code>, <code>docx</code>. <span class="param-optional">optional</span></td>
+          </tr>
+          <tr>
+            <td><code>options</code></td>
+            <td>object</td>
+            <td>PDF options (see below). <span class="param-optional">optional</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Options Object</h3>
+      <table class="param-table">
+        <thead>
+          <tr><th>Field</th><th>Default</th><th>Values</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>pageSize</code></td><td><code>a4</code></td><td><code>a4</code>, <code>letter</code>, <code>a3</code>, <code>legal</code></td></tr>
+          <tr><td><code>orientation</code></td><td><code>portrait</code></td><td><code>portrait</code>, <code>landscape</code></td></tr>
+          <tr><td><code>margin</code></td><td><code>10</code></td><td>Margin in mm (0–50)</td></tr>
+          <tr><td><code>quality</code></td><td><code>0.95</code></td><td>Image quality 0.1–1.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EXTRACT -->
+    <div class="endpoint-card">
+      <span class="endpoint-method post">POST</span>
+      <span class="endpoint-path">/api/v1/extract</span>
+      <p class="endpoint-desc">Extract text or images from a PDF file. <em>Requires Starter plan or above.</em></p>
+
+      <table class="param-table">
+        <thead>
+          <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>file</code></td>
+            <td>string</td>
+            <td>Base64-encoded PDF file. <span class="param-required">required</span></td>
+          </tr>
+          <tr>
+            <td><code>output</code></td>
+            <td>string</td>
+            <td><code>text</code> or <code>images</code>. Default: <code>text</code>. <span class="param-optional">optional</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- USAGE -->
+    <div class="endpoint-card">
+      <span class="endpoint-method get">GET</span>
+      <span class="endpoint-path">/api/v1/usage</span>
+      <p class="endpoint-desc">Check your current usage, remaining quota, and tier limits. Does not count as a conversion.</p>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="endpoint-card">
+      <span class="endpoint-method post">POST</span>
+      <span class="endpoint-path">/api/v1/register</span>
+      <p class="endpoint-desc">Register for a new API key. Returns a <code>bpdf_</code> prefixed key.</p>
+
+      <table class="param-table">
+        <thead>
+          <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>email</code></td>
+            <td>string</td>
+            <td>Your email address. <span class="param-required">required</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="docs-divider" />
+
+    <!-- ── AUTHENTICATION ── -->
+    <h2 id="authentication">Authentication</h2>
+    <p>All API requests require an API key. Pass it via one of these methods:</p>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">headers</span></div>
+      <div class="code-body"><pre><span class="comment"># Option 1: X-API-Key header (recommended)</span>
+X-API-Key: bpdf_your_key_here
+
+<span class="comment"># Option 2: Authorization Bearer</span>
+Authorization: Bearer bpdf_your_key_here</pre></div>
+    </div>
+
+    <hr class="docs-divider" />
+
+    <!-- ── LIVE PLAYGROUND ── -->
+    <h2 id="playground">Live Playground</h2>
+    <p>Test the API right here — enter your API key and HTML content to generate a PDF.</p>
+
+    <div class="playground">
+      <h3>Try it out</h3>
+      <label style="color:#94a3b8;font-size:.85rem;display:block;margin-bottom:.5rem;">API Key</label>
+      <input type="text" class="playground-key" id="playgroundKey" placeholder="bpdf_your_key_here" />
+
+      <label style="color:#94a3b8;font-size:.85rem;display:block;margin-bottom:.5rem;">HTML Content</label>
+      <textarea class="playground-input" id="playgroundHtml"><h1>Hello from BuildPDF!</h1>
+<p>This PDF was generated via the API.</p>
+<ul>
+  <li>✅ Fast conversion</li>
+  <li>✅ No server setup needed</li>
+  <li>✅ Privacy-first</li>
+</ul></textarea>
+
+      <button class="btn-primary" id="playgroundBtn" onclick="runPlayground()">
+        ⚡ Convert to PDF
+      </button>
+
+      <div class="playground-output" id="playgroundOutput" style="display:none;"></div>
+    </div>
+
+    <hr class="docs-divider" />
+
+    <!-- ── PRICING ── -->
+    <h2 id="pricing">Pricing</h2>
+    <p>Start free. Upgrade when you need more. No credit card required for the free tier.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Free</div>
+        <div class="pricing-price">$0<span>/mo</span></div>
+        <div class="pricing-feature">100 conversions/mo</div>
+        <div class="pricing-feature">5 MB max file</div>
+        <div class="pricing-feature">10 req/min</div>
+        <div class="pricing-feature">"Powered by" watermark</div>
+        <div class="pricing-feature">HTML, Image, Text → PDF</div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price">$9<span>/mo</span></div>
+        <div class="pricing-feature">1,000 conversions/mo</div>
+        <div class="pricing-feature">25 MB max file</div>
+        <div class="pricing-feature">60 req/min</div>
+        <div class="pricing-feature">No watermark</div>
+        <div class="pricing-feature">+ PDF Extraction</div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-price">$29<span>/mo</span></div>
+        <div class="pricing-feature">10,000 conversions/mo</div>
+        <div class="pricing-feature">50 MB max file</div>
+        <div class="pricing-feature">300 req/min</div>
+        <div class="pricing-feature">No watermark</div>
+        <div class="pricing-feature">+ Batch conversion</div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Business</div>
+        <div class="pricing-price">$79<span>/mo</span></div>
+        <div class="pricing-feature">50,000 conversions/mo</div>
+        <div class="pricing-feature">100 MB max file</div>
+        <div class="pricing-feature">1,000 req/min</div>
+        <div class="pricing-feature">Priority support</div>
+        <div class="pricing-feature">All features included</div>
+      </div>
+    </div>
+
+    <hr class="docs-divider" />
+
+    <!-- ── ERROR CODES ── -->
+    <h2 id="errors">Error Codes</h2>
+    <table class="param-table">
+      <thead>
+        <tr><th>Code</th><th>Meaning</th><th>What to do</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>400</code></td><td>Bad Request</td><td>Check your request body — a required field is missing or malformed.</td></tr>
+        <tr><td><code>401</code></td><td>Unauthorized</td><td>API key is missing or invalid. Check the X-API-Key header.</td></tr>
+        <tr><td><code>403</code></td><td>Forbidden</td><td>Feature not available on your tier. Upgrade your plan.</td></tr>
+        <tr><td><code>413</code></td><td>File Too Large</td><td>File exceeds your tier's size limit.</td></tr>
+        <tr><td><code>429</code></td><td>Rate Limited</td><td>Too many requests. Wait and retry, or upgrade for higher limits.</td></tr>
+        <tr><td><code>500</code></td><td>Server Error</td><td>Something went wrong on our end. Retry, or contact support.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="logo">
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </div>
+      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+      <nav class="footer-nav">
+        <a href="/">Converter</a>
+        <a href="/api/docs">API Docs</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // ── Tab Switcher ──
+    function switchTab(tabBarId, panelsId, tabName) {
+      const tabBar = document.getElementById(tabBarId);
+      const panels = document.getElementById(panelsId);
+
+      tabBar.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        const panel = panels.querySelectorAll('.tab-panel')[i];
+        if (btn.textContent.trim().toLowerCase() === tabName) {
+          btn.classList.add('active');
+          panel.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+          panel.classList.remove('active');
+        }
+      });
+    }
+
+    // ── Code Copy ──
+    function copyCode(btn) {
+      const code = btn.closest('.code-block').querySelector('pre').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = '✓ Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // ── API Key Generator ──
+    async function generateKey() {
+      const email = document.getElementById('keygenEmail').value.trim();
+      const btn = document.getElementById('keygenBtn');
+      const result = document.getElementById('keygenResult');
+      const value = document.getElementById('keygenValue');
+
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      btn.textContent = 'Generating...';
+      btn.disabled = true;
+
+      try {
+        const resp = await fetch('/api/v1/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await resp.json();
+
+        if (data.success) {
+          value.textContent = data.apiKey;
+          result.classList.add('visible');
+        } else {
+          alert('Error: ' + (data.error || 'Unknown error'));
+        }
+      } catch (err) {
+        alert('Failed to connect. Please try again.');
+      }
+
+      btn.textContent = 'Generate Key';
+      btn.disabled = false;
+    }
+
+    // ── Live Playground ──
+    async function runPlayground() {
+      const key = document.getElementById('playgroundKey').value.trim();
+      const html = document.getElementById('playgroundHtml').value.trim();
+      const output = document.getElementById('playgroundOutput');
+      const btn = document.getElementById('playgroundBtn');
+
+      if (!key) {
+        alert('Enter your API key first.');
+        return;
+      }
+      if (!html) {
+        alert('Enter some HTML content.');
+        return;
+      }
+
+      output.style.display = 'block';
+      output.textContent = '⏳ Converting...';
+      btn.disabled = true;
+
+      try {
+        const resp = await fetch('/api/v1/convert', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-API-Key': key,
+          },
+          body: JSON.stringify({ html, options: { pageSize: 'a4' } }),
+        });
+        const data = await resp.json();
+
+        if (data.success) {
+          output.innerHTML = `<span style="color:#4ade80;">✓ Success!</span>\n\nPages: ${data.pages}\nSize: ${(data.sizeBytes / 1024).toFixed(1)} KB\nWatermark: ${data.watermark}\nRemaining: ${data.usage.remaining} conversions\n\n<button class="btn-primary" style="font-size:.8rem;padding:.5rem 1rem;" onclick="downloadPlaygroundPdf()">Download PDF</button>`;
+          window.__playgroundPdf = data.pdf;
+        } else {
+          output.innerHTML = `<span style="color:#f87171;">✗ Error:</span> ${data.error}${data.details ? '\n\n' + JSON.stringify(data.details, null, 2) : ''}`;
+        }
+      } catch (err) {
+        output.innerHTML = `<span style="color:#f87171;">✗ Connection failed:</span> ${err.message}`;
+      }
+
+      btn.disabled = false;
+    }
+
+    function downloadPlaygroundPdf() {
+      if (!window.__playgroundPdf) return;
+      const byteChars = atob(window.__playgroundPdf);
+      const byteArr = new Uint8Array(byteChars.length);
+      for (let i = 0; i < byteChars.length; i++) byteArr[i] = byteChars.charCodeAt(i);
+      const blob = new Blob([byteArr], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'buildpdf-test.pdf';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+
+</body>
+</html>
