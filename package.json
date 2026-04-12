@@ -1,0 +1,14 @@
+{
+  "name": "buildpdf",
+  "version": "1.0.0",
+  "description": "BuildPDF — Free online PDF converter with REST API",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site — no build step'"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^7.0.0",
+    "jspdf": "^2.5.1",
+    "pdf-parse": "^1.1.1"
+  }
+}
