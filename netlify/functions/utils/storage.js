@@ -8,6 +8,20 @@ const { getStore } = require("@netlify/blobs");
 const KEYS_STORE = "api-keys";
 const USAGE_STORE = "api-usage";
 
+// ── Get a properly configured store ──
+// Netlify Blobs auto-context doesn't always inject in Git-linked deploys,
+// so we explicitly pass siteID and token from environment variables.
+function getConfiguredStore(name) {
+  const siteID = process.env.NETLIFY_SITE_ID || process.env.SITE_ID;
+  const token = process.env.NETLIFY_AUTH_TOKEN || process.env.NETLIFY_API_TOKEN;
+
+  if (siteID && token) {
+    return getStore({ name, siteID, token });
+  }
+  // Fallback to auto-context (works in some Netlify function environments)
+  return getStore(name);
+}
+
 
 // ── Helpers ──
 function currentMonth() {
@@ -76,7 +90,7 @@ const TIERS = {
  * @returns {{ apiKey: string, keyHash: string }}
  */
 async function registerKey(email) {
-  const store = getStore(KEYS_STORE);
+  const store = getConfiguredStore(KEYS_STORE);
   const apiKey = generateApiKey();
   const keyHash = await hashKey(apiKey);
 
@@ -101,7 +115,7 @@ async function registerKey(email) {
 async function validateKey(apiKey) {
   if (!apiKey || !apiKey.startsWith("bpdf_")) return null;
 
-  const store = getStore(KEYS_STORE);
+  const store = getConfiguredStore(KEYS_STORE);
   const keyHash = await hashKey(apiKey);
 
   try {
@@ -122,7 +136,7 @@ async function validateKey(apiKey) {
  * @returns {number}
  */
 async function getUsage(keyHash) {
-  const store = getStore(USAGE_STORE);
+  const store = getConfiguredStore(USAGE_STORE);
   const key = `${keyHash}:${currentMonth()}`;
 
   try {
@@ -139,7 +153,7 @@ async function getUsage(keyHash) {
  * @returns {number} new count
  */
 async function incrementUsage(keyHash) {
-  const store = getStore(USAGE_STORE);
+  const store = getConfiguredStore(USAGE_STORE);
   const key = `${keyHash}:${currentMonth()}`;
 
   let current = 0;
