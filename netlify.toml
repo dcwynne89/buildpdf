@@ -28,6 +28,11 @@
   to     = "/.netlify/functions/register"
   status = 200
 
+[[redirects]]
+  from   = "/api/v1/health"
+  to     = "/.netlify/functions/health"
+  status = 200
+
 # API Docs clean URL
 [[redirects]]
   from   = "/api/docs"
