@@ -7,6 +7,95 @@
 (function () {
   'use strict';
 
+  // ── FACEBOOK IN-APP BROWSER DETECTION ──
+  const isFacebookBrowser = /FBAN|FBAV|FB_IAB|Instagram/i.test(navigator.userAgent);
+
+  if (isFacebookBrowser) {
+    showFacebookBanner();
+  }
+
+  function showFacebookBanner() {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'fb-browser-overlay';
+    overlay.innerHTML = `
+      <div class="fb-banner-card">
+        <div class="fb-banner-icon">⚠️</div>
+        <h2>Open in Your Browser</h2>
+        <p>Facebook's built-in browser doesn't fully support file uploads and downloads. For the best experience, please open this page in <strong>Chrome</strong>, <strong>Safari</strong>, or your default browser.</p>
+        <div class="fb-banner-steps">
+          <div class="fb-step"><span class="fb-step-num">1</span> Tap the <strong>⋮</strong> or <strong>⋯</strong> menu at the top right</div>
+          <div class="fb-step"><span class="fb-step-num">2</span> Select <strong>"Open in Browser"</strong> or <strong>"Open in Chrome/Safari"</strong></div>
+        </div>
+        <button id="fb-banner-continue" class="fb-banner-btn-secondary">Continue Anyway</button>
+      </div>
+    `;
+
+    // Inject styles
+    const style = document.createElement('style');
+    style.textContent = `
+      #fb-browser-overlay {
+        position: fixed; inset: 0; z-index: 10000;
+        background: rgba(13,14,26,0.92);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        display: flex; align-items: center; justify-content: center;
+        padding: 24px;
+      }
+      .fb-banner-card {
+        background: #1a1b30; border: 1px solid rgba(108,99,255,.25);
+        border-radius: 20px; padding: 40px 32px; max-width: 440px;
+        width: 100%; text-align: center;
+        box-shadow: 0 20px 60px rgba(0,0,0,.6);
+        animation: fbSlideUp 0.3s ease;
+      }
+      @keyframes fbSlideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fb-banner-icon { font-size: 3rem; margin-bottom: 16px; }
+      .fb-banner-card h2 {
+        font-size: 1.4rem; font-weight: 800; color: #E8E8F0;
+        margin-bottom: 14px; letter-spacing: -0.02em;
+      }
+      .fb-banner-card > p {
+        font-size: 0.92rem; color: #8889A8; line-height: 1.65;
+        margin-bottom: 24px;
+      }
+      .fb-banner-card strong { color: #E8E8F0; }
+      .fb-banner-steps {
+        background: rgba(108,99,255,0.08); border: 1px solid rgba(108,99,255,0.15);
+        border-radius: 12px; padding: 18px 20px;
+        margin-bottom: 24px; text-align: left;
+      }
+      .fb-step {
+        display: flex; align-items: center; gap: 12px;
+        font-size: 0.88rem; color: #c8c8d8; padding: 6px 0;
+      }
+      .fb-step-num {
+        width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+        background: linear-gradient(135deg, #6C63FF, #3B82F6);
+        color: white; font-weight: 700; font-size: 0.78rem;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .fb-banner-btn-secondary {
+        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+        color: #8889A8; border-radius: 100px; padding: 12px 28px;
+        font-size: 0.88rem; font-weight: 600; cursor: pointer;
+        font-family: 'Inter', sans-serif; transition: all 0.2s;
+      }
+      .fb-banner-btn-secondary:hover { background: rgba(255,255,255,0.1); color: #E8E8F0; }
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(overlay);
+
+    // Allow dismissal
+    document.getElementById('fb-banner-continue').addEventListener('click', () => {
+      overlay.style.opacity = '0';
+      overlay.style.transition = 'opacity 0.25s ease';
+      setTimeout(() => overlay.remove(), 260);
+    });
+  }
+
   // ── DOM refs ──
   const dropZone      = document.getElementById('dropZone');
   const fileInput     = document.getElementById('fileInput');
@@ -454,16 +543,36 @@
     await addTextPage(doc, fakeFile, margin, pageW, usableW, usableH);
   }
 
-  // ── DOWNLOAD ──
+  // ── DOWNLOAD (with Facebook WebView fallback) ──
   function triggerDownload(blob, filename) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 10000);
+    // In Facebook's in-app browser, Blob URLs often don't work.
+    // Try normal method first, fall back to data URI.
+    if (isFacebookBrowser) {
+      // Data URI fallback for WebView
+      const reader = new FileReader();
+      reader.onload = function () {
+        const a = document.createElement('a');
+        a.href = reader.result;
+        a.download = filename;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+        }, 1000);
+      };
+      reader.readAsDataURL(blob);
+    } else {
+      // Standard Blob URL download
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    }
   }
 
   function buildFilename() {
