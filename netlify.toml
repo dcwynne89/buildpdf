@@ -6,6 +6,25 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# pdfmake loads binary data files (data.trie) and jsdom uses dynamic requires —
+# both break when bundled by esbuild. Mark as external and include at runtime.
+[functions."convert"]
+  external_node_modules = [
+    "pdfmake",
+    "html-to-pdfmake",
+    "jsdom",
+    "@foliojs-fork/fontkit",
+    "@foliojs-fork/pdfkit",
+    "pdfkit"
+  ]
+  included_files = [
+    "node_modules/pdfmake/**",
+    "node_modules/html-to-pdfmake/**",
+    "node_modules/jsdom/**",
+    "node_modules/@foliojs-fork/**",
+    "node_modules/pdfkit/**"
+  ]
+
 
 # ── API Route Redirects ──────────────────────────────────────────────────────
 # Route /api/v1/* to the corresponding Netlify Functions
