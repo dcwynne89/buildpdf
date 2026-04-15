@@ -577,6 +577,33 @@
     <h2>Quick Start</h2>
     <p>Get up and running in under 2 minutes. No SDK needed — just HTTP requests.</p>
 
+    <!-- ── MINIMAL HELLO WORLD ── -->
+    <div class="endpoint-card" style="border-color:rgba(108,99,255,.3);background:rgba(108,99,255,.04);margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+        <span style="background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.25);color:#4ade80;font-size:.75rem;font-weight:700;padding:.2rem .6rem;border-radius:6px;">FASTEST PATH</span>
+        <span style="color:#e2e8f0;font-weight:600;">Minimum viable request — try this first</span>
+      </div>
+      <p style="color:#94a3b8;margin-bottom:1rem;font-size:.9rem;">This is all you need. No options object required. Paste your API key and send it.</p>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">json — request body</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+        <div class="code-body"><pre>{
+  <span class="property">"html"</span>: <span class="string">"&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;My first PDF!&lt;/p&gt;"</span>
+}</pre></div>
+      </div>
+      <div class="code-block" style="margin-top:.75rem;">
+        <div class="code-header"><span class="code-lang">json — response</span></div>
+        <div class="code-body"><pre>{
+  <span class="property">"success"</span>: <span class="keyword">true</span>,
+  <span class="property">"pdf"</span>: <span class="string">"JVBERi0xLjQ..."</span>,  <span class="comment">// base64-encoded PDF bytes</span>
+  <span class="property">"pages"</span>: <span class="keyword">1</span>,
+  <span class="property">"sizeBytes"</span>: <span class="keyword">4821</span>,
+  <span class="property">"watermark"</span>: <span class="keyword">true</span>,   <span class="comment">// true on Free tier</span>
+  <span class="property">"usage"</span>: { <span class="property">"used"</span>: <span class="keyword">1</span>, <span class="property">"limit"</span>: <span class="keyword">100</span>, <span class="property">"remaining"</span>: <span class="keyword">99</span> }
+}</pre></div>
+      </div>
+      <p style="color:#64748b;font-size:.82rem;margin-top:.5rem;">Decode the <code style="color:#a5b4fc;background:rgba(108,99,255,.08);padding:.1rem .3rem;border-radius:4px;">pdf</code> field from base64 to get the raw PDF bytes.</p>
+    </div>
+
     <h3>1. Get your API key</h3>
     <div class="playground" id="keygenSection">
       <p style="color:#94a3b8;margin-top:0;">Enter your email to generate a free API key instantly:</p>
@@ -698,76 +725,128 @@ pdf_bytes = base64.<span class="method">b64decode</span>(response.<span class="m
     <div class="endpoint-card">
       <span class="endpoint-method post">POST</span>
       <span class="endpoint-path">/api/v1/convert</span>
-      <p class="endpoint-desc">Convert HTML, text, or image files to PDF. Send content directly or as base64-encoded files.</p>
+      <p class="endpoint-desc">Convert HTML content, plain text, or image files (JPG, PNG) to PDF. Send one of <code>html</code>, <code>text</code>, or <code>file</code> — all other fields are optional.</p>
+
+      <!-- HTML rendering note -->
+      <div style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:10px;padding:.85rem 1rem;margin:.75rem 0 1.25rem;">
+        <span style="color:#fbbf24;font-size:.8rem;font-weight:700;">ℹ HTML RENDERING NOTE</span>
+        <p style="color:#94a3b8;font-size:.83rem;margin:.4rem 0 0;">The current HTML renderer strips tags and outputs clean plain text — ideal for invoices, reports, and documents built with semantic HTML (<code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;table&gt;</code>). Full CSS &amp; layout rendering (fonts, colors, flexbox) is coming in v2. For styled HTML, use inline styles or the <code>text</code> field.</p>
+      </div>
 
       <h3>Request Body</h3>
       <table class="param-table">
         <thead>
-          <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+          <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><code>html</code></td>
             <td>string</td>
-            <td>Raw HTML content to convert. <span class="param-optional">optional</span></td>
+            <td><span class="param-optional">optional*</span></td>
+            <td>HTML string to convert. Tags are parsed for structure; use <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> for best results. Max body size: 10 MB.</td>
           </tr>
           <tr>
             <td><code>text</code></td>
             <td>string</td>
-            <td>Plain text content. <span class="param-optional">optional</span></td>
+            <td><span class="param-optional">optional*</span></td>
+            <td>Plain text string rendered directly to PDF. Line breaks and whitespace are preserved. Use this for logs, CSVs, or pre-formatted content.</td>
           </tr>
           <tr>
             <td><code>file</code></td>
             <td>string</td>
-            <td>Base64-encoded file (image or document). <span class="param-optional">optional</span></td>
+            <td><span class="param-optional">optional*</span></td>
+            <td>Base64-encoded image file (JPG or PNG). Must be paired with <code>"format": "image"</code>. The image is scaled to fill the page while preserving aspect ratio.</td>
           </tr>
           <tr>
             <td><code>format</code></td>
             <td>string</td>
-            <td>File format hint when using <code>file</code>: <code>image</code>, <code>text</code>, <code>html</code>, <code>docx</code>. <span class="param-optional">optional</span></td>
+            <td><span class="param-optional">optional</span></td>
+            <td>Required when sending a <code>file</code>. Accepted value: <code>"image"</code> (JPG or PNG). Tells the API how to interpret the base64 payload.</td>
           </tr>
           <tr>
             <td><code>options</code></td>
             <td>object</td>
-            <td>PDF options (see below). <span class="param-optional">optional</span></td>
+            <td><span class="param-optional">optional</span></td>
+            <td>PDF layout settings. All fields have sensible defaults — omit the entire object for a standard A4 portrait PDF.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="color:#64748b;font-size:.8rem;margin-top:-.5rem;">* Provide exactly one of <code>html</code>, <code>text</code>, or <code>file</code>.</p>
+
+      <h3>options Object Fields</h3>
+      <table class="param-table">
+        <thead>
+          <tr><th>Field</th><th>Default</th><th>Accepted Values</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>pageSize</code></td>
+            <td><code>"a4"</code></td>
+            <td><code>"a4"</code>, <code>"letter"</code>, <code>"a3"</code>, <code>"legal"</code></td>
+            <td>Output page dimensions. <code>"a4"</code> = 210×297mm (international). <code>"letter"</code> = 216×279mm (US standard).</td>
+          </tr>
+          <tr>
+            <td><code>orientation</code></td>
+            <td><code>"portrait"</code></td>
+            <td><code>"portrait"</code>, <code>"landscape"</code></td>
+            <td>Page orientation. <code>"portrait"</code> = tall (default). <code>"landscape"</code> = wide — good for tables and charts.</td>
+          </tr>
+          <tr>
+            <td><code>margin</code></td>
+            <td><code>10</code></td>
+            <td>Integer, 0–50</td>
+            <td>Page margin in millimeters applied to all four sides. Use <code>0</code> for edge-to-edge (full bleed). Use <code>20</code> for wide margins like a formal document.</td>
+          </tr>
+          <tr>
+            <td><code>quality</code></td>
+            <td><code>0.95</code></td>
+            <td>Float, 0.1–1.0</td>
+            <td>JPEG compression quality for image inputs only. <code>0.95</code> = high quality, larger file. <code>0.6</code> = smaller file, slight visual loss. Has no effect on text or HTML inputs.</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>Options Object</h3>
-      <table class="param-table">
-        <thead>
-          <tr><th>Field</th><th>Default</th><th>Values</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>pageSize</code></td><td><code>a4</code></td><td><code>a4</code>, <code>letter</code>, <code>a3</code>, <code>legal</code></td></tr>
-          <tr><td><code>orientation</code></td><td><code>portrait</code></td><td><code>portrait</code>, <code>landscape</code></td></tr>
-          <tr><td><code>margin</code></td><td><code>10</code></td><td>Margin in mm (0–50)</td></tr>
-          <tr><td><code>quality</code></td><td><code>0.95</code></td><td>Image quality 0.1–1.0</td></tr>
-        </tbody>
-      </table>
+      <h3>Response</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">json</span></div>
+        <div class="code-body"><pre>{
+  <span class="property">"success"</span>: <span class="keyword">true</span>,
+  <span class="property">"pdf"</span>: <span class="string">"JVBERi0xLjQ..."</span>,  <span class="comment">// base64-encoded PDF — decode to get raw bytes</span>
+  <span class="property">"pages"</span>: <span class="keyword">2</span>,             <span class="comment">// number of pages in the generated PDF</span>
+  <span class="property">"sizeBytes"</span>: <span class="keyword">18432</span>,      <span class="comment">// size of the PDF in bytes</span>
+  <span class="property">"watermark"</span>: <span class="keyword">true</span>,      <span class="comment">// true on Free tier, false on paid plans</span>
+  <span class="property">"usage"</span>: {
+    <span class="property">"used"</span>: <span class="keyword">1</span>,            <span class="comment">// conversions used this month</span>
+    <span class="property">"limit"</span>: <span class="keyword">100</span>,          <span class="comment">// your plan's monthly limit</span>
+    <span class="property">"remaining"</span>: <span class="keyword">99</span>       <span class="comment">// conversions left this month</span>
+  },
+  <span class="property">"powered_by"</span>: <span class="string">"https://buildpdf.co"</span>
+}</pre></div>
+      </div>
     </div>
 
     <!-- EXTRACT -->
     <div class="endpoint-card">
       <span class="endpoint-method post">POST</span>
       <span class="endpoint-path">/api/v1/extract</span>
-      <p class="endpoint-desc">Extract text or images from a PDF file. <em>Requires Starter plan or above.</em></p>
+      <p class="endpoint-desc">Extract the contents of a PDF file — get back either plain text or a ZIP of page images (JPG). <em>Requires Starter plan or above.</em></p>
 
       <table class="param-table">
         <thead>
-          <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+          <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><code>file</code></td>
             <td>string</td>
-            <td>Base64-encoded PDF file. <span class="param-required">required</span></td>
+            <td><span class="param-required">required</span></td>
+            <td>Base64-encoded PDF file to extract from. Max size determined by your plan tier (Starter: 25 MB, Pro: 50 MB).</td>
           </tr>
           <tr>
             <td><code>output</code></td>
             <td>string</td>
-            <td><code>text</code> or <code>images</code>. Default: <code>text</code>. <span class="param-optional">optional</span></td>
+            <td><span class="param-optional">optional</span></td>
+            <td>What to extract. <code>"text"</code> (default) returns a plain text string of all page content. <code>"images"</code> returns a base64-encoded ZIP file containing one JPG per page.</td>
           </tr>
         </tbody>
       </table>
@@ -777,24 +856,25 @@ pdf_bytes = base64.<span class="method">b64decode</span>(response.<span class="m
     <div class="endpoint-card">
       <span class="endpoint-method get">GET</span>
       <span class="endpoint-path">/api/v1/usage</span>
-      <p class="endpoint-desc">Check your current usage, remaining quota, and tier limits. Does not count as a conversion.</p>
+      <p class="endpoint-desc">Returns your current monthly usage, quota limit, and remaining conversions. This call does <strong>not</strong> count against your conversion quota — check it as often as you like.</p>
     </div>
 
     <!-- REGISTER -->
     <div class="endpoint-card">
       <span class="endpoint-method post">POST</span>
       <span class="endpoint-path">/api/v1/register</span>
-      <p class="endpoint-desc">Register for a new API key. Returns a <code>bpdf_</code> prefixed key.</p>
+      <p class="endpoint-desc">Create a new free API key. Returns a <code>bpdf_</code>-prefixed key tied to your email. Each email address can hold one active key. <strong>Save the key immediately</strong> — it cannot be retrieved later.</p>
 
       <table class="param-table">
         <thead>
-          <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+          <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><code>email</code></td>
             <td>string</td>
-            <td>Your email address. <span class="param-required">required</span></td>
+            <td><span class="param-required">required</span></td>
+            <td>Your email address. Used to associate your key with your account and prevent duplicate registrations. We do not send marketing emails.</td>
           </tr>
         </tbody>
       </table>
@@ -804,14 +884,17 @@ pdf_bytes = base64.<span class="method">b64decode</span>(response.<span class="m
 
     <!-- ── AUTHENTICATION ── -->
     <h2 id="authentication">Authentication</h2>
-    <p>All API requests require an API key. Pass it via one of these methods:</p>
+    <p>All API requests require an API key passed in the request header. Your key is prefixed with <code>bpdf_</code>. Keep it in an environment variable — never hardcode it in client-side code.</p>
     <div class="code-block">
-      <div class="code-header"><span class="code-lang">headers</span></div>
-      <div class="code-body"><pre><span class="comment"># Option 1: X-API-Key header (recommended)</span>
+      <div class="code-header"><span class="code-lang">headers</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><pre><span class="comment"># Option 1 (recommended): X-API-Key header</span>
 X-API-Key: bpdf_your_key_here
 
-<span class="comment"># Option 2: Authorization Bearer</span>
-Authorization: Bearer bpdf_your_key_here</pre></div>
+<span class="comment"># Option 2: Authorization Bearer token</span>
+Authorization: Bearer bpdf_your_key_here
+
+<span class="comment"># Coming from RapidAPI? Use X-API-Key with your BuildPDF key,</span>
+<span class="comment"># not the X-RapidAPI-Key. Your key starts with bpdf_</span></pre></div>
     </div>
 
     <hr class="docs-divider" />
