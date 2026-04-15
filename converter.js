@@ -195,6 +195,7 @@
   }
 
   // ── Add files ──
+  let _redditLeadFired = false;
   function addFiles(raw) {
     const valid = raw.filter(f => isSupported(f.name));
     const invalid = raw.filter(f => !isSupported(f.name));
@@ -206,7 +207,14 @@
       files.push({ file: f, id });
       appendFileItem(f, id);
     });
-    if (files.length > 0) showControls();
+    if (files.length > 0) {
+      showControls();
+      // Reddit: fire Lead event once per session when user selects a file
+      if (!_redditLeadFired && typeof rdt !== 'undefined') {
+        rdt('track', 'Lead');
+        _redditLeadFired = true;
+      }
+    }
     // reset input so same file can be re-added
     fileInput.value = '';
   }
@@ -369,7 +377,13 @@
         progressArea.style.display = 'none';
         resultArea.style.display   = '';
         resultDesc.textContent = `${files.length} file${files.length > 1 ? 's' : ''} converted successfully.`;
-        downloadBtn.onclick = () => triggerDownload(pdfBlob, buildFilename());
+        downloadBtn.onclick = () => {
+          // Reddit: fire Purchase (conversion) event on download
+          if (typeof rdt !== 'undefined') {
+            rdt('track', 'Purchase', { value: 0, currency: 'USD' });
+          }
+          triggerDownload(pdfBlob, buildFilename());
+        };
       }, 400);
 
     } catch (err) {
@@ -439,7 +453,13 @@
         progressArea.style.display = 'none';
         resultArea.style.display   = '';
         resultDesc.textContent = `PDF extracted successfully.`;
-        downloadBtn.onclick = () => triggerDownload(outputBlob, outputFilename);
+        downloadBtn.onclick = () => {
+          // Reddit: fire Purchase (conversion) event on PDF extraction download
+          if (typeof rdt !== 'undefined') {
+            rdt('track', 'Purchase', { value: 0, currency: 'USD' });
+          }
+          triggerDownload(outputBlob, outputFilename);
+        };
       }, 400);
 
     } catch (err) {
