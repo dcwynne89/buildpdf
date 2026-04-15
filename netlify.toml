@@ -6,6 +6,12 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# Chromium needs up to 26s on cold start + enough RAM to launch
+[functions."convert"]
+  timeout = 26
+  memory  = 3008
+
+
 # ── API Route Redirects ──────────────────────────────────────────────────────
 # Route /api/v1/* to the corresponding Netlify Functions
 [[redirects]]
