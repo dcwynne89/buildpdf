@@ -148,12 +148,26 @@ exports.handler = async (event) => {
 //          br, a, span (with inline color), hr
 // ─────────────────────────────────────────────────────────────
 async function renderHtmlWithPdfmake(html, { pageSize, orientation, margin, watermark }) {
-  const PdfPrinter   = require("pdfmake/src/printer");
+  const path          = require("path");
+  const PdfPrinter    = require("pdfmake/src/printer");
   const htmlToPdfmake = require("html-to-pdfmake");
-  const { JSDOM }    = require("jsdom");
+  const { JSDOM }     = require("jsdom");
 
   // jsdom window is required by html-to-pdfmake in Node.js
   const { window } = new JSDOM("");
+
+  // Server-side pdfmake font loading — use actual .ttf file paths,
+  // NOT the browser VFS. pdfmake ships Roboto fonts in its fonts/ directory.
+  const pdfmakeDir = path.dirname(require.resolve("pdfmake/package.json"));
+  const fontsDir   = path.join(pdfmakeDir, "fonts");
+  const fonts = {
+    Roboto: {
+      normal:      path.join(fontsDir, "Roboto-Regular.ttf"),
+      bold:        path.join(fontsDir, "Roboto-Medium.ttf"),
+      italics:     path.join(fontsDir, "Roboto-Italic.ttf"),
+      bolditalics: path.join(fontsDir, "Roboto-MediumItalic.ttf"),
+    },
+  };
 
   // Wrap bare HTML fragments in a full document
   const fullHtml = /^<!doctype|^<html/i.test(html.trim())
@@ -163,21 +177,10 @@ async function renderHtmlWithPdfmake(html, { pageSize, orientation, margin, wate
   // Convert HTML → pdfmake content array
   const content = htmlToPdfmake(fullHtml, {
     window,
-    tableAutoSize:    true,
-    ignoreStyles:     false,
+    tableAutoSize:     true,
+    ignoreStyles:      false,
     removeExtraBlanks: true,
   });
-
-  // Roboto font — bundled with pdfmake, no external files needed
-  const vfs     = require("pdfmake/build/vfs_fonts").pdfMake.vfs;
-  const fonts   = {
-    Roboto: {
-      normal:      Buffer.from(vfs["Roboto-Regular.ttf"],       "base64"),
-      bold:        Buffer.from(vfs["Roboto-Medium.ttf"],        "base64"),
-      italics:     Buffer.from(vfs["Roboto-Italic.ttf"],        "base64"),
-      bolditalics: Buffer.from(vfs["Roboto-MediumItalic.ttf"], "base64"),
-    },
-  };
 
   const marginPt = mmToPt(margin);
 
@@ -220,9 +223,8 @@ async function renderHtmlWithPdfmake(html, { pageSize, orientation, margin, wate
   return new Promise((resolve, reject) => {
     const chunks = [];
     pdfDoc.on("data",  (c) => chunks.push(c));
-    pdfDoc.on("end",   ()  => {
+    pdfDoc.on("end",   () => {
       const buffer = Buffer.concat(chunks);
-      // Estimate page count from PDF structure
       const matches = buffer.toString("latin1").match(/\/Type\s*\/Page[^s]/g);
       resolve({ buffer, pages: matches ? matches.length : 1 });
     });
