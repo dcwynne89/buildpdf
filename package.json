@@ -8,9 +8,10 @@
   },
   "dependencies": {
     "@netlify/blobs": "^7.0.0",
-    "@sparticuz/chromium": "117.0.0",
+    "html-to-pdfmake": "^2.4.23",
+    "jsdom": "^24.0.0",
     "jspdf": "^2.5.1",
     "pdf-parse": "^1.1.1",
-    "puppeteer-core": "21.3.8"
+    "pdfmake": "^0.2.10"
   }
 }

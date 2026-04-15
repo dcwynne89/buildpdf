@@ -6,13 +6,6 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# Chromium: needs ~26s cold start, 3GB RAM, and must not be bundled by esbuild
-[functions."convert"]
-  timeout                = 26
-  memory                 = 3008
-  external_node_modules  = ["@sparticuz/chromium", "puppeteer-core"]
-  included_files         = ["node_modules/@sparticuz/chromium/**"]
-
 
 # ── API Route Redirects ──────────────────────────────────────────────────────
 # Route /api/v1/* to the corresponding Netlify Functions
