@@ -148,7 +148,6 @@ exports.handler = async (event) => {
 //          br, a, span (with inline color), hr
 // ─────────────────────────────────────────────────────────────
 async function renderHtmlWithPdfmake(html, { pageSize, orientation, margin, watermark }) {
-  const path          = require("path");
   const PdfPrinter    = require("pdfmake/src/printer");
   const htmlToPdfmake = require("html-to-pdfmake");
   const { JSDOM }     = require("jsdom");
@@ -156,16 +155,15 @@ async function renderHtmlWithPdfmake(html, { pageSize, orientation, margin, wate
   // jsdom window is required by html-to-pdfmake in Node.js
   const { window } = new JSDOM("");
 
-  // Server-side pdfmake font loading — use actual .ttf file paths,
-  // NOT the browser VFS. pdfmake ships Roboto fonts in its fonts/ directory.
-  const pdfmakeDir = path.dirname(require.resolve("pdfmake/package.json"));
-  const fontsDir   = path.join(pdfmakeDir, "fonts");
+  // pdfmake 0.2.x UMD build: in Node.js, vfs_fonts exports the VFS object
+  // directly via module.exports (not wrapped in .pdfMake.vfs)
+  const vfsData = require("pdfmake/build/vfs_fonts");
   const fonts = {
     Roboto: {
-      normal:      path.join(fontsDir, "Roboto-Regular.ttf"),
-      bold:        path.join(fontsDir, "Roboto-Medium.ttf"),
-      italics:     path.join(fontsDir, "Roboto-Italic.ttf"),
-      bolditalics: path.join(fontsDir, "Roboto-MediumItalic.ttf"),
+      normal:      Buffer.from(vfsData["Roboto-Regular.ttf"],       "base64"),
+      bold:        Buffer.from(vfsData["Roboto-Medium.ttf"],        "base64"),
+      italics:     Buffer.from(vfsData["Roboto-Italic.ttf"],        "base64"),
+      bolditalics: Buffer.from(vfsData["Roboto-MediumItalic.ttf"], "base64"),
     },
   };
 
