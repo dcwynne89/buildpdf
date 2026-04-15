@@ -5,9 +5,9 @@
   "private": true,
   "dependencies": {
     "@netlify/blobs": "^7.0.0",
-    "@sparticuz/chromium": "^123.0.1",
+    "@sparticuz/chromium": "117.0.0",
     "jspdf": "^2.5.1",
     "pdf-parse": "^1.1.1",
-    "puppeteer-core": "^22.6.1"
+    "puppeteer-core": "21.3.8"
   }
 }
