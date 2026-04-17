@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── PRIMARY SEO ── -->
+  <title>JPG to PDF – Convert JPEG to PDF Free Online | No Sign-Up</title>
+  <meta name="description" content="Convert JPG and JPEG images to PDF instantly — free, no sign-up, no watermark. Files stay in your browser and are never uploaded to a server. Works on any device." />
+  <meta name="keywords" content="jpg to pdf, jpeg to pdf, convert jpg to pdf, jpg to pdf online, jpg to pdf free, jpg to pdf no sign up, image to pdf" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="BuildPDF" />
+  <meta name="theme-color" content="#0D0E1A" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://buildpdf.co/jpg-to-pdf" />
+
+  <!-- ── OPEN GRAPH ── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://buildpdf.co/jpg-to-pdf" />
+  <meta property="og:title" content="JPG to PDF – Free Converter, No Sign-Up" />
+  <meta property="og:description" content="Turn any JPG or JPEG photo into a clean PDF in seconds. 100% free — your files never leave your browser." />
+  <meta property="og:site_name" content="BuildPDF" />
+
+  <!-- ── TWITTER CARD ── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JPG to PDF – Free Converter | BuildPDF" />
+  <meta name="twitter:description" content="Convert JPG/JPEG to PDF instantly. No account. No watermark. Files stay in your browser." />
+
+  <!-- ── STRUCTURED DATA ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BuildPDF – JPG to PDF Converter",
+    "url": "https://buildpdf.co/jpg-to-pdf",
+    "description": "Free online JPG to PDF converter. Convert JPEG images to PDF instantly in your browser — no sign-up, no watermark, no file uploads.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": ["Convert JPG to PDF", "Convert JPEG to PDF", "Batch image to PDF", "No file upload — 100% browser-based", "No sign-up required", "No watermarks"],
+    "creator": { "@type": "Organization", "name": "BuildPDF" }
+  }
+  </script>
+
+  <!-- ── FONTS & STYLES ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+
+  <!-- ── LIBRARIES ── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+
+  <!-- ── GOOGLE ADSENSE ── -->
+  <meta name="google-adsense-account" content="ca-pub-6010936774105671" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
+
+  <style>
+    .lp-hero { text-align: center; padding: 72px 24px 48px; position: relative; overflow: hidden; }
+    .lp-hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 60% 55% at 50% -10%, rgba(59,130,246,.2) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 35% at 80% 60%, rgba(108,99,255,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .lp-hero-content { position: relative; z-index: 1; }
+    .lp-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.28);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: .8rem; font-weight: 600; color: #93c5fd;
+      letter-spacing: .02em; margin-bottom: 22px;
+    }
+    .lp-title { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.15; letter-spacing: -.04em; margin-bottom: 16px; }
+    .lp-subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 36px; }
+    .trust-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 36px; }
+    .trust-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.04); border: 1px solid var(--border-light);
+      border-radius: 100px; padding: 6px 14px;
+      font-size: .8rem; color: var(--text-muted); font-weight: 500;
+    }
+    .trust-badge span { font-size: 1rem; }
+    .upload-cta-box {
+      background: var(--bg-card); border: 2px dashed rgba(59,130,246,.35);
+      border-radius: var(--radius); padding: 52px 32px 44px;
+      cursor: pointer; transition: border-color .25s, background .25s, transform .2s;
+      text-align: center; max-width: 640px; margin: 0 auto;
+    }
+    .upload-cta-box:hover { border-color: var(--primary-2); background: rgba(59,130,246,.06); transform: translateY(-2px); }
+    .upload-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
+    .upload-cta-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+    .upload-cta-sub { font-size: .9rem; color: var(--text-muted); margin-bottom: 24px; }
+    .btn-upload-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--primary-2), var(--primary));
+      color: #fff; border: none; border-radius: 100px; padding: 13px 32px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(59,130,246,.4); font-family: var(--font);
+      text-decoration: none;
+    }
+    .btn-upload-cta:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(59,130,246,.5); }
+    .formats-accepted { font-size: .78rem; color: var(--text-faint); margin-top: 16px; }
+    .content-section { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+    .content-section h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.03em; margin: 48px 0 16px; }
+    .content-section p { color: var(--text-muted); font-size: .95rem; line-height: 1.75; margin-bottom: 14px; }
+    .content-section ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .content-section ul li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-muted); font-size: .93rem; line-height: 1.6; }
+    .content-section ul li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .steps-lp { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0; }
+    .step-lp { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius); padding: 24px 20px; text-align: center; }
+    .step-lp-icon { font-size: 2rem; margin-bottom: 10px; }
+    .step-lp h3 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+    .step-lp p { font-size: .82rem; color: var(--text-muted); margin: 0; }
+    .faq-lp { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+    .related-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+    .related-tool {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm); padding: 16px 18px;
+      text-decoration: none; transition: border-color .2s, transform .2s;
+    }
+    .related-tool:hover { border-color: var(--border); transform: translateY(-2px); }
+    .related-tool-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .related-tool strong { display: block; font-size: .88rem; color: var(--text); }
+    .related-tool span { font-size: .75rem; color: var(--text-muted); }
+    .cta-bottom { background: linear-gradient(135deg, rgba(108,99,255,.1), rgba(59,130,246,.1)); border: 1px solid rgba(108,99,255,.2); border-radius: var(--radius); padding: 48px 32px; text-align: center; margin: 48px 0; }
+    .cta-bottom h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
+    .cta-bottom p { color: var(--text-muted); max-width: 420px; margin: 0 auto 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="url(#logoGradLP)"/>
+          <path d="M10 8h11l7 7v13a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity=".9"/>
+          <path d="M21 8l7 7h-5a2 2 0 01-2-2V8z" fill="white" fill-opacity=".5"/>
+          <path d="M13 19h10M13 23h7" stroke="url(#strokeGradLP)" stroke-width="2" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="logoGradLP" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF"/><stop offset="1" stop-color="#3B82F6"/>
+            </linearGradient>
+            <linearGradient id="strokeGradLP" x1="13" y1="21" x2="23" y2="21" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF"/><stop offset="1" stop-color="#3B82F6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Converter</a>
+        <a href="/word-to-pdf">Word to PDF</a>
+        <a href="/png-to-pdf">PNG to PDF</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="lp-hero">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-hero-content">
+      <div class="lp-badge">🖼️ JPG / JPEG Converter</div>
+      <h1 class="lp-title">Convert JPG to PDF<br><span class="gradient-text">Free &amp; Instant</span></h1>
+      <p class="lp-subtitle">Turn any JPEG photo into a clean, print-ready PDF in seconds. No sign-up. No watermarks. Your files never leave your device.</p>
+      <div class="trust-badges">
+        <div class="trust-badge"><span>🔒</span> 100% Private</div>
+        <div class="trust-badge"><span>⚡</span> Instant Conversion</div>
+        <div class="trust-badge"><span>🚫</span> No Watermarks</div>
+        <div class="trust-badge"><span>🆓</span> Always Free</div>
+      </div>
+      <div class="upload-cta-box" onclick="window.location='/?format=jpg'">
+        <span class="upload-icon">📸</span>
+        <div class="upload-cta-title">Drop Your JPG Files Here</div>
+        <div class="upload-cta-sub">or click to browse — supports JPG, JPEG, multiple files</div>
+        <a href="/" class="btn-upload-cta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M12 5l-4 4M12 5l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Convert JPG to PDF Now
+        </a>
+        <div class="formats-accepted">Accepts: .jpg · .jpeg · Multiple files supported · Max ~100 MB</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTENT ── -->
+  <div class="content-section">
+
+    <!-- How it works -->
+    <h2>How to Convert JPG to PDF</h2>
+    <div class="steps-lp">
+      <div class="step-lp">
+        <div class="step-lp-icon">📂</div>
+        <h3>1. Select Your JPG</h3>
+        <p>Click the button above or drag and drop your JPEG file directly onto the page.</p>
+      </div>
+      <div class="step-lp">
+        <div class="step-lp-icon">⚙️</div>
+        <h3>2. Set Options</h3>
+        <p>Choose page size (A4, Letter, A3), orientation, margin, and image quality.</p>
+      </div>
+      <div class="step-lp">
+        <div class="step-lp-icon">📄</div>
+        <h3>3. Download PDF</h3>
+        <p>Hit Convert and your PDF downloads instantly — no email, no account needed.</p>
+      </div>
+    </div>
+
+    <!-- Why use BuildPDF -->
+    <h2>Why Use BuildPDF for JPG to PDF?</h2>
+    <ul>
+      <li>Your images are converted entirely in your browser — they are never sent to any server.</li>
+      <li>No account, no subscription, no watermark — completely free, always.</li>
+      <li>Batch convert multiple JPGs into a single merged PDF in one click.</li>
+      <li>Control page size (A4, US Letter, A3, Legal), orientation, and margin.</li>
+      <li>Works on Windows, Mac, iPhone, Android — any modern browser.</li>
+      <li>High-quality output at up to 95% JPEG quality — prints perfectly.</li>
+    </ul>
+
+    <!-- Ad slot -->
+    <div style="margin: 32px 0; text-align:center;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6010936774105671" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- FAQ -->
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list faq-lp">
+      <details class="faq-item">
+        <summary>Is converting JPG to PDF really free?</summary>
+        <p>Yes. BuildPDF is 100% free with no hidden charges or premium tier. We show ads to keep the service running — that's it.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does my JPG get uploaded to a server?</summary>
+        <p>No. All conversion happens locally in your browser using JavaScript. Your image data never leaves your device. It's one of BuildPDF's core privacy guarantees.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I convert multiple JPG files into one PDF?</summary>
+        <p>Yes! Select multiple JPEG files and they'll be combined into a single PDF in the order you add them. Perfect for combining photo scans into one document.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What's the maximum file size I can convert?</summary>
+        <p>There's no hard limit, but very large files (above 100 MB) may slow down depending on your device's processing power. Most photos and scans convert in under 2 seconds.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will converting a JPG to PDF reduce image quality?</summary>
+        <p>By default, BuildPDF uses 95% JPEG quality — virtually indistinguishable from the original. You can also choose Medium (80%) or Low (60%) to reduce file size if needed.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What page size does the PDF use?</summary>
+        <p>You can choose A4, US Letter, A3, or Legal. By default A4 is selected. The image is scaled to fit the page while maintaining its aspect ratio.</p>
+      </details>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-bottom">
+      <h2>Ready to Convert Your JPG?</h2>
+      <p>No downloads, no installs, no accounts. Just drag, drop, and download your PDF.</p>
+      <a href="/" class="btn-upload-cta">Open BuildPDF Converter →</a>
+    </div>
+
+    <!-- Related Tools -->
+    <h2>Related Free PDF Tools</h2>
+    <div class="related-tools">
+      <a href="/png-to-pdf" class="related-tool">
+        <div class="related-tool-icon">🖼️</div>
+        <div><strong>PNG to PDF</strong><span>Convert PNG images to PDF</span></div>
+      </a>
+      <a href="/word-to-pdf" class="related-tool">
+        <div class="related-tool-icon">📄</div>
+        <div><strong>Word to PDF</strong><span>Convert DOCX to PDF free</span></div>
+      </a>
+      <a href="/" class="related-tool">
+        <div class="related-tool-icon">🔄</div>
+        <div><strong>All Formats</strong><span>JPG, PNG, DOCX, TXT, HTML</span></div>
+      </a>
+      <a href="/blog/jpg-to-pdf.html" class="related-tool">
+        <div class="related-tool-icon">📖</div>
+        <div><strong>JPG to PDF Guide</strong><span>Step-by-step tutorial</span></div>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
+      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+      <nav class="footer-nav">
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -59,6 +59,22 @@
   to     = "/api-docs.html"
   status = 200
 
+# ── SEO Landing Page Clean URLs ───────────────────────────────────────────────
+[[redirects]]
+  from   = "/jpg-to-pdf"
+  to     = "/jpg-to-pdf.html"
+  status = 200
+
+[[redirects]]
+  from   = "/word-to-pdf"
+  to     = "/word-to-pdf.html"
+  status = 200
+
+[[redirects]]
+  from   = "/png-to-pdf"
+  to     = "/png-to-pdf.html"
+  status = 200
+
 # ── Redirects ────────────────────────────────────────────────────────────────
 [[redirects]]
   from   = "https://www.buildpdf.co/*"
