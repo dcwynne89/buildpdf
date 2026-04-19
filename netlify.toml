@@ -26,6 +26,25 @@
   ]
 
 
+# ── Bot Blocking ─────────────────────────────────────────────────────────────
+[[redirects]]
+  from   = "/wp-admin/*"
+  to     = "/"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/wordpress/*"
+  to     = "/"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/.env"
+  to     = "/"
+  status = 301
+  force  = true
+
 # ── API Route Redirects ──────────────────────────────────────────────────────
 # Route /api/v1/* to the corresponding Netlify Functions
 [[redirects]]
