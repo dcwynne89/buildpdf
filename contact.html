@@ -178,7 +178,7 @@
       const subject = document.getElementById('contactSubject').value;
       const message = document.getElementById('contactMessage').value;
       // Open mailto link as fallback
-      const mailto = `mailto:support@buildpdf.co?subject=[${subject}] Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\nFrom: ' + email)}`;
+      const mailto = `mailto:buildpdf.help@gmail.com?subject=[${subject}] Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\nFrom: ' + email)}`;
       window.location.href = mailto;
       btn.disabled = true;
       btn.textContent = 'Sent!';
