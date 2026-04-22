@@ -63,6 +63,30 @@
   status = 404
   force  = true
 
+[[redirects]]
+  from   = "/meta.json"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/_next/*"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/config.php"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/admin/*"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
 # ── API Route Redirects ──────────────────────────────────────────────────────
 # Route /api/v1/* to the corresponding Netlify Functions
 [[redirects]]
