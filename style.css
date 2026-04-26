@@ -88,11 +88,12 @@ body {
 /* Hamburger Toggle */
 .nav-toggle {
   display: none;
+  position: relative;
   background: none;
   border: none;
   cursor: pointer;
   padding: 6px;
-  z-index: 110;
+  z-index: 1010;
 }
 .nav-toggle span {
   display: block;
@@ -814,28 +815,34 @@ select:focus { border-color: var(--primary); }
 @media (max-width: 768px) {
   .nav-toggle { display: block; }
   .site-nav {
+    display: flex;
     position: fixed;
-    inset: 0;
-    background: rgba(13,14,26,.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0D0E1A;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 32px;
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s;
-    z-index: 105;
+    z-index: 1000;
   }
   .site-nav.open {
     opacity: 1;
     pointer-events: auto;
   }
   .site-nav a {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 600;
+    color: var(--text-muted);
   }
+  .site-nav a:hover { color: var(--text); }
 }
 @media (max-width: 640px) {
   .hero    { padding: 48px 16px 36px; }
