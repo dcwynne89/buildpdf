@@ -510,30 +510,39 @@
     const navToggle = document.getElementById('navToggle');
     const siteNav = document.getElementById('siteNav');
     const headerInner = navToggle ? navToggle.closest('.header-inner') : null;
+
+    function closeNav() {
+      siteNav.classList.remove('open');
+      navToggle.classList.remove('open');
+      document.body.style.overflow = '';
+      const btn = siteNav.querySelector('.nav-close');
+      if (btn) btn.remove();
+      setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
+    }
+
     if (navToggle && siteNav && headerInner) {
       navToggle.addEventListener('click', () => {
         const isOpen = siteNav.classList.contains('open');
         if (!isOpen) {
           document.body.appendChild(siteNav);
+          // Inject close button
+          const closeBtn = document.createElement('button');
+          closeBtn.className = 'nav-close';
+          closeBtn.setAttribute('aria-label', 'Close menu');
+          closeBtn.innerHTML = '✕';
+          closeBtn.addEventListener('click', closeNav);
+          siteNav.prepend(closeBtn);
           requestAnimationFrame(() => {
             siteNav.classList.add('open');
             navToggle.classList.add('open');
           });
           document.body.style.overflow = 'hidden';
         } else {
-          siteNav.classList.remove('open');
-          navToggle.classList.remove('open');
-          document.body.style.overflow = '';
-          setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
+          closeNav();
         }
       });
       siteNav.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          siteNav.classList.remove('open');
-          navToggle.classList.remove('open');
-          document.body.style.overflow = '';
-          setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
-        });
+        a.addEventListener('click', closeNav);
       });
     }
     // Scroll reveal

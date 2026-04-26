@@ -849,6 +849,21 @@ select:focus { border-color: var(--primary); }
     color: var(--text-muted);
   }
   .site-nav a:hover { color: var(--text); }
+  .nav-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    opacity: .7;
+    transition: opacity .2s;
+  }
+  .nav-close:hover { opacity: 1; }
 }
 @media (max-width: 640px) {
   .hero    { padding: 48px 16px 36px; }
