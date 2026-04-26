@@ -203,12 +203,30 @@
       setTimeout(() => { btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Send Message'; }, 3000);
     }
   </script>
-  <script>
+<script>
     const navToggle = document.getElementById('navToggle');
     const siteNav = document.getElementById('siteNav');
-    if (navToggle && siteNav) {
-      navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); siteNav.classList.toggle('open'); navToggle.closest('.site-header').classList.toggle('nav-open'); });
-      siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navToggle.classList.remove('open'); siteNav.classList.remove('open'); navToggle.closest('.site-header').classList.remove('nav-open'); }));
+    const headerInner = navToggle ? navToggle.closest('.header-inner') : null;
+    if (navToggle && siteNav && headerInner) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = siteNav.classList.contains('open');
+        if (!isOpen) {
+          document.body.appendChild(siteNav);
+          requestAnimationFrame(() => { siteNav.classList.add('open'); navToggle.classList.add('open'); });
+          document.body.style.overflow = 'hidden';
+        } else {
+          siteNav.classList.remove('open'); navToggle.classList.remove('open');
+          document.body.style.overflow = '';
+          setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
+        }
+      });
+      siteNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          siteNav.classList.remove('open'); navToggle.classList.remove('open');
+          document.body.style.overflow = '';
+          setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
+        });
+      });
     }
   </script>
 </body>

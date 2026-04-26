@@ -506,20 +506,33 @@
 
   <script src="converter.js"></script>
   <script>
-    // Hamburger menu toggle
+    // Hamburger menu toggle — moves nav to body level to escape header stacking context
     const navToggle = document.getElementById('navToggle');
     const siteNav = document.getElementById('siteNav');
-    if (navToggle && siteNav) {
+    const headerInner = navToggle ? navToggle.closest('.header-inner') : null;
+    if (navToggle && siteNav && headerInner) {
       navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('open');
-        siteNav.classList.toggle('open');
-        navToggle.closest('.site-header').classList.toggle('nav-open');
+        const isOpen = siteNav.classList.contains('open');
+        if (!isOpen) {
+          document.body.appendChild(siteNav);
+          requestAnimationFrame(() => {
+            siteNav.classList.add('open');
+            navToggle.classList.add('open');
+          });
+          document.body.style.overflow = 'hidden';
+        } else {
+          siteNav.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.style.overflow = '';
+          setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
+        }
       });
       siteNav.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
-          navToggle.classList.remove('open');
           siteNav.classList.remove('open');
-          navToggle.closest('.site-header').classList.remove('nav-open');
+          navToggle.classList.remove('open');
+          document.body.style.overflow = '';
+          setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
         });
       });
     }
