@@ -248,8 +248,8 @@
     const navToggle = document.getElementById('navToggle');
     const siteNav = document.getElementById('siteNav');
     if (navToggle && siteNav) {
-      navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); siteNav.classList.toggle('open'); });
-      siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navToggle.classList.remove('open'); siteNav.classList.remove('open'); }));
+      navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); siteNav.classList.toggle('open'); navToggle.closest('.site-header').classList.toggle('nav-open'); });
+      siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navToggle.classList.remove('open'); siteNav.classList.remove('open'); navToggle.closest('.site-header').classList.remove('nav-open'); }));
     }
   </script>
 
