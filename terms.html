@@ -51,11 +51,14 @@
         </svg>
         <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
       </a>
-      <nav class="site-nav">
+      <nav class="site-nav" id="siteNav">
         <a href="/">Converter</a>
         <a href="/blog/">Guides</a>
         <a href="/contact.html">Contact</a>
       </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -113,16 +116,38 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
-      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
-      <nav class="footer-nav">
-        <a href="/about.html">About</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Use</a>
-        <a href="/contact.html">Contact</a>
-      </nav>
+      <div class="footer-columns">
+        <div class="footer-brand">
+          <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
+          <p>Free, privacy-first file to PDF converter. Your files never leave your device.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="/">Converter</a>
+          <a href="/blog/">Guides</a>
+          <a href="/about.html">About</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Support</h4>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored</p>
+      </div>
     </div>
   </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const siteNav = document.getElementById('siteNav');
+    if (navToggle && siteNav) {
+      navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); siteNav.classList.toggle('open'); });
+      siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navToggle.classList.remove('open'); siteNav.classList.remove('open'); }));
+    }
+  </script>
 
 </body>
 </html>

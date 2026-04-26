@@ -131,7 +131,7 @@
         </svg>
         <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
       </div>
-      <nav class="site-nav">
+      <nav class="site-nav" id="siteNav">
         <a href="#how-it-works">How It Works</a>
         <a href="#formats">Formats</a>
         <a href="#faq">FAQ</a>
@@ -139,6 +139,9 @@
         <a href="/blog/">Guides</a>
         <a href="/about.html">About</a>
       </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -275,6 +278,10 @@
           <span id="convertBtnText">Convert to PDF</span>
         </button>
         <p class="convert-note">Your files are processed locally — never uploaded to any server.</p>
+        <div class="privacy-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" fill="#10B981" opacity=".7"/><path d="M10 14l-2-2 1.41-1.41L10 11.17l4.59-4.58L16 8l-6 6z" fill="white"/></svg>
+          Privacy Verified — files processed locally, never uploaded
+        </div>
       </div>
 
       <!-- PROGRESS -->
@@ -313,7 +320,7 @@
       </div>
 
       <!-- ── HOW IT WORKS ── -->
-      <section class="how-section" id="how-it-works">
+      <section class="how-section reveal" id="how-it-works">
         <h2 class="section-title">How It Works</h2>
         <div class="steps-grid">
           <div class="step-card">
@@ -335,7 +342,7 @@
       </section>
 
       <!-- ── FORMATS TABLE ── -->
-      <section class="formats-section" id="formats">
+      <section class="formats-section reveal" id="formats">
         <h2 class="section-title">Supported Formats</h2>
         <div class="formats-grid">
           <div class="format-card">
@@ -377,7 +384,7 @@
       </section>
 
       <!-- ── FAQ ── -->
-      <section class="faq-section" id="faq">
+      <section class="faq-section reveal" id="faq">
         <h2 class="section-title">Frequently Asked Questions</h2>
         <div class="faq-list">
           <details class="faq-item">
@@ -407,7 +414,7 @@
 
 
       <!-- ── GUIDES SECTION ── -->
-      <section class="guides-section" id="guides">
+      <section class="guides-section reveal" id="guides">
         <h2 class="section-title">PDF Guides & Tutorials</h2>
         <p class="guides-intro">Learn everything about working with PDFs — converting, extracting, and merging files — with our free step-by-step guides.</p>
         <div class="guides-grid">
@@ -456,29 +463,69 @@
   <!-- ── FOOTER ── -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="logo">
-        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
-      </div>
-      <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
-      <div style="margin:0.75rem 0;">
-        <p style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6C63FF;margin-bottom:0.5rem;">Also from the Build ecosystem</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;">
-          <a href="https://buildcertificates.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.3rem 0.75rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:0.78rem;color:rgba(255,255,255,0.6);text-decoration:none;">🏅 <strong style="color:rgba(255,255,255,0.9);">BuildCertificates</strong> — Free certificate generator</a>
-          <a href="https://buildinvoice.co" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.3rem 0.75rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:0.78rem;color:rgba(255,255,255,0.6);text-decoration:none;">⚡ <strong style="color:rgba(255,255,255,0.9);">BuildInvoice</strong> — Free PDF invoice generator</a>
-          <a href="https://buildquotes.co" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.3rem 0.75rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:0.78rem;color:rgba(255,255,255,0.6);text-decoration:none;">💼 <strong style="color:rgba(255,255,255,0.9);">BuildQuotes</strong> — Free price quote generator</a>
-          <a href="https://buildchangeorder.co" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.3rem 0.75rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:0.78rem;color:rgba(255,255,255,0.6);text-decoration:none;">📋 <strong style="color:rgba(255,255,255,0.9);">BuildChangeOrder</strong> — Free change order generator</a>
+      <div class="footer-columns">
+        <div class="footer-brand">
+          <div class="logo">
+            <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+          </div>
+          <p>Free, privacy-first file to PDF converter. Your files never leave your device — no uploads, no accounts, no watermarks.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="/">Converter</a>
+          <a href="/blog/">Guides</a>
+          <a href="/api/docs">API Docs</a>
+          <a href="/about.html">About</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Support</h4>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+          <a href="/contact.html">Contact</a>
         </div>
       </div>
-      <nav class="footer-nav">
-        <a href="/about.html">About</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Use</a>
-        <a href="/contact.html">Contact</a>
-      </nav>
+      <div class="footer-divider"></div>
+      <div class="footer-ecosystem">
+        <div class="footer-ecosystem-label">Also from the Build ecosystem</div>
+        <div class="footer-ecosystem-links">
+          <a href="https://buildcertificates.com" target="_blank" rel="noopener">🏅 <strong>BuildCertificates</strong> — Free certificate generator</a>
+          <a href="https://buildinvoice.co" target="_blank" rel="noopener">⚡ <strong>BuildInvoice</strong> — Free PDF invoice generator</a>
+          <a href="https://buildquotes.co" target="_blank" rel="noopener">💼 <strong>BuildQuotes</strong> — Free price quote generator</a>
+          <a href="https://buildchangeorder.co" target="_blank" rel="noopener">📋 <strong>BuildChangeOrder</strong> — Free change order generator</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+      </div>
     </div>
   </footer>
 
   <script src="converter.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const navToggle = document.getElementById('navToggle');
+    const siteNav = document.getElementById('siteNav');
+    if (navToggle && siteNav) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        siteNav.classList.toggle('open');
+      });
+      siteNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          navToggle.classList.remove('open');
+          siteNav.classList.remove('open');
+        });
+      });
+    }
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    if (reveals.length) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => observer.observe(el));
+    }
+  </script>
 </body>
 
 </html>
