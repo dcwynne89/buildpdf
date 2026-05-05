@@ -164,7 +164,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy        = "strict-origin-when-cross-origin"
     Permissions-Policy     = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagservices.com https://adservice.google.com https://tpc.googlesyndication.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://www.googletagmanager.com https://*.doubleclick.net https://www.redditstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.googlesyndication.com https://*.google.com https://*.gstatic.com https://*.doubleclick.net https://*.redditmedia.com https://*.redditstatic.com; connect-src 'self' https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://*.google.com https://*.googleapis.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://*.doubleclick.net https://adservice.google.com https://events.reddit.com https://www.redditstatic.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net; object-src 'none'; base-uri 'self';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagservices.com https://adservice.google.com https://tpc.googlesyndication.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://www.googletagmanager.com https://*.doubleclick.net https://www.redditstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.googlesyndication.com https://*.google.com https://*.gstatic.com https://*.doubleclick.net https://*.redditmedia.com https://*.redditstatic.com https://googleads.g.doubleclick.net; connect-src 'self' https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://*.google.com https://*.googleapis.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://*.doubleclick.net https://adservice.google.com https://events.reddit.com https://www.redditstatic.com https://googleads.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com; worker-src blob: 'self'; child-src blob: https://*.googlesyndication.com https://*.doubleclick.net https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self';"
 
 # Cache: HTML — short TTL so Google picks up changes fast
 [[headers]]
@@ -196,5 +196,10 @@
 
 [[headers]]
   for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.ico"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
