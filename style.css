@@ -743,6 +743,14 @@ select:focus { border-color: var(--primary); }
   text-align: center;
 }
 .footer-copy { font-size: .82rem; color: var(--text-faint); }
+.footer-support { margin-top: 0.35rem; font-size: 0.8rem; }
+.kofi-link { color: #FF5E5B; font-weight: 600; text-decoration: none; transition: opacity .2s; }
+.kofi-link:hover { opacity: .8; }
+/* Post-conversion Ko-fi CTA */
+.kofi-result-cta { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid rgba(255,255,255,.07); text-align: center; }
+.kofi-result-cta p { font-size: .82rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+.kofi-result-btn { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem 1.25rem; background: #FF5E5B; color: #fff; border-radius: 8px; font-size: .85rem; font-weight: 700; text-decoration: none; transition: opacity .2s, transform .2s; }
+.kofi-result-btn:hover { opacity: .88; transform: translateY(-1px); }
 /* Legacy footer-nav fallback */
 .footer-nav { display: flex; gap: 24px; justify-content: center; margin-top: 8px; }
 .footer-nav a { font-size: .82rem; color: var(--text-muted); text-decoration: none; transition: color .2s; }
