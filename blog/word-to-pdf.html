@@ -142,6 +142,34 @@
     <h2>Does BuildPDF Support .DOC Files (Older Word Format)?</h2>
     <p>BuildPDF currently supports the modern <strong>.docx</strong> format (Word 2007 and later). The older .doc format (Word 97–2003) is not supported. If you have a .doc file, you can open it in Google Docs and re-save it as .docx, then use BuildPDF to convert to PDF.</p>
 
+    <h2>Common Issues &amp; Troubleshooting</h2>
+
+    <h3>My heading styles are missing after conversion</h3>
+    <p>Mammoth.js maps standard Word heading styles (Heading 1, Heading 2, etc.) to HTML heading tags, which BuildPDF then includes in the PDF. If you used custom named styles in Word instead of the built-in heading hierarchy, they may appear as plain body text. The fix: in your Word document, ensure headings use the standard "Heading 1", "Heading 2" styles from the Styles panel, then re-export.</p>
+
+    <h3>Tables look distorted or broken</h3>
+    <p>Simple tables (basic rows and columns with text) convert reasonably well. Complex tables with merged cells, custom borders, nested tables, or conditional formatting may not render correctly. If table accuracy is critical, consider exporting to PDF directly from Google Docs, which has more robust .docx rendering.</p>
+
+    <h3>Images inside my DOCX aren't appearing</h3>
+    <p>Mammoth.js focuses on text extraction and basic formatting. Embedded images inside .docx files (photos, charts, SmartArt) are not extracted into the PDF output. This is a current limitation of browser-based DOCX parsing. If your document has important images, use Google Docs or LibreOffice for conversion instead.</p>
+
+    <h3>The font looks different from my original document</h3>
+    <p>Custom fonts embedded in a .docx file (such as Calibri, Garamond, or proprietary brand fonts) cannot be loaded from inside a browser environment. BuildPDF's output uses a standard system serif/sans-serif font. For documents where font fidelity matters, server-side tools or desktop software will give better results.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>Can I convert a .DOC file (older Word format)?</h3>
+    <p>BuildPDF currently supports the modern <strong>.docx</strong> format (Word 2007 and later). The older .doc format (Word 97–2003) is not directly supported. If you have a .doc file, open it in Google Docs (which accepts both formats) and re-download it as .docx, then use BuildPDF to finish the conversion to PDF.</p>
+
+    <h3>Will the PDF be the same page count as my Word document?</h3>
+    <p>Not necessarily — page count depends on how the text reflows at the page size and margin settings you choose in BuildPDF. A document that's 3 pages in Word at Letter size might be 4 pages in BuildPDF's output at A4 with different margins. If matching exact page count matters, use a desktop tool that can replicate Word's layout engine exactly.</p>
+
+    <h3>Is this a good option for converting my resume?</h3>
+    <p>Yes, for straightforward resumes using standard Word templates, BuildPDF works well. The key is to keep formatting simple: use built-in heading styles, avoid text boxes, keep fonts to standard system fonts (Arial, Times New Roman, Calibri), and use a single-column layout. Run a quick visual check after conversion to make sure everything looks right before submitting.</p>
+
+    <h3>Can I batch convert multiple DOCX files at once?</h3>
+    <p>Currently, BuildPDF processes DOCX files one at a time. If you add multiple DOCX files to the queue, each is converted separately. For batch DOCX conversion, you may want to use a command-line tool like LibreOffice's headless mode or a scripted API solution.</p>
+
     <div class="cta-box">
       <h3>Convert your Word document to PDF now</h3>
       <p>No Office needed. No uploads. 100% free.</p>

@@ -164,6 +164,31 @@
     <h2>Is My File Safe?</h2>
     <p>Yes. BuildPDF uses a 100% client-side approach — all processing happens inside your web browser using JavaScript. Your image files are <strong>never uploaded to any server</strong>. They don't leave your device. This makes BuildPDF both private and fast, since there's no network round-trip.</p>
 
+    <h2>Common Issues &amp; How to Fix Them</h2>
+
+    <h3>My PDF is blurry or low quality</h3>
+    <p>This usually means the original JPG was a low-resolution file (e.g., a screenshot or compressed photo from a chat app). The PDF can only be as sharp as the source image. For better results, use the highest-resolution version of the image available. Also make sure you've selected <strong>High (95%)</strong> quality in BuildPDF's options panel.</p>
+
+    <h3>The image is cropped in the PDF</h3>
+    <p>This happens when a wide or tall image doesn't fit the selected page size with margins. To fix it: try switching to <strong>Landscape</strong> orientation for wide images, or reduce margins to <strong>None (0mm)</strong> or <strong>Narrow (5mm)</strong>. For very tall images (like a full-page screenshot), <strong>Portrait</strong> with narrow margins usually works best.</p>
+
+    <h3>Multiple images are in the wrong order</h3>
+    <p>When you add multiple JPG files, BuildPDF merges them in the order your operating system sends them — which is typically alphabetical by filename. To control the order, rename your files with numeric prefixes before selecting them: <code style="background:rgba(108,99,255,0.12);padding:2px 5px;border-radius:4px;font-size:0.85em;">01-cover.jpg</code>, <code style="background:rgba(108,99,255,0.12);padding:2px 5px;border-radius:4px;font-size:0.85em;">02-chapter1.jpg</code>, etc.</p>
+
+    <h3>The file is taking too long to convert</h3>
+    <p>Very large JPG files (20+ MB each) or large batches (50+ files) can take a moment to process, since all the work is done by your device's CPU. Try converting in smaller groups if speed is an issue, and close other heavy applications to free up memory.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>Can I convert JPEG files too, or only JPG?</h3>
+    <p>Both work identically. <strong>JPG</strong> and <strong>JPEG</strong> are the same image format — .jpeg is just an older 4-character file extension. BuildPDF accepts both automatically.</p>
+
+    <h3>Will the PDF be searchable?</h3>
+    <p>No — a JPG-to-PDF conversion creates an image-based PDF where the content is a rasterized picture, not searchable text. If you need a searchable PDF from a photo of a document, you'd need an OCR (Optical Character Recognition) tool first to extract the text, then convert.</p>
+
+    <h3>Can I convert GIF, PNG, or WEBP files the same way?</h3>
+    <p>Yes — BuildPDF supports JPG, PNG, WEBP, GIF, and BMP formats. All image types go through the same conversion process and can be mixed together in a single batch merge.</p>
+
     <div class="cta-box">
       <h3>Ready to convert your JPGs?</h3>
       <p>Free, instant, no sign-up. Your files stay on your device.</p>

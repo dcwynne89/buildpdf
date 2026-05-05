@@ -460,6 +460,79 @@
         </div>
       </section>
 
+      <!-- ── WHY BROWSER-BASED MATTERS ── -->
+      <section class="how-section reveal" id="privacy-explained" style="margin-top:3rem;">
+        <h2 class="section-title">Why "No Upload" Actually Matters</h2>
+        <p style="text-align:center;color:var(--text-muted,#8889A8);max-width:620px;margin:0 auto 2.5rem;line-height:1.8;">Most PDF converters send your file to a remote server to process it. BuildPDF is architecturally different — and that difference has real consequences for your privacy.</p>
+        <div class="steps-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+          <div class="step-card">
+            <div class="step-num">🔒</div>
+            <h3>Your Files Stay Local</h3>
+            <p>When you convert a file on BuildPDF, 100% of the processing happens inside your web browser. Your document bytes never leave your device — not even for a millisecond. This means you can safely convert sensitive files: tax documents, medical records, legal contracts, private photos.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">⚡</div>
+            <h3>No Server Round-Trip</h3>
+            <p>Server-based converters must upload your file, queue it, process it on a remote machine, then re-download the result — often taking 10–30 seconds. BuildPDF processes everything locally using your device's own CPU, which means conversions finish in 1–3 seconds for most files.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">🛡️</div>
+            <h3>Zero Data Retention Risk</h3>
+            <p>When you upload a file to a cloud service, you're trusting that provider to delete it. Many don't — or retain it for analytics. With BuildPDF, there's nothing to retain. We technically cannot store your file even if we wanted to, because it never reaches our servers.</p>
+          </div>
+        </div>
+
+        <div style="background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.15);border-radius:16px;padding:2rem;margin-top:2rem;">
+          <h3 style="color:var(--text,#E8E8F0);font-size:1.15rem;font-weight:700;margin-bottom:1rem;">🛠 The Tech Behind the Privacy</h3>
+          <p style="color:var(--text-muted,#8889A8);line-height:1.85;margin-bottom:1rem;">BuildPDF is powered by a stack of mature, open-source JavaScript libraries that run natively in modern browsers:</p>
+          <ul style="color:var(--text-muted,#8889A8);padding-left:1.5rem;line-height:1.9;">
+            <li><strong style="color:var(--text,#E8E8F0);">jsPDF</strong> — generates PDF documents directly from image data and HTML content, with full control over page size, margins, and orientation.</li>
+            <li><strong style="color:var(--text,#E8E8F0);">Mammoth.js</strong> — parses the Open XML format inside .docx files and extracts the text, headings, lists, and basic formatting without needing Microsoft Office installed.</li>
+            <li><strong style="color:var(--text,#E8E8F0);">PDF.js (by Mozilla)</strong> — reads and renders existing PDF files, allowing us to extract text content or render each page as a high-resolution image for re-export.</li>
+            <li><strong style="color:var(--text,#E8E8F0);">JSZip</strong> — packages multi-file outputs (e.g., all pages extracted from a PDF as JPG images) into a single downloadable .zip archive.</li>
+          </ul>
+          <p style="color:var(--text-muted,#8889A8);line-height:1.85;margin:1rem 0 0;">All of these libraries execute inside your browser's JavaScript engine. Your device does the work — not a server farm somewhere. This approach is called <em>client-side processing</em>, and it's the same reason you can use BuildPDF offline once the page has loaded.</p>
+        </div>
+      </section>
+
+      <!-- ── USE CASES ── -->
+      <section class="how-section reveal" id="use-cases" style="margin-top:3rem;">
+        <h2 class="section-title">Who Uses BuildPDF?</h2>
+        <p style="text-align:center;color:var(--text-muted,#8889A8);max-width:620px;margin:0 auto 2.5rem;line-height:1.8;">BuildPDF is used daily by people across dozens of situations where a clean, private PDF conversion is needed fast.</p>
+        <div class="steps-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+          <div class="step-card">
+            <div class="step-num">📋</div>
+            <h3>Job Seekers</h3>
+            <p>Converting resumes and cover letters from DOCX to PDF before submitting to employers. PDF guarantees your formatting is preserved regardless of what software the hiring manager uses to open it.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">🏠</div>
+            <h3>Renters & Homebuyers</h3>
+            <p>Scanning and converting bank statements, pay stubs, and ID photos to PDF for rental or mortgage applications. The local processing means sensitive financial documents never leave your device.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">🎓</div>
+            <h3>Students</h3>
+            <p>Compiling photos of handwritten notes, diagrams, or assignments into a single organized PDF to submit digitally. Multiple JPG or PNG files can be merged into one PDF with a single drag-and-drop.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">💼</div>
+            <h3>Freelancers & Contractors</h3>
+            <p>Converting invoices, quotes, and project proposals from web or Word format to professional PDF documents ready to send to clients — without a subscription to Adobe Acrobat or Microsoft 365.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">📸</div>
+            <h3>Photographers & Creatives</h3>
+            <p>Packaging portfolio images into a single PDF for client presentations, print submissions, or media kits. Choose A3 or Letter size with landscape orientation for panoramic and wide-format shots.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">🏢</div>
+            <h3>Small Business Owners</h3>
+            <p>Converting receipts, invoices, and business records to PDF for bookkeeping, tax filing, and client delivery — without uploading sensitive financial data to a third-party cloud service.</p>
+          </div>
+        </div>
+      </section>
+
     </main>
 
   </div><!-- /.layout-wrapper -->

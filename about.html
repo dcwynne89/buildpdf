@@ -92,6 +92,15 @@
     .about-cta h2 { font-size: 1.4rem; font-weight: 800; color: var(--text,#E8E8F0); margin-bottom: 0.75rem; }
     .about-cta p { color: var(--text-muted,#8889A8); font-size: 0.95rem; margin-bottom: 1.5rem; }
     .about-cta .btn-browse { display: inline-flex; text-decoration: none; }
+
+    details { margin-bottom: 0.75rem; }
+    details summary { cursor: pointer; }
+    details p { margin-top: 0.75rem; }
+
+    @media (max-width: 560px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -156,7 +165,7 @@
     <!-- Our Story -->
     <div class="about-section">
       <h2>📖 Our Story</h2>
-      <p>BuildPDF started from a simple frustration: every "free" PDF converter online either requires creating an account, uploads your sensitive documents to unknown servers, adds watermarks, or hits you with a paywall after one conversion.</p>
+      <p>BuildPDF started from a simple frustration: every "free" PDF converter online either requires creating an account, uploads your sensitive documents to unknown servers, adds watermarks, or hits you with a paywall after one conversion. The search for a genuinely free, genuinely private PDF tool kept coming up empty.</p>
       <p>We set out to build something better — a tool that runs entirely in your browser using modern JavaScript libraries. When you convert a file on BuildPDF, your document never leaves your device. There's no server processing, no data collection, and no hidden fees. Ever.</p>
     </div>
 
@@ -178,7 +187,7 @@
         </div>
         <div class="value-card">
           <div class="value-icon">⚡</div>
-          <h3>Speed & Simplicity</h3>
+          <h3>Speed &amp; Simplicity</h3>
           <p>No sign-ups, no email verification, no download queues. Drop your file, click convert, and download your PDF in seconds.</p>
         </div>
         <div class="value-card">
@@ -194,19 +203,68 @@
       </div>
     </div>
 
-    <!-- How It Works (Technical) -->
+    <!-- How It Works -->
     <div class="about-section">
       <h2>🛠️ How It Works Under the Hood</h2>
       <p>BuildPDF uses a combination of trusted open-source JavaScript libraries to handle all conversions directly in your browser:</p>
       <p><strong>jsPDF</strong> generates PDF documents from images and text. <strong>Mammoth.js</strong> converts Word DOCX files to clean HTML, which is then rendered into PDF. <strong>PDF.js</strong> (by Mozilla) extracts text and renders page images from existing PDFs. <strong>JSZip</strong> packages multi-file outputs into downloadable ZIP archives.</p>
-      <p>All of these libraries run client-side — meaning the processing power comes from your own device, not from a remote server. This is what makes BuildPDF both fast and private.</p>
+      <p>All of these libraries run client-side — meaning the processing power comes from your own device, not from a remote server. You can verify this yourself by opening your browser's Network tab in Developer Tools while converting a file — you'll see zero outbound requests during the conversion process itself.</p>
     </div>
 
-    <!-- Team / Who's Behind It -->
+    <!-- Who's Behind It -->
     <div class="about-section">
       <h2>👤 Who's Behind BuildPDF</h2>
-      <p>BuildPDF is an independent project created and maintained by a small team passionate about building useful, privacy-respecting web tools. We're real people who use the tool ourselves every day — and we're committed to keeping it free, honest, and continuously improving.</p>
-      <p>Have a question or want to report a bug? We'd love to hear from you on our <a href="/contact.html">Contact page</a>.</p>
+      <p>BuildPDF was started by a developer who got fed up with the state of online PDF tools. Every site either asked for an email address, uploaded your file to some server in an unknown country, plastered a watermark on the result, or hit you with a "you've hit your free limit" popup after one use.</p>
+      <p>The goal was straightforward: build a PDF converter that does exactly what it says on the tin, no strings attached. Using modern browser APIs and a handful of excellent open-source libraries, it turned out to be completely achievable — and the result is a tool that processes everything locally, with zero server involvement.</p>
+      <p>BuildPDF is part of the <strong>Build ecosystem</strong> — a small collection of free, browser-based productivity tools designed for freelancers, tradespeople, students, and small businesses. The philosophy is the same across all of them: no accounts, no paywalls, no data collection. Useful tools should be free and private by default.</p>
+      <p>Have feedback, a bug to report, or just want to say hi? <a href="/contact.html">Drop us a message</a> — we read every one.</p>
+    </div>
+
+    <!-- Privacy Deep Dive -->
+    <div class="about-section">
+      <h2>🔐 What "Private" Really Means Here</h2>
+      <p>The phrase "your files never leave your device" is something a lot of tools claim. On BuildPDF, it's technically enforced — not just a policy promise. When you drop a file onto BuildPDF, your browser reads it using the <code style="background:rgba(108,99,255,0.15);padding:2px 6px;border-radius:4px;font-size:0.85em;">FileReader</code> API — a standard browser feature that gives JavaScript access to local files without any network request. That file data is passed to our conversion libraries, which run entirely within your browser's JavaScript sandbox. The output is then offered as a download using a <code style="background:rgba(108,99,255,0.15);padding:2px 6px;border-radius:4px;font-size:0.85em;">Blob URL</code> — again, a local browser mechanism with no network involvement.</p>
+      <p>This also means BuildPDF works offline. Once the page and its libraries have loaded, you can disconnect from the internet and conversions will continue to work normally.</p>
+    </div>
+
+    <!-- Expanded FAQ -->
+    <div class="about-section">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <details style="background:var(--bg-card,#141526);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.1rem 1.25rem;">
+        <summary style="font-weight:700;color:var(--text,#E8E8F0);font-size:0.95rem;">Does BuildPDF work on phones and tablets?</summary>
+        <p style="color:var(--text-muted,#8889A8);font-size:0.9rem;">Yes. BuildPDF is fully responsive and works on iOS Safari, Android Chrome, and any mobile browser that supports modern JavaScript. File selection works via the native file picker on mobile devices.</p>
+      </details>
+
+      <details style="background:var(--bg-card,#141526);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.1rem 1.25rem;">
+        <summary style="font-weight:700;color:var(--text,#E8E8F0);font-size:0.95rem;">What file formats can I convert to PDF?</summary>
+        <p style="color:var(--text-muted,#8889A8);font-size:0.9rem;">You can convert JPG, JPEG, PNG, WEBP, GIF, BMP, DOCX, TXT, and HTML files to PDF. You can also extract content from existing PDFs — pulling out text or rendering each page as a JPG image.</p>
+      </details>
+
+      <details style="background:var(--bg-card,#141526);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.1rem 1.25rem;">
+        <summary style="font-weight:700;color:var(--text,#E8E8F0);font-size:0.95rem;">Can I merge multiple files into one PDF?</summary>
+        <p style="color:var(--text-muted,#8889A8);font-size:0.9rem;">Yes — select or drag multiple image files at once and they'll be merged into a single PDF in the order they appear in the queue. Perfect for scanning multi-page documents page by page and combining them.</p>
+      </details>
+
+      <details style="background:var(--bg-card,#141526);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.1rem 1.25rem;">
+        <summary style="font-weight:700;color:var(--text,#E8E8F0);font-size:0.95rem;">Why does my DOCX conversion look different from the original?</summary>
+        <p style="color:var(--text-muted,#8889A8);font-size:0.9rem;">BuildPDF handles headings, paragraphs, bold, italic, and bulleted lists well. However, complex formatting like custom fonts, multi-column layouts, tracked changes, or embedded charts may not render exactly as in Word. For pixel-perfect conversion, Google Docs or LibreOffice will give better results.</p>
+      </details>
+
+      <details style="background:var(--bg-card,#141526);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.1rem 1.25rem;">
+        <summary style="font-weight:700;color:var(--text,#E8E8F0);font-size:0.95rem;">Is there a file size or quantity limit?</summary>
+        <p style="color:var(--text-muted,#8889A8);font-size:0.9rem;">No artificial limits. Very large files (over 100 MB) or batches of hundreds of images may be slow depending on your device's RAM and CPU. For large batch jobs, processing in groups of 20–30 files tends to work smoothly on most computers.</p>
+      </details>
+
+      <details style="background:var(--bg-card,#141526);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.1rem 1.25rem;">
+        <summary style="font-weight:700;color:var(--text,#E8E8F0);font-size:0.95rem;">How do you make money if it's free?</summary>
+        <p style="color:var(--text-muted,#8889A8);font-size:0.9rem;">BuildPDF is supported by Google AdSense advertising. We keep ads minimal and non-intrusive. No subscriptions, no freemium tricks — the full tool is free for everyone.</p>
+      </details>
+
+      <details style="background:var(--bg-card,#141526);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.1rem 1.25rem;">
+        <summary style="font-weight:700;color:var(--text,#E8E8F0);font-size:0.95rem;">Can I use BuildPDF's conversion engine in my own project?</summary>
+        <p style="color:var(--text-muted,#8889A8);font-size:0.9rem;">Yes — BuildPDF offers a REST API for developers. Check out the <a href="/api/docs">API documentation</a> for available endpoints and rate limits.</p>
+      </details>
     </div>
 
     <!-- CTA -->
@@ -232,7 +290,7 @@
           <a href="/about.html">About</a>
         </div>
         <div class="footer-col">
-          <h4>Legal & Support</h4>
+          <h4>Legal &amp; Support</h4>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Use</a>
           <a href="/contact.html">Contact</a>
