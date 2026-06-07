@@ -1,0 +1,10 @@
+{
+  "name": "@buildplatform/api-core",
+  "version": "1.0.0",
+  "description": "Shared API authentication, key management, and usage tracking for the Build ecosystem",
+  "main": "index.js",
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0"
+  },
+  "license": "MIT"
+}
