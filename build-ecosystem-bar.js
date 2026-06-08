@@ -12,12 +12,18 @@
   "use strict";
 
   const PRODUCTS = [
-    { name: "Takeoff",       domain: "buildtakeoff.co",       url: "https://buildtakeoff.co",       icon: "📐", accent: "#F97316" },
     { name: "Quotes",        domain: "buildquotes.co",        url: "https://buildquotes.co",        icon: "💼", accent: "#10b981" },
+    { name: "Proposal",      domain: "buildproposal.co",      url: "https://buildproposal.netlify.app",      icon: "📑", accent: "#8b5cf6" },
+    { name: "Contract",      domain: "buildcontract.co",      url: "https://buildcontract-396.netlify.app",  icon: "📝", accent: "#6366f1" },
     { name: "Invoice",       domain: "buildinvoice.co",       url: "https://buildinvoice.co",       icon: "⚡", accent: "#388BCA" },
+    { name: "Receipt",       domain: "buildreceipt.co",       url: "https://buildreceipt.netlify.app",       icon: "🧾", accent: "#f43f5e" },
     { name: "ChangeOrder",   domain: "buildchangeorder.co",   url: "https://buildchangeorder.co",   icon: "📋", accent: "#F59E0B" },
-    { name: "PDF",           domain: "buildpdf.co",           url: "https://buildpdf.co",           icon: "📄", accent: "#6C63FF" },
+    { name: "Timesheet",     domain: "buildtimesheet.co",     url: "https://buildtimesheet.netlify.app",     icon: "⏰", accent: "#06b6d4" },
+    { name: "Warranty",      domain: "buildwarranty.co",      url: "https://buildwarranty.netlify.app",      icon: "🛡️", accent: "#d97706" },
+    { name: "Paystub",       domain: "buildpaystub.co",       url: "https://buildpaystub.netlify.app",       icon: "💵", accent: "#10b981" },
     { name: "Certificates",  domain: "buildcertificates.com", url: "https://buildcertificates.com", icon: "🏅", accent: "#C5A55A" },
+    { name: "Takeoff",       domain: "buildtakeoff.co",       url: "https://buildtakeoff.co",       icon: "📐", accent: "#F97316" },
+    { name: "PDF",           domain: "buildpdf.co",           url: "https://buildpdf.co",           icon: "📄", accent: "#6C63FF" },
   ];
 
   const currentHost = window.location.hostname.replace(/^www\./, "");
