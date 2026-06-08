@@ -28,6 +28,10 @@
 
   const currentHost = window.location.hostname.replace(/^www\./, "");
 
+  // Also match netlify subdomains (e.g. buildcontract-396.netlify.app → buildcontract)
+  const netlifyMatch = currentHost.match(/^([a-z]+)(?:-\d+)?\.netlify\.app$/);
+  const netlifyBase = netlifyMatch ? netlifyMatch[1] : null;
+
   // Don't re-inject if already present
   if (document.getElementById("build-ecosystem-bar")) return;
 
@@ -41,7 +45,7 @@
       background: linear-gradient(90deg, #06070b 0%, #0c0e18 50%, #06070b 100%);
       border-bottom: 1px solid rgba(255,255,255,0.06);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      font-size: 12.5px;
+      font-size: 11.5px;
       line-height: 1;
       user-select: none;
       -webkit-user-select: none;
@@ -89,9 +93,9 @@
     #build-ecosystem-bar .beb-link {
       display: flex;
       align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
-      border-radius: 6px;
+      gap: 4px;
+      padding: 3px 7px;
+      border-radius: 5px;
       color: rgba(255,255,255,0.55);
       text-decoration: none;
       white-space: nowrap;
@@ -131,24 +135,7 @@
       line-height: 1;
     }
 
-    #build-ecosystem-bar .beb-close {
-      flex-shrink: 0;
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.25);
-      cursor: pointer;
-      padding: 4px 6px;
-      font-size: 14px;
-      line-height: 1;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-      margin-left: 4px;
-    }
 
-    #build-ecosystem-bar .beb-close:hover {
-      color: rgba(255,255,255,0.7);
-      background: rgba(255,255,255,0.06);
-    }
 
     /* Animate in */
     #build-ecosystem-bar.beb-entering {
@@ -193,8 +180,13 @@
       }
 
       #build-ecosystem-bar .beb-link {
-        padding: 4px 8px;
-        font-size: 11.5px;
+        padding: 3px 6px;
+        font-size: 10.5px;
+        gap: 3px;
+      }
+      #build-ecosystem-bar .beb-dot {
+        width: 5px;
+        height: 5px;
       }
     }
   `;
@@ -204,41 +196,28 @@
   const bar = document.createElement("div");
   bar.id = "build-ecosystem-bar";
 
-  // Check if dismissed this session
-  if (sessionStorage.getItem("beb-dismissed")) {
-    return;
-  }
+
 
   bar.classList.add("beb-entering");
 
   let linksHTML = "";
   PRODUCTS.forEach(function (p) {
-    const isActive = currentHost === p.domain;
+    const domainBase = p.domain.replace(/\.(co|com)$/, "").replace(/^build/, "");
+    const isActive = currentHost === p.domain || (netlifyBase && netlifyBase === "build" + domainBase);
     const activeClass = isActive ? " beb-active" : "";
     const ariaLabel = isActive ? ' aria-current="page"' : "";
     const target = isActive ? "" : ' target="_blank" rel="noopener"';
 
     linksHTML += '<a href="' + p.url + '" class="beb-link' + activeClass + '"' + ariaLabel + target + '>'
       + '<span class="beb-dot" style="background:' + p.accent + ';color:' + p.accent + '"></span>'
-      + '<span>Build' + p.name + '</span>'
+      + '<span>' + p.name + '</span>'
       + '</a>';
   });
 
   bar.innerHTML = '<div class="beb-inner">'
-    + '<span class="beb-label">Build Ecosystem</span>'
+    + '<span class="beb-label">Build</span>'
     + '<div class="beb-links">' + linksHTML + '</div>'
-    + '<button class="beb-close" aria-label="Close ecosystem bar" title="Dismiss">&times;</button>'
     + '</div>';
-
-  // ── Close handler ─────────────────────────────────────────
-  bar.querySelector(".beb-close").addEventListener("click", function () {
-    bar.classList.remove("beb-entering");
-    bar.classList.add("beb-leaving");
-    bar.addEventListener("animationend", function () {
-      bar.remove();
-    }, { once: true });
-    sessionStorage.setItem("beb-dismissed", "1");
-  });
 
   // ── Inject into page ──────────────────────────────────────
   // Insert as first child of <body>, before any nav or ad banner
