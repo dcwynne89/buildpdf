@@ -50,6 +50,14 @@
   };
   const currentProduct = PRODUCT_MAP[host] || "unknown";
 
+  // ── SSO Bridge ──────────────────────────────────────────────
+  const BRIDGE_ORIGIN  = "https://buildstatus.co";
+  const BRIDGE_URL     = BRIDGE_ORIGIN + "/auth-bridge.html";
+  const IS_BRIDGE_HOST = (host === "buildstatus.co");
+  let bridgeIframe = null;
+  let bridgeReady  = false;
+
+
   // ── Load Firebase SDK modules from CDN ──────────────────────
   function loadScript(url) {
     return new Promise(function (resolve, reject) {
@@ -112,9 +120,75 @@
       });
 
       sdkReady = true;
+
+      // When user signs out locally, also tell bridge to sign out everywhere
+      firebaseAuth.onAuthStateChanged(function(user) {
+        if (!user && bridgeIframe && bridgeReady) {
+          try {
+            bridgeIframe.contentWindow.postMessage({ type: "BUILD_AUTH_SIGNOUT" }, BRIDGE_ORIGIN);
+          } catch(e) {}
+        }
+      });
+
     } catch (err) {
       console.warn("[BuildAuth] Firebase init failed:", err.message);
     }
+  }
+
+  // ── SSO Bridge Setup ────────────────────────────────────────
+
+  function initBridge() {
+    // The bridge host (buildstatus.co) IS the bridge — no iframe needed
+    if (IS_BRIDGE_HOST) return;
+
+    // Inject hidden iframe
+    bridgeIframe = document.createElement("iframe");
+    bridgeIframe.src = BRIDGE_URL;
+    bridgeIframe.style.cssText = "display:none;width:0;height:0;border:0;position:absolute;";
+    bridgeIframe.setAttribute("aria-hidden", "true");
+    document.body.appendChild(bridgeIframe);
+
+    // Listen for auth state from bridge
+    window.addEventListener("message", function(e) {
+      if (e.origin !== BRIDGE_ORIGIN) return;
+      var data = e.data || {};
+
+      if (data.type === "BUILD_AUTH_BRIDGE_READY") {
+        bridgeReady = true;
+        // Request current state immediately
+        try {
+          bridgeIframe.contentWindow.postMessage({ type: "BUILD_AUTH_PING" }, BRIDGE_ORIGIN);
+        } catch(err) {}
+      }
+
+      if (data.type === "BUILD_AUTH_STATE") {
+        if (data.token && data.user) {
+          // Sign in on this domain using the bridge's ID token
+          if (firebaseAuth && !firebaseAuth.currentUser) {
+            firebaseAuth.signInWithCustomToken(data.token).catch(function() {
+              // Custom token requires Cloud Function — fall back to displaying user info
+              // without a Firebase session (read-only mode, good for nav display)
+              currentUser = {
+                uid: data.user.uid,
+                email: data.user.email,
+                displayName: data.user.displayName,
+                photoURL: data.user.photoURL,
+                _bridged: true,  // flag: session from bridge, not local Firebase
+              };
+              updateNavUI();
+              authListeners.forEach(function(fn) { fn(currentUser); });
+            });
+          }
+        } else {
+          // Bridge says logged out — if we were only bridged, clear the UI
+          if (currentUser && currentUser._bridged) {
+            currentUser = null;
+            updateNavUI();
+            authListeners.forEach(function(fn) { fn(null); });
+          }
+        }
+      }
+    });
   }
 
   // ── Firestore Helpers ───────────────────────────────────────
@@ -747,9 +821,11 @@
     document.addEventListener("DOMContentLoaded", function () {
       injectNavButton();
       initFirebase();
+      initBridge();
     });
   } else {
     injectNavButton();
     initFirebase();
+    initBridge();
   }
 })();
