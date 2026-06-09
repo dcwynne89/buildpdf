@@ -89,11 +89,18 @@
   async function initFirebase() {
     try {
       await loadFirebaseCompat();
-      firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
+      // Use existing app if already initialized (e.g. from HTML <script> tags)
+      if (firebase.apps && firebase.apps.length > 0) {
+        firebaseApp = firebase.app();
+      } else {
+        firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
+      }
       firebaseAuth = firebase.auth();
+
+      // Use .settings({databaseId}) — the correct compat-SDK way to connect to a named DB.
+      // firebase.app().firestore(dbId) bypasses proper routing and hangs silently.
       firebaseDb = firebase.firestore();
-      // Use named database
-      firebaseDb = firebase.app().firestore(FIRESTORE_DB_ID);
+      firebaseDb.settings({ databaseId: FIRESTORE_DB_ID });
       
       firebaseAuth.onAuthStateChanged(function (user) {
         currentUser = user;
@@ -509,26 +516,19 @@
   var navContainer = null;
 
   function injectNavButton() {
-    // Find the nav's links container
-    var navLinks = document.getElementById("siteNav");
+    // Find the nav's links container — try by ID first, fall back to class
+    var navLinks = document.getElementById("siteNav") ||
+                   document.querySelector(".navbar-links") ||
+                   document.querySelector(".nav-links");
     if (!navLinks) return;
 
     // Create wrapper for auth button + dropdown
     navContainer = document.createElement("div");
-    navContainer.style.cssText = "position:relative;display:inline-flex;align-items:center;margin-left:8px;";
+    navContainer.style.cssText = "position:relative;display:inline-flex;align-items:center;margin-left:auto;";
     navContainer.id = "bea-nav-container";
-    
-    // Insert after the last link in siteNav, or append to parent
-    var parent = navLinks.parentElement;
-    if (parent) {
-      // Insert before the nav toggle button if it exists
-      var toggle = document.getElementById("navToggle");
-      if (toggle) {
-        parent.insertBefore(navContainer, toggle);
-      } else {
-        parent.appendChild(navContainer);
-      }
-    }
+
+    // Append INSIDE the nav links container so it travels with it on mobile
+    navLinks.appendChild(navContainer);
 
     updateNavUI();
   }
@@ -712,6 +712,7 @@
     isReady: function () { return sdkReady; },
 
     // Auth actions
+    showModal: function (mode) { showModal(mode || "signin"); },
     showSignIn: function () { showModal("signin"); },
     showSignUp: function () { showModal("signup"); },
     signOut: signOut,
@@ -735,6 +736,9 @@
 
     // Product info
     currentProduct: currentProduct,
+
+    // Database access (for product-specific queries)
+    getDb: function () { return firebaseDb; },
   };
 
   // ── Initialize ──────────────────────────────────────────────
