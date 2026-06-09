@@ -25,7 +25,7 @@
     { name: "Takeoff",       domain: "buildtakeoff.co",       url: "https://buildtakeoff.co",       icon: "📐", accent: "#F97316" },
     { name: "PDF",           domain: "buildpdf.co",           url: "https://buildpdf.co",           icon: "📄", accent: "#6C63FF" },
     { name: "Status",        domain: "buildstatus.co",        url: "https://buildstatus.co",        icon: "📊", accent: "#3b82f6" },
-    { name: "Bids",          domain: "buildbids.co",          url: "https://buildbids.netlify.app",          icon: "📋", accent: "#0d9488" },
+    { name: "Bids",          domain: "buildbids.co",          url: "https://buildbids.co",          icon: "📋", accent: "#0d9488" },
   ];
 
   const currentHost = window.location.hostname.replace(/^www\./, "");
