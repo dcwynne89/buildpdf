@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Is PDF/A? And Do You Actually Need It? – BuildPDF</title>
+  <meta name="description" content="PDF/A is the ISO archival standard for long-term document preservation. Learn what it is, how it differs from regular PDF, and whether you actually need it." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="canonical" href="https://buildpdf.co/blog/what-is-pdfa.html" />
+  <meta name="google-adsense-account" content="ca-pub-6010936774105671" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Is PDF/A? And Do You Actually Need It?",
+    "description": "PDF/A is the ISO archival standard for long-term document preservation. Learn what it is, how it differs from regular PDF, and whether you actually need it.",
+    "publisher": {"@type": "Organization", "name": "BuildPDF", "url": "https://buildpdf.co"}
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
+  <style>
+    .article-wrap { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+    .article-back { display: inline-flex; align-items: center; gap: 0.5rem; color: #6C63FF; font-weight: 600; text-decoration: none; margin-top: 1.5rem; margin-bottom: 1.75rem; transition: gap 0.2s; }
+    .article-back:hover { gap: 0.75rem; }
+    .article-tag { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #6C63FF; margin-bottom: 0.75rem; }
+    .article-wrap h1 { font-size: 2.1rem; font-weight: 800; color: var(--text-primary,#f1f5f9); line-height: 1.25; margin-bottom: 1rem; }
+    .article-meta { display: flex; gap: 1.5rem; color: var(--text-muted,#64748b); font-size: 0.85rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-wrap h2 { font-size: 1.35rem; font-weight: 700; color: var(--text-primary,#f1f5f9); margin: 2.5rem 0 0.75rem; }
+    .article-wrap h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-primary,#f1f5f9); margin: 1.75rem 0 0.6rem; }
+    .article-wrap p { color: var(--text-secondary,#94a3b8); line-height: 1.85; margin-bottom: 1.25rem; }
+    .article-wrap ul, .article-wrap ol { color: var(--text-secondary,#94a3b8); padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .article-wrap li { line-height: 1.8; margin-bottom: 0.4rem; }
+    .article-wrap a { color: #6C63FF; text-decoration: none; }
+    .article-wrap a:hover { text-decoration: underline; }
+    .cta-box { background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(59,130,246,0.15)); border: 1px solid rgba(108,99,255,0.3); border-radius: 16px; padding: 2rem; text-align: center; margin: 2.5rem 0; }
+    .cta-box h3 { color: var(--text-primary,#f1f5f9); margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .cta-box p { color: var(--text-secondary,#94a3b8); margin-bottom: 1.25rem; font-size: 0.95rem; }
+    .cta-btn { display: inline-block; padding: 0.85rem 2.25rem; background: linear-gradient(135deg,#6C63FF,#3B82F6); color: white; border-radius: 10px; font-weight: 700; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-2px); text-decoration: none; }
+    .tip-box { background: rgba(59,130,246,0.08); border-left: 3px solid #3B82F6; border-radius: 0 10px 10px 0; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .tip-box strong { color: #60a5fa; }
+    .warn-box { background: rgba(245,158,11,0.08); border-left: 3px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .warn-box strong { color: #fbbf24; }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+    .comparison-table th { background: rgba(108,99,255,0.15); color: #f1f5f9; padding: 0.75rem 1rem; text-align: left; font-weight: 700; }
+    .comparison-table td { padding: 0.7rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); color: #94a3b8; }
+    .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .kofi-link { color: #FF5E5B; font-weight: 600; text-decoration: none; }
+    .footer-support { margin-top: 0.35rem; font-size: 0.8rem; }
+    .version-card { background: rgba(108,99,255,0.08); border: 1px solid rgba(108,99,255,0.2); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+    .version-card h4 { color: #a5b4fc; font-size: 1rem; font-weight: 700; margin: 0 0 0.4rem; }
+    .version-card p { color: #94a3b8; font-size: 0.9rem; margin: 0; line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo" style="text-decoration:none;">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="url(#lg1)" />
+          <path d="M10 8h11l7 7v13a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity=".9" />
+          <path d="M21 8l7 7h-5a2 2 0 01-2-2V8z" fill="white" fill-opacity=".5" />
+          <path d="M13 19h10M13 23h7" stroke="url(#lg2)" stroke-width="2" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="lg1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#6C63FF"/><stop offset="1" stop-color="#3B82F6"/></linearGradient>
+            <linearGradient id="lg2" x1="13" y1="21" x2="23" y2="21" gradientUnits="userSpaceOnUse"><stop stop-color="#6C63FF"/><stop offset="1" stop-color="#3B82F6"/></linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Build<span class="logo-accent">PDF</span></span>
+      </a>
+      <nav class="site-nav" id="siteNav">
+        <a href="/">Converter</a>
+        <a href="/blog/" class="active">Guides</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="article-wrap">
+    <a href="/blog/" class="article-back">← All Guides</a>
+    <p class="article-tag">File Formats</p>
+    <h1>What Is PDF/A? And Do You Actually Need It?</h1>
+    <div class="article-meta">
+      <span>📅 June 2026</span>
+      <span>⏱ 7 min read</span>
+      <span>🔒 No file uploads</span>
+    </div>
+
+    <p>You've submitted a document to a government portal, a court system, or a university archive, and you've received an error: "Please submit documents in PDF/A format." Or maybe you're setting up a document management system and someone on the team mentions PDF/A compliance. What actually is PDF/A, why does it exist, and — more importantly — do you need to care about it? This guide explains the standard clearly, without the ISO jargon.</p>
+
+    <h2>The Problem PDF/A Was Created to Solve</h2>
+    <p>In the late 1990s and early 2000s, government agencies, law firms, and archives were digitizing their records en masse, saving millions of documents as PDFs. PDF was an obvious choice — it was widely supported, layout-preserving, and printable. But there was a fundamental problem with using standard PDFs for long-term preservation.</p>
+    <p>Regular PDFs can depend on things that might not exist in the future. They can reference fonts that are installed on the creating computer but not embedded in the file. They can contain JavaScript that executes when the document is opened. They can link to external resources like images or audio files hosted at a URL that may be gone in ten years. They can be encrypted, preventing future software from reading them even for legitimate archival purposes. And they can contain proprietary data streams that only specific software versions understand.</p>
+    <p>Consider the problem concretely: a legal contract stored as a PDF in 2005 that referenced a non-embedded proprietary font might look completely different in 2025 when that font is no longer available on any system. For something as critical as a medical record, a property deed, or a court filing, that's unacceptable.</p>
+    <p>PDF/A was the answer. Published as ISO 19005-1 in 2005, it's a strict subset of the PDF specification designed with one mission: to ensure a document can be rendered exactly as intended by any conforming reader, on any system, decades into the future.</p>
+
+    <h2>What PDF/A Prohibits (and Why)</h2>
+    <p>PDF/A achieves its preservation guarantees not by adding features to PDF, but by <em>removing</em> features that could create external dependencies or unpredictable behavior. Here's what's banned:</p>
+    <ul>
+      <li><strong>External font references:</strong> All fonts must be fully embedded in the file. No exceptions. This ensures the document renders identically regardless of what fonts are installed on the viewing system.</li>
+      <li><strong>Encryption:</strong> PDF/A files cannot be encrypted or password-protected. If a future archivist needs to open the file for legitimate reasons, no password should stand in the way.</li>
+      <li><strong>JavaScript:</strong> Active content that executes on open is forbidden. A static archival document has no business running code.</li>
+      <li><strong>Audio and video content:</strong> Embedded multimedia that depends on specific codecs or players cannot be guaranteed to work in future software. It's excluded.</li>
+      <li><strong>External content references:</strong> Links to external resources — web URLs, file paths on a network drive — are not permitted. Everything the document needs to render must be inside the file itself.</li>
+      <li><strong>Transparency (in PDF/A-1):</strong> The first version of the standard prohibited transparency effects in images and vector graphics, though this restriction was relaxed in later versions.</li>
+      <li><strong>LZW compression:</strong> Certain compression types with uncertain patent histories were excluded for legal safety, though this is less relevant now that those patents have expired.</li>
+    </ul>
+
+    <p>PDF/A also requires the file to include document-level metadata in a specific format (XMP), declaring that the file conforms to the standard and specifying which version of PDF/A it uses. This metadata declaration is what allows compliance-checking software to verify a file.</p>
+
+    <h2>The Different Versions of PDF/A</h2>
+    <p>PDF/A isn't a single standard — it's a family of standards that have been refined over time as PDF itself has evolved. Understanding which version you need matters when creating or checking compliant files.</p>
+
+    <div class="version-card">
+      <h4>PDF/A-1 (ISO 19005-1:2005)</h4>
+      <p>The original standard, based on PDF 1.4. The most restrictive version: no transparency, no layers, no attachments. PDF/A-1b is the most common conformance level (visual appearance preserved); PDF/A-1a adds additional requirements for document structure and accessibility (tagged PDF). If you're filing with an older government system or court that specifies "PDF/A," this is often what they mean.</p>
+    </div>
+
+    <div class="version-card">
+      <h4>PDF/A-2 (ISO 19005-2:2011)</h4>
+      <p>Based on PDF 1.7. Allows transparency, JPEG 2000 image compression, optional content groups (layers), and embedding of other PDF/A files as attachments. Significantly more capable than PDF/A-1 for complex documents. PDF/A-2b, PDF/A-2a, and PDF/A-2u (Unicode) are the three conformance levels.</p>
+    </div>
+
+    <div class="version-card">
+      <h4>PDF/A-3 (ISO 19005-3:2012)</h4>
+      <p>Extends PDF/A-2 by allowing any file type to be attached to the PDF/A file — not just other PDF/As. This matters for "hybrid" archiving scenarios where you want to attach the source spreadsheet (e.g., .xlsx) alongside the rendered PDF. Increasingly used in electronic invoicing standards in Europe (ZUGFeRD, Factur-X).</p>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 Which version should you use?</strong> When a specific version isn't mandated, PDF/A-2b is generally the best default for new documents. It's well-supported, less restrictive than PDF/A-1, and more practical for modern documents than PDF/A-3. If an authority or system specifies a version, always follow their requirement.
+    </div>
+
+    <h2>Who Actually Needs PDF/A?</h2>
+    <p>PDF/A was designed for organizations that need to retain documents reliably for many years — often with legal or regulatory obligations attached. The canonical users are:</p>
+
+    <h3>Government Agencies and Courts</h3>
+    <p>Public records, court filings, permits, licenses, and official correspondence increasingly require PDF/A. Many courts in the US, EU, and Australia mandate PDF/A for electronic filing systems. The reasoning is sound: a court document submitted in 2024 may need to be retrieved and verified in 2050. It cannot rely on specific software or fonts that may not exist then.</p>
+
+    <h3>Law Firms and Legal Departments</h3>
+    <p>Contracts, deeds, wills, and corporate records are routinely kept for decades. Many law firms have adopted PDF/A as their internal archiving standard for all signed agreements. It's also increasingly required for e-discovery submissions in major litigation.</p>
+
+    <h3>Healthcare and Medical Records</h3>
+    <p>Medical records in many jurisdictions must be retained for 7–30 years depending on the type and the patient's age. Patient records, imaging reports, surgical notes, and consent forms stored as PDF/A are readable regardless of what EHR software the practice uses in the future.</p>
+
+    <h3>Universities and Academic Institutions</h3>
+    <p>Theses, dissertations, and institutional research are typically archived permanently. Many university libraries and repositories require PDF/A for doctoral theses in particular — the Networked Digital Library of Theses and Dissertations (NDLTD) recommends it.</p>
+
+    <h3>Financial Institutions and Accountants</h3>
+    <p>Financial statements, audit reports, and tax records that must be retained under securities or tax law are natural candidates for PDF/A archiving. The stability guarantees are particularly valuable when documents may be reviewed by auditors or regulators years after creation.</p>
+
+    <h2>How to Create a PDF/A File</h2>
+    <p>Creating a true PDF/A-compliant file requires software that supports the standard explicitly. You can't just rename a PDF or hope it's compliant — the software must actively write the required metadata, embed all fonts, and exclude disallowed features during export.</p>
+
+    <ul>
+      <li><strong>Microsoft Word (2016 and later):</strong> When saving as PDF, click "More options" → "Options" → check "ISO 19005-1 compliant (PDF/A)". This creates PDF/A-1b output.</li>
+      <li><strong>LibreOffice:</strong> Export as PDF → check "PDF/A-1a" in the PDF Options dialog. Free and very reliable.</li>
+      <li><strong>Adobe Acrobat Pro:</strong> File → Save As → More Options → select PDF/A format. Also provides PDF/A validation.</li>
+      <li><strong>Adobe InDesign:</strong> Export → PDF (Print) → Standards dropdown → PDF/A-1b or PDF/A-2b.</li>
+      <li><strong>Ghostscript:</strong> Use the <code>-dPDFA=1</code> flag with the appropriate PDF/A definition file. Powerful but requires command-line knowledge.</li>
+    </ul>
+
+    <h2>How to Check If a PDF Is PDF/A Compliant</h2>
+    <p>There are several ways to verify PDF/A compliance before submitting a document:</p>
+    <ul>
+      <li><strong>Adobe Acrobat Pro:</strong> Tools → Standards → Verify Compliance. Shows exactly which elements fail compliance and why.</li>
+      <li><strong>veraPDF:</strong> A free, open-source PDF/A validator (verapdf.org) that is the reference implementation for ISO standards. The most authoritative free tool available.</li>
+      <li><strong>PDF24 Tools:</strong> An online validator that can check PDF/A conformance without requiring software installation.</li>
+      <li><strong>Metadata inspection:</strong> Open the PDF in Acrobat Reader and go to File → Properties → Description. If the PDF/A field shows a standard version, the file declares itself as PDF/A. Note: a declaration isn't proof of full compliance — a proper validator is more reliable.</li>
+    </ul>
+
+    <div class="warn-box">
+      <strong>⚠️ Declaration ≠ compliance.</strong> A PDF can declare itself PDF/A-compliant in its metadata without actually meeting the standard. This happens when PDFs are created with tools that write the compliance metadata but don't actually enforce the requirements. If PDF/A compliance genuinely matters (court submission, regulatory filing), always validate with a proper tool like veraPDF rather than trusting the file's own declaration.
+    </div>
+
+    <h2>PDF/A vs. Regular PDF: Side-by-Side</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Regular PDF</th>
+          <th>PDF/A</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Font embedding required</td>
+          <td>Optional</td>
+          <td>✅ Mandatory</td>
+        </tr>
+        <tr>
+          <td>Encryption allowed</td>
+          <td>Yes</td>
+          <td>❌ Prohibited</td>
+        </tr>
+        <tr>
+          <td>JavaScript</td>
+          <td>Allowed</td>
+          <td>❌ Prohibited</td>
+        </tr>
+        <tr>
+          <td>External links and resources</td>
+          <td>Allowed</td>
+          <td>❌ Prohibited</td>
+        </tr>
+        <tr>
+          <td>Audio/video content</td>
+          <td>Allowed</td>
+          <td>❌ Prohibited (A-1/A-2)</td>
+        </tr>
+        <tr>
+          <td>Compliance metadata required</td>
+          <td>No</td>
+          <td>✅ Required (XMP)</td>
+        </tr>
+        <tr>
+          <td>Long-term rendering guarantee</td>
+          <td>Not assured</td>
+          <td>✅ By design</td>
+        </tr>
+        <tr>
+          <td>File size</td>
+          <td>Varies</td>
+          <td>Typically larger (embedded fonts)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>The Honest Answer: Do You Need PDF/A?</h2>
+    <p>For the vast majority of people reading this article, the answer is no. If you're converting a photo to PDF to email to someone, creating a PDF from a Word document to send to a client, or archiving your own personal records, regular PDF is perfectly appropriate. The self-contained nature of standard PDF already ensures good readability across devices, and the practical rendering problems PDF/A was designed to prevent — missing fonts, expired external links — are increasingly uncommon with modern PDF creation tools that embed fonts by default.</p>
+    <p>PDF/A matters when you have a specific mandate, when documents must be legally or institutionally archivable for extended periods, or when you're submitting to a system that explicitly requires it. It's a specialist standard for specialist needs — important in the contexts it was designed for, and unnecessary overhead for everyday document use.</p>
+    <p>If you're submitting to a system that requires PDF/A, use Microsoft Word's built-in PDF/A export option or LibreOffice's PDF export — both are free and reliable for PDF/A-1b compliance. Validate with veraPDF if compliance is critical. And if you're just saving a document for your own records, a regular PDF from <a href="/">BuildPDF</a> will serve you perfectly well for years to come.</p>
+
+    <div class="cta-box">
+      <h3>Convert Your Documents to PDF</h3>
+      <p>Free, instant, no sign-up. Your files never leave your device.</p>
+      <a href="/" class="cta-btn">Convert to PDF Now →</a>
+    </div>
+
+    <h2>Related Guides</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;">
+      <a href="/blog/pdf-vs-docx.html" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.25rem;text-decoration:none;color:var(--text-secondary,#94a3b8);transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(108,99,255,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+        <div style="font-weight:700;color:#f1f5f9;margin-bottom:0.4rem;">PDF vs DOCX: Which Format Should You Use?</div>
+        <div style="font-size:0.85rem;">A practical comparison for everyday document decisions.</div>
+      </a>
+      <a href="/blog/word-to-pdf.html" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.25rem;text-decoration:none;color:var(--text-secondary,#94a3b8);transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(108,99,255,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+        <div style="font-weight:700;color:#f1f5f9;margin-bottom:0.4rem;">How to Convert Word to PDF</div>
+        <div style="font-size:0.85rem;">Convert .docx to PDF directly in your browser, no software needed.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-columns">
+        <div class="footer-brand">
+          <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
+          <p>Free, privacy-first file to PDF converter. Your files never leave your device.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="/">Converter</a>
+          <a href="/blog/">Guides</a>
+          <a href="/about.html">About</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal &amp; Support</h4>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
+        <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- KO-FI FLOATING WIDGET -->
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script>
+    kofiWidgetOverlay.draw('dustincw', {
+      'type': 'floating-chat',
+      'floating-chat.donateButton.text': 'Support me',
+      'floating-chat.donateButton.background-color': '#00b9fe',
+      'floating-chat.donateButton.text-color': '#fff'
+    });
+  </script>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const siteNav = document.getElementById('siteNav');
+    const headerInner = navToggle ? navToggle.closest('.header-inner') : null;
+    function closeNav() {
+      siteNav.classList.remove('open'); navToggle.classList.remove('open');
+      document.body.style.overflow = '';
+      const btn = siteNav.querySelector('.nav-close'); if (btn) btn.remove();
+      setTimeout(() => headerInner.insertBefore(siteNav, navToggle), 300);
+    }
+    if (navToggle && siteNav && headerInner) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = siteNav.classList.contains('open');
+        if (!isOpen) {
+          document.body.appendChild(siteNav);
+          const closeBtn = document.createElement('button');
+          closeBtn.className = 'nav-close';
+          closeBtn.setAttribute('aria-label', 'Close menu');
+          closeBtn.innerHTML = '&#x2715;';
+          closeBtn.addEventListener('click', closeNav);
+          siteNav.prepend(closeBtn);
+          requestAnimationFrame(() => { siteNav.classList.add('open'); navToggle.classList.add('open'); });
+          document.body.style.overflow = 'hidden';
+        } else { closeNav(); }
+      });
+      siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    }
+  </script>
+</body>
+</html>
