@@ -53,6 +53,7 @@
     .use-case-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.25rem; }
     .use-case-card h4 { color: var(--text-primary,#f1f5f9); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.35rem; }
     .use-case-card p { color: var(--text-secondary,#94a3b8); font-size: 0.82rem; margin: 0; line-height: 1.6; }
+    .kofi-link { color: #FF5E5B; font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -72,7 +73,7 @@
     <h1>How to Convert a Text File (.TXT) to PDF</h1>
     <div class="article-meta">
       <span>📅 April 4, 2026</span>
-      <span>⏱ 3 min read</span>
+      <span>⏱ 8 min read</span>
       <span>✍️ BuildPDF Team</span>
     </div>
 
@@ -126,6 +127,75 @@
       <strong>💡 Tip:</strong> If your text file contains code (Python, JavaScript, etc.), BuildPDF will preserve the monospace formatting. The converted PDF is great for sharing code samples or configuration files in a readable, printable format.
     </div>
 
+    <h2>The Encoding Problem: UTF-8, ASCII, and Windows-1252</h2>
+    <p>Plain text files carry no universal declaration of their encoding — it's simply not part of the .txt format. A file created on a Windows machine in the 1990s may use Windows-1252 (a Western European single-byte encoding), while a modern file from Linux or macOS is almost certainly UTF-8. Both are valid, but they are not interchangeable.</p>
+    <p>BuildPDF reads all .txt files as UTF-8. The problem arises with legacy files: a Windows-1252 file containing characters like curly quotes, em-dashes, or the copyright symbol will display as garbled characters (mojibake) in the PDF because those byte sequences mean different things in UTF-8.</p>
+    <p>The fix is straightforward. Open the file in Notepad (Windows) and use <strong>File → Save As</strong>, then change the Encoding dropdown from "ANSI" to "UTF-8." On macOS, TextEdit handles this automatically when you re-save. VS Code, Notepad++, and Sublime Text all have encoding conversion built in — look for "Save with Encoding" in their menus.</p>
+
+    <h2>How BuildPDF Handles Line Breaks and Pagination</h2>
+    <p>Plain text files use one of three line-ending conventions: <strong>LF</strong> (Unix/macOS), <strong>CRLF</strong> (Windows), or <strong>CR</strong> (old Mac). BuildPDF normalises all three — you don't need to worry about which system created the file.</p>
+    <p>When paginating, BuildPDF flows the text into the page width you've set, wrapping lines that are too long and adding new pages when the text fills the current one. This is word-wrap pagination — so a file formatted for an 80-column terminal may look slightly different in the PDF depending on font size and margin settings.</p>
+    <p>One important limitation: BuildPDF does not interpret form-feed characters (<code>\f</code>) as page breaks. If your text file relies on form-feed for manual pagination (common in legacy printer output), those characters will be ignored. For fine-grained pagination control, consider converting the file to DOCX in a word processor first, then using BuildPDF's DOCX-to-PDF converter.</p>
+
+    <div class="tip-box">
+      <strong>💡 Preserving alignment:</strong> If your .txt file contains ASCII art, tables drawn with pipe characters, or code aligned with spaces, the PDF output will only look correct with a <strong>monospace font</strong>. Courier is the safe default — all characters are equal width so columns align perfectly.
+    </div>
+
+    <h2>Content Types and How to Handle Each</h2>
+
+    <h3>Code files and scripts</h3>
+    <p>Python, JavaScript, shell scripts, config files — any plain text file with code converts cleanly to PDF with BuildPDF. The output is formatted as monospace text, ideal for printing code reviews or archiving configuration snapshots. Note: very long lines (common in generated output or minified code) will word-wrap in the PDF. Break long lines in the source file before converting if you need them to stay on one line.</p>
+
+    <h3>Log files</h3>
+    <p>Application logs, server logs, and debug traces are natural candidates for TXT-to-PDF conversion — especially for bug reports, support tickets, or post-mortems. Use <strong>Narrow (5mm)</strong> margins to fit more content per page. For very large log files (10,000+ lines), trim to the relevant section before converting to keep the PDF manageable.</p>
+
+    <h3>Poems, lyrics, and creative writing</h3>
+    <p>Plain text is a common format for writing drafts. When converting poetry or creative prose, BuildPDF respects hard line breaks in the source file — a line that ends with Enter in the .txt will end with a line break in the PDF, exactly what you want for verse. Use <strong>Wide (20mm)</strong> margins for an elegant, book-like appearance.</p>
+
+    <h3>README and documentation files</h3>
+    <p>Software projects almost always include a README.txt at their root. Converting these to PDF is useful for client handoffs, printed technical documentation, or packaged deliverables. Note: .md (Markdown) files can be dropped into BuildPDF, but Markdown syntax characters (##, **, etc.) will appear literally in the PDF — BuildPDF does not render Markdown. For rendered Markdown-to-PDF, use Pandoc or a Markdown editor with export support.</p>
+
+    <h2>Pro Tips for Better TXT-to-PDF Results</h2>
+    <ul>
+      <li><strong>Set margin to Wide for formal documents:</strong> A 20mm margin mimics the look of a professionally printed letter or policy document, giving the converted text more gravitas.</li>
+      <li><strong>Merge multiple .txt files:</strong> Select multiple .txt files at once in BuildPDF — they'll be merged in order into a single PDF. Useful for combining meeting notes, session logs, or a series of documents.</li>
+      <li><strong>Pre-format headers with dashes:</strong> Since .txt has no heading tags, simulate visual hierarchy by adding a row of dashes or equals signs under section headings (e.g., <code>========</code>). This improves PDF readability significantly.</li>
+      <li><strong>Check encoding before converting:</strong> Open the file in VS Code — the bottom-right status bar shows the encoding. If it says anything other than UTF-8, use VS Code's "Save with Encoding" to re-save as UTF-8 before uploading.</li>
+      <li><strong>Use Landscape for wide data:</strong> If your .txt file contains tabular data formatted with spaces or tabs, Landscape orientation gives more horizontal space and reduces awkward line-wrapping of column data.</li>
+    </ul>
+
+    <h2>Common Questions</h2>
+
+    <h3>Can I convert a .txt file that contains emoji?</h3>
+    <p>Yes, as long as the file is saved as UTF-8 (which it will be if created on a modern system). Emoji are standard Unicode characters and BuildPDF's PDF engine supports a wide range of Unicode glyphs. Some very recently-added or obscure emoji may not render depending on font coverage, but the vast majority of common emoji will appear correctly.</p>
+
+    <h3>My text file has tabs for indentation. Will they be preserved?</h3>
+    <p>Tab characters are preserved as whitespace in the PDF output. However, the visual width of a tab stop in the PDF may differ from what you see in your text editor — editors default to 4-space or 8-space tab widths while the PDF renderer may use a different value. If precise indentation matters, convert tabs to spaces in your editor before converting (most code editors have a "Convert Indentation" feature).</p>
+
+    <h3>Will page numbers be added to the PDF?</h3>
+    <p>BuildPDF does not currently add automatic page numbers to TXT conversions. If you need page numbers, consider opening the resulting PDF in LibreOffice Draw or Adobe Acrobat to add headers or footers, or convert the .txt to .docx in a word processor, add page numbers there, and then use BuildPDF's DOCX-to-PDF converter.</p>
+
+    <h2>Common Issues &amp; How to Fix Them</h2>
+
+    <h3>Characters appear as boxes or question marks</h3>
+    <p>This is almost always an encoding mismatch — the file is likely in a non-UTF-8 encoding. Open the file in Notepad++ or VS Code, check the encoding shown in the status bar, and use "Convert to UTF-8" before trying again in BuildPDF. Characters in extended ASCII (Windows-1252) code points 128–255 are the most common culprits.</p>
+
+    <h3>The PDF has strange line breaks mid-sentence</h3>
+    <p>If lines break at odd places, the source .txt file contains hard line breaks at those positions — it was likely written in an editor that inserts a newline at column 80. Fix: open the file in a word processor, use Find &amp; Replace with regular expressions to replace single newlines with spaces (preserving paragraph breaks), then re-save and re-convert.</p>
+
+    <h3>The converted PDF is many more pages than expected</h3>
+    <p>A large number of pages usually means the file is very long, has extra blank lines, or the font size is set larger than you realise. Check your margin setting — Wide (20mm) margins take up space quickly. Switching to Narrow (5mm) margins will fit significantly more text per page. Also confirm you haven't accidentally selected an entire folder of .txt files.</p>
+
+    <h2>TXT to PDF vs Other Options</h2>
+    <p>It's worth knowing when BuildPDF is the right tool and when to reach for something else:</p>
+    <ul>
+      <li><strong>BuildPDF:</strong> Best for quick, private, one-off conversions. No installation, no account, no limits. Output is clean plain text in a PDF — no styling or syntax highlighting.</li>
+      <li><strong>LibreOffice Writer:</strong> Free and powerful. Open the .txt file, apply heading styles, add page numbers, then export as PDF. More work, but full formatting control.</li>
+      <li><strong>Pandoc:</strong> The gold standard for command-line document conversion. Can convert .txt or .md to beautifully typeset PDF via LaTeX. Requires installation but produces publication-quality output.</li>
+      <li><strong>Microsoft Word / Google Docs:</strong> Import the .txt and use rich formatting tools before exporting to PDF. Best if you need tables, headers, or a branded look.</li>
+    </ul>
+    <p>For raw speed and privacy — especially with sensitive log files, config files, or personal notes — BuildPDF remains the most practical choice.</p>
+
     <h2>Privacy</h2>
     <p>Your .txt file never leaves your device. Everything is processed locally in your browser. This is especially important for .txt files that might contain passwords, API keys, personal data, or confidential notes — none of it is ever sent to a server.</p>
 
@@ -148,7 +218,7 @@
     <div class="footer-inner">
       <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
       <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
-        <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
+      <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
       <nav class="footer-nav"><a href="/about.html">About</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Use</a><a href="/contact.html">Contact</a></nav>
     </div>
   </footer>

@@ -51,6 +51,7 @@
     .example-list { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
     .example-list li { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.85rem 1.1rem; color: var(--text-secondary,#94a3b8); display: flex; gap: 0.75rem; align-items: flex-start; }
     .example-list span.emoji { font-size: 1.1rem; flex-shrink: 0; }
+    .kofi-link { color: #FF5E5B; font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -70,7 +71,7 @@
     <h1>How to Merge Multiple Images Into a Single PDF</h1>
     <div class="article-meta">
       <span>📅 April 4, 2026</span>
-      <span>⏱ 4 min read</span>
+      <span>⏱ 9 min read</span>
       <span>✍️ BuildPDF Team</span>
     </div>
 
@@ -140,6 +141,60 @@
     <h2>How Many Images Can I Merge?</h2>
     <p>There's no hard limit set by BuildPDF — you can merge as many images as your browser can handle in memory. In practice, merging 50–200 images works well in most modern browsers on a standard laptop. Very large batches (500+ high-resolution images) may be slow or may exhaust browser memory; for those, consider splitting into two conversions.</p>
 
+    <h2>The Ordering Problem: Getting Your Pages Right</h2>
+    <p>The single most common frustration with image-to-PDF merging is page order. When you select multiple files in a browser file picker, the order in which they appear in BuildPDF's list depends on how your operating system sorts them — typically alphabetical or numerical order by filename. This is predictable once you know it, and you can exploit it.</p>
+    <p>The most reliable method is the <strong>numeric prefix rename strategy</strong>. Before selecting your files, rename them so the first part of each filename is a zero-padded number: <code>001_receipt.jpg</code>, <code>002_receipt.jpg</code>, <code>003_receipt.jpg</code>. The zero-padding is important: without it, <code>10_page.jpg</code> will sort before <code>2_page.jpg</code> in most systems. With zero-padding (<code>010_page.jpg</code> vs <code>002_page.jpg</code>), numerical sort order is guaranteed.</p>
+    <p>On Windows, you can batch-rename files in File Explorer by selecting them all, pressing F2, and typing a name — Windows will append <code>(1)</code>, <code>(2)</code>, etc. automatically. On macOS, select files in Finder, right-click, and use "Rename X Items" to apply a sequential prefix. Both methods are quick and give you full control over page order before you ever open BuildPDF.</p>
+
+    <div class="tip-box">
+      <strong>💡 Screenshot sequences:</strong> If you're capturing a series of screenshots for a walkthrough, name them as you go: screenshot_001.png, screenshot_002.png, etc. Most screenshot tools let you set custom filenames or auto-increment — this saves the renaming step entirely.
+    </div>
+
+    <h2>Handling Mixed Portrait and Landscape Images</h2>
+    <p>Real-world image batches are often mixed: some photos are portrait, some are landscape, some are square. BuildPDF applies a single orientation setting to all pages in the output PDF. Here are three strategies to handle this well:</p>
+    <ol>
+      <li><strong>Choose the majority orientation:</strong> If 80% of your images are portrait, set the PDF to Portrait. Landscape images will be scaled down to fit within the portrait page, leaving white bars on the sides — acceptable for many use cases like document packets or client deliverables.</li>
+      <li><strong>Split by orientation, merge separately:</strong> Create two PDFs — one for portrait images, one for landscape — then combine them using a tool like PDF24 (free, browser-based) or LibreOffice Draw. This gives each set of pages the correct orientation.</li>
+      <li><strong>Rotate landscape images before converting:</strong> If all your images should ultimately be portrait in the PDF, rotate the landscape images 90° in an image editor or using your OS's built-in tools, then re-run the conversion.</li>
+    </ol>
+    <p>For truly professional mixed-orientation PDFs where each page needs its own orientation setting, Adobe Acrobat or Canva Pro is the right choice. BuildPDF excels at batches where one orientation fits all.</p>
+
+    <h2>Compression Tradeoffs for Large Batches</h2>
+    <p>When merging many images, the quality setting in BuildPDF determines the JPEG compression applied to each image before it's embedded in the PDF. This has a direct and significant impact on file size.</p>
+    <p>To put numbers on it: a batch of 20 smartphone photos at 12 MP each, merged at High (95%) quality, might produce a PDF of 150–300 MB. The same batch at Medium (80%) might be 30–60 MB — still excellent quality for screen viewing. At Low (60%), you might get 10–20 MB, acceptable for quick sharing but visibly softer on close inspection.</p>
+    <p>A useful rule: match quality to purpose. <strong>Archiving or printing</strong> → High (95%). <strong>Email or sharing via messaging apps</strong> → Medium (80%). <strong>Quick preview or draft</strong> → Low (60%). Don't default to High if the PDF will only ever be viewed on screens — you're creating unnecessarily large files that are slow to open and share.</p>
+
+    <h2>Pro Tips for Better Multi-Image PDF Results</h2>
+    <ul>
+      <li><strong>Use None (0mm) margin for photo albums:</strong> Full-bleed images with no margin look far more polished than images surrounded by white space — ideal for portfolios and photo collections.</li>
+      <li><strong>Compress large source images first:</strong> If you're merging 100+ high-resolution photos, run them through a batch image compressor (like Squoosh or TinyPNG) before uploading. This pre-processing step can dramatically speed up browser-side conversion and reduce final PDF size.</li>
+      <li><strong>Separate document scans from photos:</strong> Scanned document pages benefit from High quality and no margins to preserve legibility. Photos for aesthetic display can tolerate Medium quality. If mixing both, create two PDFs and merge them with a free merger tool.</li>
+      <li><strong>Check the file list before converting:</strong> After selecting files, review BuildPDF's list carefully before clicking Convert. Spotting a missing or mis-ordered file before conversion is far easier than fixing a 200-page PDF after the fact.</li>
+      <li><strong>For receipts and invoices, use A4 Portrait with Normal margins:</strong> Financial documents in a standard business format look more professional and are easier for accounting teams to process than edge-to-edge scans.</li>
+    </ul>
+
+    <h2>Common Questions</h2>
+
+    <h3>Can I mix different image formats (JPG, PNG, WEBP) in one batch?</h3>
+    <p>Yes, absolutely. BuildPDF handles any mix of supported image formats (JPG, PNG, WEBP, GIF, BMP) in a single conversion run. Each image is processed individually before being embedded into the PDF, so format differences don't cause any issues. The page order in the PDF follows the order of files as they appear in BuildPDF's file list, regardless of their format.</p>
+
+    <h3>Will very large images slow down or crash the browser?</h3>
+    <p>It depends on your device's RAM and the number of files. A modern laptop with 8–16 GB RAM handles batches of 50–100 high-resolution phone photos (12–24 MP each) without trouble. If the browser tab becomes slow or unresponsive, try reducing the batch size — do two runs of 50 images and merge the resulting PDFs. Alternatively, shrink the source images using a batch resizer before merging; reducing phone photos from 12 MP to 4 MP makes them perfectly adequate for screen viewing while dramatically reducing processing demands.</p>
+
+    <h3>Is there a way to reorder images after selecting them?</h3>
+    <p>BuildPDF's current interface does not support drag-to-reorder after selection. The page order is determined by the file selection order. The most reliable approach is to rename files with numeric prefixes before selecting them, as described above. If you've already converted and the order is wrong, it's faster to rename the source files and re-run the conversion than to try to reorder pages in a third-party PDF editor.</p>
+
+    <h2>Common Issues &amp; How to Fix Them</h2>
+
+    <h3>Some images appear rotated incorrectly in the PDF</h3>
+    <p>JPEG files often contain orientation metadata in their EXIF data — a flag telling image viewers how to rotate the photo. Some systems respect this flag automatically; others don't. If your photos appear sideways in the PDF, the EXIF rotation isn't being applied. Fix: open the affected images in your OS's built-in photo viewer, rotate them visually (not just a metadata change — actually re-save the rotated version), and then re-run the conversion. Windows Photos and macOS Preview both do this correctly.</p>
+
+    <h3>The PDF is much larger than expected</h3>
+    <p>Large PDFs from image merges almost always trace back to high-resolution source images combined with a High quality setting. Lower the quality to Medium (80%) — for most use cases, the visual difference is negligible. Also check whether your source images are unnecessarily large; scaling them to 50% with an image editor before merging typically reduces PDF size by 75% or more with minimal visible quality loss on screen.</p>
+
+    <h3>White space appears around images that should be full-page</h3>
+    <p>This happens when the image's aspect ratio doesn't match the chosen page size, and BuildPDF scales the image to fit while preserving aspect ratio. To minimise white space: (1) set margins to None (0mm), (2) choose the orientation that best matches most of your images, and (3) if one image format is dominant (e.g., all are 4:3 ratio), find a standard page size closest to that ratio. Perfect full-bleed on a standard paper size requires images that match those proportions exactly.</p>
+
     <div class="cta-box">
       <h3>Merge your images into a PDF now</h3>
       <p>Free, unlimited, no watermarks. Files stay on your device.</p>
@@ -159,7 +214,7 @@
     <div class="footer-inner">
       <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
       <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
-        <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
+      <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
       <nav class="footer-nav"><a href="/about.html">About</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Use</a><a href="/contact.html">Contact</a></nav>
     </div>
   </footer>

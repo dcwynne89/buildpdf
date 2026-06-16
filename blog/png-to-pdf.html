@@ -51,6 +51,7 @@
     .related-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-2px); }
     .related-card .rtag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #6C63FF; margin-bottom: 0.35rem; }
     .related-card .rtitle { color: var(--text-primary,#f1f5f9); font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
+    .kofi-link { color: #FF5E5B; font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -70,7 +71,7 @@
     <h1>How to Convert PNG to PDF Online for Free</h1>
     <div class="article-meta">
       <span>📅 April 4, 2026</span>
-      <span>⏱ 4 min read</span>
+      <span>⏱ 8 min read</span>
       <span>✍️ BuildPDF Team</span>
     </div>
 
@@ -129,7 +130,71 @@
       <strong>💡 Tip:</strong> If you're converting a high-resolution PNG (e.g., a 4K screenshot), the resulting PDF may be large. Use <strong>Medium (80%)</strong> quality if you need a smaller file size for email attachments.
     </div>
 
-    <h2>Privacy & Security</h2>
+    <h2>Understanding PNG Transparency in PDFs</h2>
+    <p>One of the most common surprises when converting PNG files to PDF is what happens to transparency. PNG supports an alpha channel — a per-pixel transparency value that lets backgrounds show through. It's the reason logos and icons look crisp on any coloured background in a browser or image editor.</p>
+    <p>The PDF format does not natively support arbitrary transparency the same way PNG does. When a transparent PNG is embedded into a PDF, the transparent areas are filled with a solid colour — almost always <strong>white</strong>. This behaviour appears in BuildPDF and in virtually every other converter, including Adobe Acrobat's own tools. It's not a bug; it's a fundamental difference in how the two formats handle compositing.</p>
+    <p>If your workflow demands a specific non-white background for a transparent PNG, your best option is to pre-flatten the image in a tool like GIMP, Photoshop, or Canva before converting. Open your PNG, add a background layer in the colour you want, flatten the image, and then run the conversion.</p>
+
+    <h2>Lossless vs Lossy: Why PNG Files Can Make Large PDFs</h2>
+    <p>PNG uses lossless compression — no image data is discarded when the file is saved. That's why a 4K screenshot saved as PNG might be 8–12 MB, while the equivalent JPG would be under 2 MB. When you embed a high-resolution PNG into a PDF, the resulting PDF can be surprisingly large.</p>
+    <p>For PDFs intended for print, use <strong>High (95%)</strong> quality in BuildPDF and keep your PNG at its original resolution. For PDFs you're emailing or sharing digitally, <strong>Medium (80%)</strong> quality dramatically reduces file size with minimal visible quality loss on screen.</p>
+    <p>The key insight: if your PNG is a <em>photograph</em>, JPG is usually the smarter source format for PDF. But if it's a <em>screenshot, diagram, logo, or image with flat colours and crisp edges</em>, PNG's lossless quality will always produce sharper PDF output than a JPG at equivalent file size.</p>
+
+    <h2>Print vs Screen: Matching Your PNG Resolution to the Output</h2>
+    <p>Digital screens display images at 72–96 DPI. Print media typically requires 300 DPI for sharp output. A PNG that looks perfectly sharp on your monitor may print blurry if the source resolution is too low.</p>
+    <p>Quick rule of thumb: for print at a specific physical size, your PNG should be at least <strong>300 × the target size in inches</strong> in pixels. For an A4 page (8.27 × 11.69 inches), you'd want at least 2480 × 3508 pixels. Screenshots at 1920 × 1080 are fine for screen PDFs but may look soft when printed full-page.</p>
+    <p>BuildPDF does not upscale images — it embeds them at their native resolution. The quality of your PDF output is bounded by the quality of the source PNG you provide.</p>
+
+    <div class="tip-box">
+      <strong>💡 Screen-to-print tip:</strong> On macOS, screenshots on a Retina display are saved at 2× resolution — much better for printing. On Windows, use the Snipping Tool's delay feature to capture menus or tooltips cleanly at higher effective resolution.
+    </div>
+
+    <h2>Pro Tips for Better PNG-to-PDF Results</h2>
+    <ul>
+      <li><strong>Use Landscape orientation for wide images:</strong> If your PNG is wider than it is tall, switch BuildPDF's orientation to Landscape to avoid the image being shrunk to fit with large white margins.</li>
+      <li><strong>Batch multiple screenshots:</strong> Select all your PNG files at once. BuildPDF merges them into a single multi-page PDF in selection order — perfect for UI walkthroughs and how-to guides.</li>
+      <li><strong>Pre-name for order control:</strong> Rename files <code>01_step.png</code>, <code>02_step.png</code>, etc. before selecting to guarantee the right page order in the merged PDF.</li>
+      <li><strong>Remove the alpha channel before converting:</strong> If you see white where you expected a coloured background, open the PNG in Paint (Windows) or Preview (macOS) and re-save — this automatically flattens the alpha channel onto white.</li>
+      <li><strong>For logos on coloured backgrounds:</strong> Pre-apply the background colour to your transparent PNG in an image editor before converting, rather than relying on the PDF's default white fill.</li>
+    </ul>
+
+    <h2>Common Questions</h2>
+
+    <h3>Can I convert a PNG with multiple layers?</h3>
+    <p>Standard PNG files are flat — they don't store layers the way Photoshop (.psd) or GIMP (.xcf) files do. When you export a layered file as PNG, all layers are flattened into a single image. So by the time BuildPDF receives a PNG, it's already a flat merged image. If you need to convert a multi-layer file, export each layer as a separate PNG first, then merge them in BuildPDF.</p>
+
+    <h3>Why does my converted PDF look slightly different from the original PNG?</h3>
+    <p>The most common reason is transparency handling — white replacing transparent areas. A second reason can be colour space: PNGs can use sRGB or other colour profiles, and PDF viewers render colour differently. If colour fidelity is critical for print proofing, use a professional prepress tool like Adobe Acrobat or Affinity Publisher instead.</p>
+
+    <h3>Does BuildPDF support animated GIFs or animated PNGs (APNG)?</h3>
+    <p>BuildPDF supports GIF files, but only the first frame is used in the PDF — animation cannot be embedded in a standard PDF. For animated PNGs (APNG), the same applies: only the first frame is extracted. To include multiple frames as separate pages, export each frame as an individual image and merge them in BuildPDF's multi-file mode.</p>
+
+    <h3>Is there a file size limit?</h3>
+    <p>BuildPDF has no server-side file size limit because nothing is uploaded. The practical limit is your browser's available RAM. A 50 MB PNG converts without issue on any modern laptop. If very large files cause slowdowns (200 MB+), reduce the PNG's dimensions first in an image editor, then re-convert.</p>
+
+    <h2>Common Issues &amp; How to Fix Them</h2>
+
+    <h3>The PDF looks blurry or pixelated</h3>
+    <p>This almost always means the source PNG had lower resolution than needed for the intended output size. BuildPDF faithfully embeds what it receives without adding blur. Solution: go back to the original source and export or screenshot at a higher resolution. On Windows, capture at 150% or 200% display scaling to get higher-pixel screenshots.</p>
+
+    <h3>The PDF file is enormous — much larger than expected</h3>
+    <p>High-resolution PNGs produce large PDFs. Set Image Quality to <strong>Medium (80%)</strong> in BuildPDF's options for a significantly smaller file with minimal visible quality loss. If the image is photographic, convert to JPG first — the file size difference can be dramatic (often 5–10×).</p>
+
+    <h3>White bars appear around the image on the PDF page</h3>
+    <p>This happens when the PNG's aspect ratio doesn't match the chosen page size. BuildPDF scales images to fit within the page while preserving aspect ratio, leaving white margins on sides or top/bottom. Fix: set margins to <strong>None (0mm)</strong> and toggle between Portrait and Landscape to find the best fit for your image's proportions.</p>
+
+    <h2>BuildPDF vs Alternatives for PNG to PDF</h2>
+    <p>There are several ways to convert a PNG to PDF. Here's an honest look at how BuildPDF compares:</p>
+    <ul>
+      <li><strong>BuildPDF:</strong> Completely free, no sign-up, no watermarks, no file uploads. Works in any browser. Best for quick, private conversions.</li>
+      <li><strong>Adobe Acrobat:</strong> Industry-standard with complex colour profile and metadata support. Paid (~$20/month). Best for professional print production.</li>
+      <li><strong>macOS Preview:</strong> Drag a PNG onto Preview and export as PDF — free, built-in, one-click. No control over quality or page size.</li>
+      <li><strong>Microsoft Print to PDF:</strong> Open in Photos or Paint, hit Print, choose "Microsoft Print to PDF." Free and built-in but zero quality or page-size control.</li>
+      <li><strong>Smallpdf / ILovePDF:</strong> Browser-based with friendly UI. Free tier is limited. Files are uploaded to their servers — a privacy consideration for sensitive images.</li>
+    </ul>
+    <p>For most everyday use — converting screenshots, packaging design assets, or merging batches — BuildPDF hits the sweet spot of speed, privacy, and zero cost.</p>
+
+    <h2>Privacy &amp; Security</h2>
     <p>Your PNG files are processed entirely within your browser's memory. <strong>No file is ever sent to our servers.</strong> Once you close or refresh the page, nothing is retained. This makes BuildPDF especially appropriate for screenshots containing sensitive information, like banking details, personal IDs, or private messages.</p>
 
     <div class="cta-box">
@@ -151,7 +216,7 @@
     <div class="footer-inner">
       <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
       <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
-        <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
+      <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
       <nav class="footer-nav"><a href="/about.html">About</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Use</a><a href="/contact.html">Contact</a></nav>
     </div>
   </footer>

@@ -58,6 +58,7 @@
     .mode-card .mode-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 6px; margin-bottom: 0.6rem; }
     .mode-badge.text { background: rgba(108,99,255,0.2); color: #a5b4fc; }
     .mode-badge.images { background: rgba(59,130,246,0.2); color: #93c5fd; }
+    .kofi-link { color: #FF5E5B; font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -77,7 +78,7 @@
     <h1>How to Extract Text or Images from a PDF File</h1>
     <div class="article-meta">
       <span>📅 April 4, 2026</span>
-      <span>⏱ 5 min read</span>
+      <span>⏱ 9 min read</span>
       <span>✍️ BuildPDF Team</span>
     </div>
 
@@ -156,7 +157,70 @@
       <strong>💡 Tip:</strong> Need individual page images at print resolution? For best results, ensure the original PDF was created at 150 DPI or higher. Screen-resolution PDFs will produce lower-quality page images.
     </div>
 
-    <h2>Privacy & Security</h2>
+    <h2>What PDF.js Can and Cannot Extract</h2>
+    <p>BuildPDF uses <strong>PDF.js</strong> — Mozilla's open-source, battle-tested PDF rendering library — to process your files entirely in the browser. Understanding its capabilities helps you know when it will work brilliantly and when you'll need a different tool.</p>
+    <p><strong>PDF.js can extract:</strong> all text stored in a PDF's text layer (characters, words, paragraphs, including Unicode and most special symbols), the visual appearance of each page rendered as a raster image, and document metadata like title and author if present in the file.</p>
+    <p><strong>PDF.js cannot extract:</strong> text from scanned PDFs (image-only content with no text layer), vector graphics as editable vectors (they are rasterised during page rendering), embedded fonts as independent font files, form field data as a structured dataset, or digital signatures in a tamper-evident way.</p>
+    <p>The most important limitation for most users is the scanned document scenario. A PDF created by scanning physical pages is, underneath its .pdf wrapper, just a series of high-resolution images with no text layer at all. PDF.js will render these pages as images just fine — but text extraction will return nothing, because there is literally no text to extract.</p>
+
+    <div class="warning-box">
+      <strong>⚠️ How to tell if your PDF has a text layer:</strong> Open it in any PDF viewer and try to click and drag to select a word. If you can highlight individual words, there is a text layer and BuildPDF's text extraction will work. If nothing highlights, or the entire page selects as a single object, it's a scanned (image-only) PDF.
+    </div>
+
+    <h2>OCR: The Gap BuildPDF Doesn't Fill (and What Does)</h2>
+    <p>Optical Character Recognition (OCR) reads text out of images — including scanned PDFs. It's a computationally intensive AI task requiring specialised models. BuildPDF extracts text that <em>already exists</em> as machine-readable content inside the PDF. For scanned PDFs that need OCR, here are genuinely useful alternatives:</p>
+    <ul>
+      <li><strong>Google Drive (free):</strong> Upload the PDF to Google Drive, right-click it, and choose "Open with → Google Docs." Google runs OCR automatically and opens a Docs file with the extracted text. Quality is excellent for clean scans in major languages.</li>
+      <li><strong>Adobe Acrobat (paid):</strong> Acrobat's "Recognize Text" feature is the industry gold standard. It also adds the recognised text back as a searchable layer in the PDF.</li>
+      <li><strong>Tesseract (free, open source):</strong> A command-line OCR engine that runs locally. No cloud, no subscription, supports 100+ languages. Requires some technical comfort but is very capable for batch processing.</li>
+      <li><strong>Microsoft OneNote (free):</strong> Insert the scanned PDF page as an image into OneNote, right-click, and choose "Copy Text from Picture." Works surprisingly well for clean document scans.</li>
+    </ul>
+
+    <h2>Legal and Ethical Considerations When Extracting PDF Content</h2>
+    <p>Extracting text or images from a PDF you own — your own documents, your scanned receipts, your own reports — is entirely straightforward. However, some PDFs belong to others and may be protected by copyright or access restrictions.</p>
+    <p>Many PDFs have password protection or DRM applied. BuildPDF will not bypass password protection — if a PDF requires a password to open, it cannot be processed without that password. If you legitimately have the password (e.g., it's your own file), enter it first in a PDF reader to unlock it, then re-save the unlocked version for extraction.</p>
+    <p>Beyond technical locks, copying significant portions of copyrighted material (a textbook chapter, a commercial report, a published article) for redistribution may infringe copyright, regardless of the technical ease of extraction. Always ensure you have the right to use extracted content in the way you intend.</p>
+
+    <h2>Real-World Use Cases for PDF Extraction</h2>
+    <ul>
+      <li><strong>Reusing content from old reports:</strong> You have a PDF report from five years ago and need to update its figures in a new document. Text extraction saves you from retyping hundreds of words of analysis.</li>
+      <li><strong>Creating social media images from slide decks:</strong> Export each page of a PDF presentation as a JPG image, then use those images directly on LinkedIn, Twitter, or Instagram without needing the original slide software.</li>
+      <li><strong>Archiving receipts as images:</strong> Accounting teams sometimes need individual receipt pages as image files for expense management systems that don't accept PDFs. Extract each page as a JPG.</li>
+      <li><strong>Extracting text for AI or analysis:</strong> Feed a PDF's text content into a summarisation tool or spreadsheet for analysis. Text extraction gives you the raw content in a paste-able format.</li>
+      <li><strong>Converting a PDF manual to a searchable text file:</strong> A product manual in PDF might not be full-text searchable if your system doesn't index PDFs. Extract the text, save it, and your standard file search will find any keyword in it.</li>
+    </ul>
+
+    <h2>Batch Extraction Tips</h2>
+    <p>BuildPDF processes one PDF at a time, but there are practical ways to handle batch extraction efficiently. For image extraction, each run produces a ZIP containing all page JPGs. If you need images from several PDFs, run the tool once per file — each ZIP will be clearly named and self-contained.</p>
+    <p>For text extraction from multiple PDFs, extract each PDF's text separately, saving each .txt file with a descriptive name. You can then combine them in a text editor, or import them into a spreadsheet or document for further processing. This manual but fast approach beats any server-based batch tool for privacy, since every file stays local.</p>
+
+    <div class="tip-box">
+      <strong>💡 Name your extractions clearly:</strong> When BuildPDF downloads an extracted file, it typically uses the original PDF's filename. If you're processing multiple PDFs, rename each output immediately after download so you don't mix up <code>document.txt</code> from three different files.
+    </div>
+
+    <h2>Common Questions</h2>
+
+    <h3>Can I extract just a specific page, not the whole PDF?</h3>
+    <p>BuildPDF's extraction currently processes the entire PDF. For image extraction, you receive a ZIP with every page — simply open the ZIP and discard the pages you don't need. For text extraction, the output .txt file includes all pages separated by page markers, so you can easily copy just the section you need.</p>
+
+    <h3>Why is the extracted text in the wrong order?</h3>
+    <p>PDF text ordering is notoriously difficult. Unlike HTML or Word documents, PDF stores text as positioned elements on a page, and reading order must be inferred. PDF.js does a good job for most Western-language documents in simple column layouts. Multi-column layouts, complex tables, and right-to-left languages may have text extracted in visual position order rather than reading order. Manual cleanup is often necessary for complex layouts.</p>
+
+    <h3>The ZIP file has images at a lower resolution than I'd like — how do I improve it?</h3>
+    <p>The page images are rendered at a resolution determined by the PDF's internal page dimensions and your browser's rendering engine. For most PDFs, the output JPGs are screen-resolution images — excellent for web use but not ideal for print. For higher-resolution images from a PDF, the most reliable approach is Adobe Acrobat's "Export to Image" feature, which lets you specify DPI output directly.</p>
+
+    <h2>Common Issues &amp; How to Fix Them</h2>
+
+    <h3>Text extraction produces only a blank .txt file</h3>
+    <p>This is the scanned PDF scenario — the file has no text layer, it's image-only content. Text extraction has nothing to work with. Solution: use Google Drive's free OCR (described above) to extract the text, or use BuildPDF's image extraction mode to get the page images and work with those instead.</p>
+
+    <h3>The page images in the ZIP look washed out or lower quality than the PDF</h3>
+    <p>JPG compression can affect colour and sharpness. Ensure you're using <strong>High (95%)</strong> in the options panel before extracting. Note that PDFs designed for screen display at 72 DPI will naturally produce lower-quality JPGs than print-quality PDFs designed at 300 DPI.</p>
+
+    <h3>The PDF fails to load or extract at all</h3>
+    <p>A handful of PDFs use features that PDF.js doesn't support: advanced encryption, non-standard PDF extensions, or corrupted file structures. Try opening the PDF in Adobe Reader first — if it doesn't open there, the file may be corrupted. If it opens in Adobe Reader but not in BuildPDF, the file may use DRM or encryption that PDF.js cannot process. In that case, use Adobe Acrobat's own export tools.</p>
+
+    <h2>Privacy &amp; Security</h2>
     <p>Your PDF file is processed entirely within your browser using <strong>PDF.js</strong>, Mozilla's open-source PDF rendering engine. <strong>The file is never uploaded to any server.</strong> This makes BuildPDF safe for extracting sensitive content from confidential PDFs like contracts, financial statements, or medical records.</p>
 
     <div class="cta-box">
@@ -178,7 +242,7 @@
     <div class="footer-inner">
       <div class="logo"><span class="logo-text">Build<span class="logo-accent">PDF</span></span></div>
       <p class="footer-copy">© 2026 BuildPDF · Free online converter · No data stored · No sign-up required</p>
-        <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
+      <p class="footer-support"><a href="https://ko-fi.com/dustincw" target="_blank" rel="noopener" class="kofi-link">☕ Support this free tool</a></p>
       <nav class="footer-nav"><a href="/about.html">About</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Use</a><a href="/contact.html">Contact</a></nav>
     </div>
   </footer>
